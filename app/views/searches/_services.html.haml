@@ -1,0 +1,16 @@
+%h3
+  = "Matched #{pluralize(@services.total_entries, "Service")}, displaying #{@services.size}"
+  - if @services.total_entries > @services.size
+    (
+    = link_to "Show All Results", search_services_url(:q => @query)
+    )
+
+%table.list
+  %tr
+    %th Cluster
+    %th Function
+    %th State
+    %th # of Assets
+    %th Actions
+  = render :partial => "service", :collection => @services
+

@@ -1,0 +1,5 @@
+= semantic_menu :id => "subNav", :class => "subNav" do |m|
+  - m.add "Cables", cables_path if can? :read, Cable
+  - m.add "Circuits", circuits_path if can? :read, Circuit
+  - m.add "Networks", networks_path if can? :read, Network
+  

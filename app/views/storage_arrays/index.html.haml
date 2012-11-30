@@ -1,0 +1,25 @@
+- title "Storage Arrays"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th # of Controllers
+    %th # of Shelves
+    %th # of Disks
+    %th Actions
+  - for storage_array in @storage_arrays
+    %tr
+      %td= h storage_array.name
+      %td= h storage_array.description
+      %td= storage_array.storage_heads.size
+      %td= storage_array.storage_shelves.size
+      %td= storage_array.total_disks
+      %td.actions
+        = link_to 'Show', storage_array
+        = link_to 'Edit', edit_storage_array_path(storage_array)
+        = link_to 'Destroy', storage_array, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Storage Array", new_storage_array_path if can? :create, StorageArray
+/ %p= link_to "New Storage Controller", new_storage_head_path if can? :create, StorageHead
+/ %p= link_to "New Storage Shelf", new_storage_shelf_path if can? :create, StorageShelf

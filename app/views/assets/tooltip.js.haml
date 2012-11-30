@@ -1,0 +1,23 @@
+%ul.tooltip
+  %li
+    = image_tag @asset.hardware_model.picture.url(:small) if @asset.hardware_model
+  %li
+    %label Name
+    = @asset.name
+  %li
+    %label Manufacturer
+    = link_to @asset.manufacturer.name, @asset.manufacturer if @asset.manufacturer
+  %li
+    %label Model
+    = link_to @asset.hardware_model.name, @asset.hardware_model if @asset.hardware_model
+  %li
+    %label Group
+    = link_to @asset.group.name, @asset.group if @asset.group
+  %li
+    %label Farm
+    = link_to @asset.farm.name, @asset.farm if @asset.farm
+  %li
+    %label Actions
+    = link_to icon('magnifier', 'Show'), @asset, :class => "view"
+    |
+    = link_to icon('pencil', 'Edit'), edit_asset_path(@asset), :class => "edit"

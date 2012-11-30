@@ -1,0 +1,93 @@
+%tr{:id => dom_id(service, 'row'), :class => cycle("odd", "even")}
+  %td{:id => dom_id(service, 'cluster')}
+    = link_to service.cluster.name, service.cluster if service.cluster
+    = "(#{service.cluster.description})" if (service.cluster && service.cluster.description)
+    - if service.cluster
+      :javascript
+        $("##{dom_id(service, 'cluster')}").qtip({
+          content: 'Other #{service.cluster.name} cluster members:<br>#{service.cluster.assets.each.map{|a| link_to(a.name, a)}.join(', ')}',
+          show: {
+            solo: true
+          },
+          hide: {
+            delay: 1000,
+            fixed: true
+          },
+          position: {
+            corner: {
+              target: 'topMiddle',
+              tooltip: 'bottomMiddle'
+            }
+          },
+          style: {
+            tip: 'bottomMiddle',
+            name: 'blue'
+          }
+        });
+  %td{:id => dom_id(service, 'function')}
+    = link_to service.function.name, service.function if service.function
+    = "(#{service.function.description})" if (service.function && service.function.description)
+  - if (service.function && (service.function.assets.size < 20))
+    :javascript
+      $("##{dom_id(service, 'function')}").qtip({
+        content: 'Other devices with the #{service.function.name} function:<br>#{service.function.assets.each.map{|a| link_to(a.name, a)}.join(', ')}',
+        show: {
+          solo: true
+        },
+        hide: {
+          delay: 1000,
+          fixed: true
+        },
+        position: {
+          corner: {
+            target: 'topMiddle',
+            tooltip: 'bottomMiddle'
+          }
+        },
+        style: {
+          tip: 'bottomMiddle',
+          name: 'blue'
+        }
+      });
+
+  %td{:id => dom_id(service, 'state')}
+    = h service.state
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(service, 'state_spinner')
+  %td
+    = link_to service.assets.size, '#', :id => dom_id(service, 'assetcount')
+    - if service.assets.size > 0
+      :javascript
+        $("##{dom_id(service, 'assetcount')}").qtip({
+          content: '#{service.assets.each.map{|a| link_to(a.name, a)}.join(', ')}',
+          show: {
+            solo: true
+          },
+          hide: {
+            delay: 1000,
+            fixed: true
+          },
+          position: {
+            corner: {
+              target: 'rightMiddle',
+              tooltip: 'leftMiddle'
+            }
+          },
+          style: {
+            tip: 'leftMiddle',
+            name: 'blue'
+          }
+        });
+  %td.actions
+    = link_to icon('magnifier', 'Show'), service, :class => "view" if can? :read, service
+    = link_to icon('pencil', 'Edit'), edit_service_path(service), :class => "edit" if can? :edit, service
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => service_path(service), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(service, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(service, 'row')), |
+        visual_effect(:fade, dom_id(service, 'row')), |
+        "$('##{dom_id(service, 'spinner')}').hide();" ] |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(service, 'spinner') if can? :destroy, service
+    

@@ -1,0 +1,10 @@
+# header row
+csv << ["Group:", @group.name]
+csv << ["Status:", @group.state]
+csv << ["Created At:", @group.created_at]
+csv << ["Updated At:", @group.updated_at]
+csv << [] # gap between header and data for visibility
+
+csv << ["Asset List"]
+csv << []
+generate_assets_csv(@group.assets.uniq).each {|elem| csv << elem }

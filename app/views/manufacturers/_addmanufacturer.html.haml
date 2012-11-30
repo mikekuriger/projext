@@ -1,0 +1,23 @@
+#addmanufacturer
+  %h3 New Manufacturer
+  - manufacturer = Manufacturer.new
+  #addmanufacturerform
+    - semantic_remote_form_for manufacturer, |
+      :loading => "$('#add_spinner').show();", |
+      :loaded => "$('#add_spinner').hide();", |
+      :update => 'manufacturerlist', |
+      :position => 'bottom', |
+      :failure => "alert('Unable to create, status ' + request.status)", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(manufacturer, 'row')) |
+        ] do |f| |
+      - f.inputs do
+        = f.input :name
+        = f.input :address1
+        = f.input :address2
+        = f.input :city
+        = f.input :state
+        = f.input :zip
+        = f.input :url
+        = f.commit_button
+        = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'add_spinner'

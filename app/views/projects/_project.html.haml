@@ -1,0 +1,25 @@
+%tr{:id => dom_id(project, 'row'), :class => cycle("odd", "even")}
+  %td= link_to project.name, project
+  %td
+    = h project.description
+    &nbsp;
+  %td{:id => dom_id(project, 'state')}
+    = h project.state
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(project, 'state_spinner')
+  %td.actions
+    = link_to_remote icon('arrow_switch', 'Activate/Deactivate'), |
+      :url => (project.active?) ? deactivate_project_path(project) : activate_project_path(project), |
+      :method => "post", :loading => "$('##{dom_id(project, 'state_spinner')}').show();", |
+      :complete => [visual_effect(:highlight, dom_id(project, 'state'))] if can? :edit, project |
+    = link_to icon('magnifier', 'Show'), project, :class => "view" if can? :read, project
+    = link_to icon('pencil', 'Edit'), edit_project_path(project), :class => "edit" if can? :edit, project
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => project_path(project), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(project, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(project, 'row')), |
+        visual_effect(:fade, dom_id(project, 'row')), |
+        "$('##{dom_id(project, 'spinner')}').hide();" ] |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(project, 'spinner')

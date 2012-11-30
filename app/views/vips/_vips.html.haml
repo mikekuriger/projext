@@ -1,0 +1,22 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @vips, :entry_name => 'VIP'
+  = will_paginate @vips
+
+%table{:id => "viplist", :class => "list"}
+  %tr
+    %th Name
+    %th Description
+    %th Load Balancer
+    %th IP
+    %th Port
+    %th Notes
+    %th State
+    %th Actions
+  = render :partial => "vip", :collection => @vips
+
+.wham_pagination
+  .page_info
+    = page_entries_info @vips, :entry_name => 'vip'
+  = will_paginate @vips
+

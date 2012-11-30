@@ -1,0 +1,22 @@
+.service
+  %fieldset
+    - new_or_existing = service.new_record? ? 'new' : 'existing'
+    - prefix = "server[#{new_or_existing}_service_attributes][]"
+    - semantic_fields_for prefix, service do |service_form|
+      - cn = service_form.object.cluster_name
+      - fn = service_form.object.function_name
+      - id = service_form.object.id
+      %li
+        / %label Cluster Name
+        / = service_form.text_field :cluster_name
+        / = service_form.input :cluster_id, :as => :autocomplete, :url => clusters_path
+        = service_form.input :cluster_id, :label => 'Cluster', :as => :select, :collection => Cluster.all
+        / = text_field_with_auto_complete "#{prefix}_#{id}_cluster", :name, { :value => cn, :size => 15 }, { :url => { :controller => 'clusters', :action => 'autocomplete', :format => :js }, :method => :get, :param_name => 'search' }
+        / = service_form.input :cluster, :label => 'Cluster', :as => :select, :collection => Cluster.all
+        
+      %li
+        / %label Function Name
+        / = service_form.text_field :function_name
+        = service_form.input :function_id, :label => 'Function', :as => :select, :collection => Function.all
+        / = text_field_with_auto_complete "#{prefix}_#{id}_function", :name, { :value => fn, :size => 15 }, { :url => { :controller => 'functions', :action => 'autocomplete', :format => :js }, :method => :get, :param_name => 'search' }
+      = link_to_function "remove", "$(this).parents('.service').remove()"

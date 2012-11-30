@@ -1,0 +1,20 @@
+%tr{:id => dom_id(load_balancer, 'row'), :class => cycle("odd", "even")}
+  %td= h load_balancer.fqdn unless load_balancer.fqdn.nil?
+  %td= h load_balancer.serial
+  %td= link_to load_balancer.hardware_model.name, load_balancer.hardware_model if load_balancer.hardware_model
+  %td= h load_balancer.state
+  %td.actions
+    = link_to icon('arrow_switch', 'Activate/Deactivate'), (load_balancer.active?) ? deactivate_load_balancer_path(load_balancer) : activate_load_balancer_path(load_balancer), :class => "activate" if can? :edit, load_balancer
+    = link_to icon('magnifier', 'Show'), load_balancer, :class => "view" if can? :read, load_balancer
+    = link_to icon('pencil', 'Edit'), edit_load_balancer_path(load_balancer), :class => "edit" if can? :edit, load_balancer
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => load_balancer_path(load_balancer), |
+      :confirm => "Are you sure?", :method => "delete", |
+      :loading => "$('##{dom_id(load_balancer, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(load_balancer, 'row')), |
+        visual_effect(:fade, dom_id(load_balancer, 'row')), |
+        "$('##{dom_id(load_balancer, 'spinner')}').hide();" |
+      ]
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(load_balancer, 'spinner')
+    

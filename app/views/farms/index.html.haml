@@ -1,0 +1,10 @@
+- title "Farms"
+
+= (session[:show_inactive]) ? link_to("Hide Inactive", farms_url(:hide_inactive => 'Y')) : link_to("Show Inactive", farms_url(:show_inactive => 'Y'))
+
+#farms
+  = render 'farms'
+
+= render :partial => "addfarm" if can? :create, Farm
+
+= render :partial => 'shared/export', :object => @farms

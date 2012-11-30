@@ -1,0 +1,13 @@
+- semantic_form_for @user do |f|
+  = f.error_messages
+  - f.inputs do
+    / = f.input :email
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :title
+    = f.input :phone
+    = f.input :cell
+    = f.input :pager
+    = f.input :roles, :as => :comboselect if can? :assign_roles, @user
+    / = f.input :state
+  = f.buttons

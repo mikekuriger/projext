@@ -1,0 +1,4 @@
+= semantic_menu :id => "subNav", :class => "subNav" do |m|
+  - m.add "Contracts", contracts_path if can? :read, Contract
+  - m.add "Quotes", quotes_path if can? :read, Quote
+  - m.add "Purchase Orders", purchase_orders_path if can? :read, PurchaseOrder

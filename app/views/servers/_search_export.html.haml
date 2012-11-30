@@ -1,0 +1,26 @@
+#altformats
+  %h3 Export
+  %fieldset#export
+    XLS (
+    = link_to 'Current Page', :format => :xls, :q => @query, :page => (params[:page] || 1), :per_page => (params[:per_page])
+    |
+    = link_to "All Records", :format => :xls, :q => @query, :page => 1, :per_page => object.total_entries
+    )
+    %br
+    CSV (
+    = link_to 'Current Page', :format => :csv, :q => @query, :page => (params[:page] || 1), :per_page => (params[:per_page])
+    |
+    = link_to "All Records", :format => :csv, :q => @query, :page => 1, :per_page => object.total_entries
+    )
+    %br
+    XML (
+    = link_to 'Current Page', :format => :xml, :q => @query, :page => (params[:page] || 1), :per_page => (params[:per_page])
+    |
+    = link_to "All Records", :format => :xml, :q => @query, :page => 1, :per_page => object.total_entries
+    )
+    %br
+    YML (
+    = link_to 'Current Page', :format => :yaml, :q => @query, :page => (params[:page] || 1), :per_page => (params[:per_page])
+    |
+    = link_to "All Records", :format => :yaml, :q => @query, :page => 1, :per_page => object.total_entries
+    )

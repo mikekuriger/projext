@@ -1,0 +1,17 @@
+#addgroup
+  %h3 Add Group
+  - group = Group.new
+  #addgroupform
+    - semantic_remote_form_for group, |
+      :loading => "$('#add_spinner').show();", |
+      :loaded => "$('#add_spinner').hide();", |
+      :update => 'grouplist', |
+      :position => 'bottom', |
+      :failure => "alert('Unable to create, status ' + request.status)", |
+      :complete => visual_effect(:highlight, dom_id(group, 'row')) do |f| |
+      
+      - f.inputs do
+        = f.input :name
+        = f.input :description
+        = f.commit_button
+        = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'add_spinner'

@@ -1,0 +1,12 @@
+%h3= "Matched #{pluralize(@sites.total_entries, "Site")}, displaying #{@sites.size}"
+
+%table.list
+  %tr
+    %th Name
+    %th IP
+    %th VIP
+    %th Cluster
+    %th Customer
+    %th State
+    %th Actions
+  = render :partial => "site", :collection => @sites

@@ -1,0 +1,17 @@
+- if can? :manage, User
+  %h2 New Users to confirm
+  %ul
+    - @newusers.each do |user|
+      - next if user.type == 'Agent'
+      %ul
+        %li
+          %label Email
+          =user.email
+        
+  %h2 New WHAMD agents to confirm
+  %ul
+    - @newagents.each do |agent|
+      %ul
+        %li
+          %label Email
+          =agent.email

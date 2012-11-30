@@ -1,0 +1,40 @@
+%tr{ :id => dom_id(manufacturer, 'row'), :class => cycle("odd", "even") }
+  %td
+    = link_to manufacturer.name, manufacturer
+    &nbsp;
+  %td
+    = h manufacturer.address1
+    &nbsp;
+  %td
+    = h manufacturer.address2
+    &nbsp;
+  %td
+    = h manufacturer.city
+    &nbsp;
+  %td
+    = h manufacturer.state
+    &nbsp;
+  %td
+    = h manufacturer.zip
+    &nbsp;
+  %td
+    = link_to manufacturer.url if manufacturer.url
+    &nbsp;
+  %td
+    = h manufacturer.notes
+    &nbsp;
+  %td.action
+    = link_to icon('magnifier', 'Show'), manufacturer, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_manufacturer_path(manufacturer), :class => "edit"
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => manufacturer_path(manufacturer), |
+      :class => "delete", |
+      :confirm => 'Are you sure?', |
+      :method => :delete, |
+      :loading => "$('##{dom_id(manufacturer, 'state_spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(manufacturer, 'row')), |
+        visual_effect(:fade, dom_id(manufacturer, 'row')) |
+      ] |
+      
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(manufacturer, 'state_spinner')

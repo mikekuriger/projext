@@ -1,0 +1,11 @@
+- title "Virtual Servers"
+
+= (session[:show_inactive]) ? link_to ("Hide Inactive", virtual_servers_url(:hide_inactive => 'Y')) : link_to ("Show Inactive", virtual_servers_url(:show_inactive => 'Y'))
+
+#virtual_servers
+  = render 'virtual_servers'
+
+= render :partial => "addvirtual_server", :locals => { :virtual_server => @virtual_server } if can? :create, Server
+
+%h3 Export
+= render :partial => 'shared/export', :object => @virtual_servers

@@ -1,0 +1,125 @@
+one:
+  id: 1
+  name: asset1
+  description: MyString
+  serial: fdsfadsfdsa
+  wb_asset_id: MyString
+  hardware_model_id: 1
+  group_id: 1
+  farm_id: 1
+  equipment_rack_id: 1
+  rack_elevation: 1
+  rack_units: 1
+  purchase_date: 2009-12-28
+  vendor_id: 1
+  leased: false
+  sap_asset_id: MyString
+  sap_wbs_element: MyString
+  monitorable: false
+  type: Asset
+
+two:
+  id: 2
+  name: serverasset
+  description: MyString
+  serial: 483432423
+  wb_asset_id: MyString
+  hardware_model_id: 1
+  group_id: 1
+  farm_id: 1
+  equipment_rack_id: 1
+  rack_elevation: 1
+  rack_units: 1
+  purchase_date: 2009-12-28
+  vendor_id: 1
+  leased: false
+  sap_asset_id: MyString
+  sap_wbs_element: MyString
+  monitorable: false
+  type: Server
+
+three:
+  id: 3
+  name: switchasset
+  description: This is a switch
+  serial: 489fdsmkj
+  group_id: 2
+  farm_id: 1
+  type: Switch
+
+four:
+  id: 4
+  name: bur-filer3-a
+  description: This is a storage head
+  serial: 489fdsmkf
+  group_id: 2
+  farm_id: 1
+  type: StorageHead
+
+five:
+  id: 5
+  name: bur-filer3-b
+  description: This is another storage head
+  serial: 489fdsmkl
+  group_id: 2
+  farm_id: 1
+  type: StorageHead
+
+six:
+  id: 6
+  name: bur-filer3-shelf1
+  description: This is a storage shelf
+  serial: 489fdsmkk
+  group_id: 2
+  farm_id: 1
+  type: StorageShelf
+
+seven:
+  id: 7
+  name: bur-filer3-shelf2
+  description: This is another storage shelf
+  serial: 489fdsmko
+  group_id: 2
+  farm_id: 1
+  type: StorageShelf
+
+eight:
+  id: 8
+  name: softwareasset
+  description: This is a software asset
+  serial: 489fdsfjiuiur
+  group_id: 2
+  farm_id: 1
+  type: SoftwareLicense
+
+# == Schema Information
+#
+# Table name: assets
+#
+#  id                :integer(4)      not null, primary key
+#  name              :string(255)
+#  description       :string(255)
+#  serial            :string(255)
+#  wb_asset_id       :string(255)
+#  hardware_id       :integer(4)
+#  group_id          :integer(4)
+#  farm_id           :integer(4)
+#  equipment_rack_id :integer(4)
+#  rack_elevation    :integer(4)
+#  rack_units        :integer(4)
+#  purchase_date     :date
+#  vendor_id         :integer(4)
+#  leased            :boolean(1)
+#  sap_asset_id      :string(255)
+#  sap_wbs_element   :string(255)
+#  monitorable       :boolean(1)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  state             :string(255)
+#  hostname          :string(255)
+#  domain            :string(255)
+#  type              :string(255)     default("Asset")
+#  building_id       :integer(4)
+#  room_id           :integer(4)
+#
+

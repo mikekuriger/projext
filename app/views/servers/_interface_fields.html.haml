@@ -1,0 +1,9 @@
+.fields
+  - f.inputs do
+    = f.input :name
+    -# This is too heavy right now, need to use autocomplete
+    / = f.input :ip, :label => "IP Address"
+    = f.input :mac, :label => "MAC"
+    = f.input :speed, :as => :select, :collection => Interface::SPEED_OPTIONS, :required => true
+    = f.input :connector_type, :as => :select, :collection => Interface::CONNECTOR_TYPE_OPTIONS, :allow_blank => true
+    = link_to_remove_fields "Remove Interface", f

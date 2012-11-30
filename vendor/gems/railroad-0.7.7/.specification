@@ -1,0 +1,85 @@
+--- !ruby/object:Gem::Specification 
+name: railroad
+version: !ruby/object:Gem::Version 
+  version: 0.7.7
+platform: ruby
+authors: 
+- Javier Smaldone
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-03-06 00:00:00 -08:00
+default_executable: railroad
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: hoe
+  type: :development
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: 2.3.3
+    version: 
+description: ""
+email: javier@smaldone.com.ar
+executables: 
+- railroad
+extensions: []
+
+extra_rdoc_files: 
+- History.txt
+- Manifest.txt
+- README.txt
+files: 
+- COPYING
+- ChangeLog
+- History.txt
+- Manifest.txt
+- README.txt
+- Rakefile
+- bin/railroad
+- init.rb
+- lib/railroad.rb
+- lib/railroad/aasm_diagram.rb
+- lib/railroad/app_diagram.rb
+- lib/railroad/controllers_diagram.rb
+- lib/railroad/diagram_graph.rb
+- lib/railroad/lifecycle_diagram.rb
+- lib/railroad/models_diagram.rb
+- lib/railroad/options_struct.rb
+- lib/railroad/tasks/diagrams.rake
+- lib/railroad/tasks/diagrams.rb
+- railroad.gemspec
+has_rdoc: true
+homepage: http://railroad.rubyforge.org
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --main
+- README.txt
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: railroad
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 3
+summary: A DOT diagram generator for Ruby on Rail applications
+test_files: []
+

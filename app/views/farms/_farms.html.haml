@@ -1,0 +1,18 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @farms, :entry_name => 'farm'
+  = will_paginate @farms
+
+%table{:id => "farmlist", :class => "list"}
+  %tr
+    %th Name
+    %th Description
+    %th State
+    %th # of Assets
+    %th Actions
+  = render :partial => "farm", :collection => @farms
+
+.wham_pagination
+  .page_info
+    = page_entries_info @farms, :entry_name => 'farm'
+  = will_paginate @farms

@@ -1,0 +1,33 @@
+- title "Storage Shelf"
+
+%p
+  %strong Name:
+  =h @storage_shelf.name
+%p
+  %strong Hostname:
+  =h @storage_shelf.hostname
+%p
+  %strong Domain:
+  =h @storage_shelf.domain
+%p
+  %strong Serial:
+  =h @storage_shelf.serial
+%p
+  %strong Hardware Model:
+  =h @storage_shelf.hardware_model_id
+%p
+  %strong Group:
+  =h @storage_shelf.group_id
+%p
+  %strong Farm:
+  =h @storage_shelf.farm_id
+%p
+  %strong Equipment Rack:
+  =h @storage_shelf.equipment_rack_id
+
+%p
+  = link_to "Edit", edit_storage_shelf_path(@storage_shelf)
+  |
+  = link_to "Destroy", @storage_shelf, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", storage_shelves_path

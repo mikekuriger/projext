@@ -1,0 +1,19 @@
+one:
+  name: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  state: CA
+  zip: MyString
+  url: MyString
+  notes: MyString
+
+two:
+  name: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  state: CA
+  zip: MyString
+  url: MyString
+  notes: MyString

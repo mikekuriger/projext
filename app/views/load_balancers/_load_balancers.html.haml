@@ -1,0 +1,21 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @load_balancers, :entry_name => 'load_balancer'
+  = will_paginate @load_balancers
+
+%table{:id => "load_balancerlist", :class => "list"}
+  %tr
+    %th Hostname
+    %th Serial
+    %th Hardware
+    %th Group
+    %th Farm
+    %th Location
+    %th Actions
+  = render :partial => "load_balancer", :collection => @load_balancers
+
+.wham_pagination
+  .page_info
+    = page_entries_info @load_balancers, :entry_name => 'load_balancer'
+  = will_paginate @load_balancers
+

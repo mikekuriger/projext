@@ -1,0 +1,12 @@
+%h3= "Matched #{pluralize(@firewalls.total_entries, "Firewall")}, displaying #{@firewalls.size}"
+
+%table.list
+  %tr
+    %th Name
+    %th Hostname
+    %th Serial
+    -# %th Group
+    / %th Dump
+    -# %th Farm
+    %th Actions
+  = render :partial => "firewall", :collection => @firewalls

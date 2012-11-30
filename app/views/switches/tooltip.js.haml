@@ -1,0 +1,23 @@
+%ul.tooltip
+  %li
+    = image_tag @switch.hardware_model.picture.url(:small) if @switch.hardware_model
+  %li
+    %label Name
+    = @switch.name
+  %li
+    %label Manufacturer
+    = link_to @switch.manufacturer.name, @switch.manufacturer if @switch.manufacturer
+  %li
+    %label Model
+    = link_to @switch.hardware_model.name, @switch.hardware_model if @switch.hardware_model
+  %li
+    %label Group
+    = link_to @switch.group.name, @switch.group if @switch.group
+  %li
+    %label Farm
+    = link_to @switch.farm.name, @switch.farm if @switch.farm
+  %li
+    %label Actions
+    = link_to icon('magnifier', 'Show'), @switch, :class => "view"
+    |
+    = link_to icon('pencil', 'Edit'), edit_switch_path(@switch), :class => "edit"

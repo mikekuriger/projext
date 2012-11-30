@@ -1,0 +1,23 @@
+%ul.tooltip
+  %li
+    = image_tag @storage_head.hardware_model.picture.url(:small) if @storage_head.hardware_model
+  %li
+    %label Name
+    = @storage_head.name
+  %li
+    %label Manufacturer
+    = link_to @storage_head.manufacturer.name, @storage_head.manufacturer if @storage_head.manufacturer
+  %li
+    %label Model
+    = link_to @storage_head.hardware_model.name, @storage_head.hardware_model if @storage_head.hardware_model
+  %li
+    %label Group
+    = link_to @storage_head.group.name, @storage_head.group if @storage_head.group
+  %li
+    %label Farm
+    = link_to @storage_head.farm.name, @storage_head.farm if @storage_head.farm
+  %li
+    %label Actions
+    = link_to icon('magnifier', 'Show'), @storage_head, :class => "view"
+    |
+    = link_to icon('pencil', 'Edit'), edit_storage_head_path(@storage_head), :class => "edit"

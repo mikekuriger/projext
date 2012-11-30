@@ -1,0 +1,40 @@
+- title "Crontab"
+
+%p
+  %strong Name:
+  =h @crontab.name
+%p
+  %strong Description:
+  =h @crontab.description
+%p
+  %strong Cluster:
+  = link_to @crontab.cluster.name, @crontab.cluster if @crontab.cluster
+%p
+  %strong Minute:
+  =h @crontab.minute
+%p
+  %strong Hour:
+  =h @crontab.hour
+%p
+  %strong Day Of Month:
+  =h @crontab.dayofmonth
+%p
+  %strong Month:
+  =h @crontab.month
+%p
+  %strong Day of Week:
+  =h @crontab.dayofweek
+%p
+  %strong User:
+  =h @crontab.user
+%p
+  %strong Command:
+  =h @crontab.command
+
+
+%p
+  = link_to "Edit", edit_crontab_path(@crontab)
+  |
+  = link_to "Destroy", @crontab, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", crontabs_path

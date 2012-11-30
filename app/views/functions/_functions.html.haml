@@ -1,0 +1,18 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @functions, :entry_name => 'function'
+  = will_paginate @functions
+
+%table{:id => "functionlist", :class => "list"}
+  %tr
+    %th Name
+    %th Description
+    %th State
+    %th # of Assets
+    %th Actions
+  = render :partial => "function", :collection => @functions
+
+.wham_pagination
+  .page_info
+    = page_entries_info @functions, :entry_name => 'function'
+  = will_paginate @functions

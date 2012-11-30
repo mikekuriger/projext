@@ -1,0 +1,28 @@
+- form_for @ip do |f|
+  = f.error_messages
+  %p
+    = f.label :network_id
+    %br
+    = f.text_field :network_id
+  %p
+    = f.label :ip
+    %br
+    = f.text_field :ip
+  %p
+    = f.label :pingable
+    %br
+    = f.check_box :pingable
+  %p
+    = f.label :lastpinged
+    %br
+    = f.datetime_select :lastpinged
+  %p
+    = f.label :lastresponse
+    %br
+    = f.datetime_select :lastresponse
+  %p
+    = f.label :notes
+    %br
+    = f.text_area :notes
+  %p
+    = f.submit "Submit"

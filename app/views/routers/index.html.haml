@@ -1,0 +1,29 @@
+- title "Routers"
+
+%table.list
+  %tr
+    %th Name
+    %th Hostname
+    %th Domain
+    %th Serial
+    %th Model
+    %th Group
+    %th Farm
+    %th Equipment Rack
+    %th Actions
+  - for router in @routers
+    %tr
+      %td= h router.name
+      %td= h router.hostname
+      %td= h router.domain
+      %td= h router.serial
+      %td= h router.hardware_model_id
+      %td= h router.group_id
+      %td= h router.farm_id
+      %td= h router.equipment_rack_id
+      %td
+        = link_to 'Show', router
+        = link_to 'Edit', edit_router_path(router)
+        = link_to 'Destroy', router, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Router", new_router_path

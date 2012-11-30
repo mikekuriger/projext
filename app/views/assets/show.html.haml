@@ -1,0 +1,110 @@
+- title "Asset"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @asset.name
+      %li
+        %label Type
+        =h @asset.type
+      %li
+        %label Status
+        =h @asset.state.humanize
+      %li
+        %label Description
+        =h @asset.description
+      %li
+        %label Serial
+        =h @asset.serial
+      %li
+        %label WB Asset ID
+        =h @asset.wb_asset_id
+        
+  %fieldset#hardware
+    %legend Hardware
+    %ul
+      %li
+        %label Manufacturer
+        = link_to @asset.hardware_model.manufacturer.name, @asset.hardware_model.manufacturer if @asset.hardware_model
+      %li
+        %label Model
+        = link_to @asset.hardware_model.name, @asset.hardware_model if @asset.hardware_model
+  
+  %fieldset#location
+    %legend Physical Location
+    %ul
+      %li
+        %label Building
+        - if @asset.building
+          = link_to @asset.building.name, @asset.building
+          %br
+          =h @asset.building.address1
+          %br
+          =h "#{@asset.building.city}, #{@asset.building.state} #{@asset.building.zip}"
+      %li
+        %label Room
+        = link_to @asset.room.name, @asset.room if @asset.room
+      %li
+        %label Rack
+        = link_to @asset.equipment_rack.name, @asset.equipment_rack if @asset.equipment_rack
+      %li
+        %label Rack Elevation
+        =h @asset.rack_elevation
+      %li
+        %label Rack Units:
+        =h @asset.rack_units
+      
+  %fieldset#classification
+    %legend Classification
+    %ul
+      %li
+        %label Farm
+        = link_to @asset.farm.name, @asset.farm if @asset.farm
+      %li
+        %label Group
+        = link_to @asset.group.name, @asset.group if @asset.group
+      %li
+        %label Services
+        %ul
+          - for service in @asset.services
+            %li= h service.to_s
+            
+  %fieldset#finance
+    %legend Finance
+    %ul
+      %li
+        %label Purchase Date
+        =h @asset.purchase_date
+      %li
+        %label Vendor
+        =h @asset.try(:vendor).try(:name)
+      %li
+        %label Leased
+        =h @asset.leased
+      %li
+        %label SAP Asset ID
+        =h @asset.sap_asset_id
+      %li
+        %label WBS Element
+        =h @asset.sap_wbs_element
+      %li
+        %label Monitorable
+        =h @asset.monitorable
+        
+  %fieldset#notes
+    %legend Notes
+    %ul
+      %li
+        %label Notes
+        %pre= @asset.notes
+
+
+%p
+  = link_to "Edit", edit_asset_path(@asset)
+  |
+  = link_to "Destroy", @asset, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", assets_path

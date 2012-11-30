@@ -1,0 +1,39 @@
+- semantic_form_for @cable do |f|
+  = f.error_messages
+  - f.inputs do
+    = f.input :device, :as => :select, :collection => Asset.find_all_by_type(['Server', 'Switch', 'Router', 'Firewall', 'LoadBalancer'], :conditions => ['state = ? or state = ?', 'installed', 'in_service']), :selected => @cable.interface.asset.id, :required => true
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'interface_spinner'
+    
+    :javascript
+      $(document).ready(function() {
+        $('#cable_device').change(function() {
+          $('#interface_spinner').show();
+          $('#cable_interface_id').html = "";
+          $('#cable_interface_id').load('/interfaces.js?asset_id=' + $('#cable_device').val(), function() {
+            $('#interface_spinner').hide();
+          });
+        })
+      });
+    
+    = f.input :interface, :as => :select, :collection => (@cable.interface.asset.nil?) ? [] : Interface.find_all_by_asset_id(@cable.interface.asset.id), :include_blank => true
+    
+    = f.input :medium, :required => true
+    
+    = f.input :target_device, :as => :select, :collection => Asset.find_all_by_type(['Server', 'Switch', 'Router', 'Firewall', 'LoadBalancer'], :conditions => ['state = ? or state = ?', 'installed', 'in_service']), :selected => @cable.interface_target.asset.id, :required => true
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'interface_target_spinner'
+
+    :javascript
+      $(document).ready(function() {
+        $('#cable_target_device').change(function() {
+          $('#interface_target_spinner').show();
+          $('#cable_interface_id_target').html = "";
+          $('#cable_interface_id_target').load('/interfaces.js?asset_id=' + $('#cable_target_device').val(), function() {
+            $('#interface_target_spinner').hide();
+          });
+        })
+      });
+    
+    = f.input :interface_target, :label => 'Target Interface', :as => :select, :collection => (@cable.interface_target.asset.nil?) ? [] : Interface.find_all_by_asset_id(@cable.interface_target.asset.id), :include_blank => true
+    
+    = f.input :notes
+  = f.buttons

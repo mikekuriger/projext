@@ -1,0 +1,5 @@
+.fields
+  - f.inputs do
+    = f.input :cluster_id, :as => :select, :collection => Cluster.all
+    = f.input :function_id, :as => :select, :collection => Function.all
+    = link_to_remove_fields "Remove Service", f

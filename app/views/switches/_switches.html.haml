@@ -1,0 +1,21 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @switches, :entry_name => 'switch'
+  = will_paginate @switches
+
+%table{:id => "switchlist", :class => "list"}
+  %tr
+    %th Hostname
+    %th Serial
+    %th Model
+    %th Group
+    %th Farm
+    %th Rack
+    %th Actions
+  = render :partial => "switch", :collection => @switches
+
+.wham_pagination
+  .page_info
+    = page_entries_info @switches, :entry_name => 'switch'
+  = will_paginate @switches
+

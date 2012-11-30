@@ -1,0 +1,16 @@
+%div{:id => dom_id(f.object, 'fields'), :class => 'fields' }
+  - f.inputs do
+    - if f.object.new_record?
+      = f.input :data, :label => 'Select File', :as => :file
+      = link_to_remove_fields "Remove Document", f
+    - else
+      = image_tag f.object.url(:small)
+      = link_to_remote "Remove Document", |
+        :url => document_path(:id => f.object), |
+        :method => :delete, |
+        :html => { :title => "Remove this attachment", :id => "remove" }, |
+        :loading => "$('##{dom_id(f.object, 'spinner')}').show()", |
+        :failure => "alert('Error removing document'); $('##{dom_id(f.object, 'spinner')}').hide()", |
+        :success => "$('##{dom_id(f.object, 'fields')}').fadeOut(300, function() { $(this).remove(); })" |
+      = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(f.object, 'spinner')
+      

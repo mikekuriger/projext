@@ -1,0 +1,89 @@
+- title "Virtual Server"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @virtual_server.try(:name)
+      %li
+        %label Hostname
+        =h @virtual_server.hostname
+      %li
+        %label Domain
+        =h @virtual_server.domain
+      %li
+        %label Host Server
+        =link_to @virtual_server.parent.name, @virtual_server.parent if @virtual_server.parent
+      %li
+        %label Host Server Location
+        =h @virtual_server.parent.location if @virtual_server.parent
+      %li
+        %label Host Server Rack Elevation
+        =h @virtual_server.parent.rack_elevation if @virtual_server.parent
+      %li
+        %label Description
+        =h @virtual_server.description
+
+  %fieldset#sizing
+    %legend Sizing
+    %ul
+      %li
+        %label Memory
+        =h @virtual_server.physical_memory
+      %li
+        %label Processor
+        =h "#{@virtual_server.cpu_count} x #{@virtual_server.try(:cpu).to_s}"
+      %li
+        %label Network Interfaces
+        %ul
+          - @virtual_server.interfaces.each do |interface|
+            %li
+              %label Name
+              = h interface.name
+              %ul
+                %li
+                  %label Speed
+                  =h interface.speed
+                %li
+                  %label MAC Address
+                  =h interface.mac
+                %li
+                  %label IP
+                  =h interface.ip.ip unless interface.ip.nil?
+                %li
+                  %label Connector
+                  =h interface.connector_type
+
+  %fieldset#classification
+    %legend Classification
+    %ul
+      %li
+        %label Group
+        = link_to @virtual_server.group.name, @virtual_server.group unless @virtual_server.group.nil?
+      %li
+        %label Farm
+        = link_to @virtual_server.farm.name, @virtual_server.farm unless @virtual_server.farm.nil?
+      %li
+        %label Services
+        %ul
+          - @virtual_server.services.each do |service|
+            %li= h "#{service.cluster.name} -> #{service.function.name}"
+
+  %fieldset#miscellaneous
+    %legend Miscellaneous
+    %ul
+      %li
+        %label Monitorable
+        =h @virtual_server.monitorable
+      %li
+        %label State
+        =h @virtual_server.state
+
+%p
+  = link_to "Edit", edit_virtual_server_path(@virtual_server)
+  |
+  = link_to "Destroy", @virtual_server, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", virtual_servers_path

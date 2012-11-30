@@ -1,0 +1,18 @@
+- title "Service"
+
+%p
+  %strong Cluster:
+  =h @service.cluster.name
+%p
+  %strong Function:
+  =h @service.function.name
+%p
+  %strong State:
+  =h @service.state
+
+%p
+  = link_to "Edit", edit_service_path(@service)
+  |
+  = link_to "Destroy", @service, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", services_path

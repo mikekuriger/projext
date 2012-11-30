@@ -1,0 +1,50 @@
+#addcable
+  %h3 New Cable
+  - cable = Cable.new
+  #addcableform
+    - semantic_remote_form_for cable, |
+      :loading => "$('#add_spinner').show();", |
+      :loaded => "$('#add_spinner').hide();", |
+      :update => 'cablelist', |
+      :position => 'bottom', |
+      :failure => "alert('Unable to create, status ' + request.status)", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(cable, 'row')) |
+        ] do |f| |
+      - f.inputs do
+        = f.input :device, :as => :select, :collection => Asset.find_all_by_type(['Server', 'Switch', 'Router', 'Firewall', 'LoadBalancer'], :conditions => ['state = ? or state = ?', 'installed', 'in_service']), :required => true
+        = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'interface_spinner'
+
+        :javascript
+          $(document).ready(function() {
+            $('#cable_device').change(function() {
+              $('#interface_spinner').show();
+              $('#cable_interface_id').html = "";
+              $('#cable_interface_id').load('/interfaces.js?asset_id=' + $('#cable_device').val(), function() {
+                $('#interface_spinner').hide();
+              });
+            })
+          });
+
+        = f.input :interface, :as => :select, :collection => [], :include_blank => true
+
+        = f.input :medium, :required => true
+
+        = f.input :target_device, :as => :select, :collection => Asset.find_all_by_type(['Server', 'Switch', 'Router', 'Firewall', 'LoadBalancer'], :conditions => ['state = ? or state = ?', 'installed', 'in_service']), :required => true
+        = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'interface_target_spinner'
+
+        :javascript
+          $(document).ready(function() {
+            $('#cable_target_device').change(function() {
+              $('#interface_target_spinner').show();
+              $('#cable_interface_id_target').html = "";
+              $('#cable_interface_id_target').load('/interfaces.js?asset_id=' + $('#cable_target_device').val(), function() {
+                $('#interface_target_spinner').hide();
+              });
+            })
+          });
+
+        = f.input :interface_target, :label => 'Target Interface', :as => :select, :collection => [], :include_blank => true
+        = f.input :notes
+        = f.commit_button
+        = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'add_spinner'

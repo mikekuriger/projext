@@ -1,0 +1,27 @@
+%tr{:id => dom_id(group, 'row'), :class => cycle("odd", "even")}
+  %td= link_to group.name, group
+  %td
+    = h group.description
+    &nbsp;
+  %td{:id => dom_id(group, 'state')}
+    = h group.state
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(group, 'state_spinner')
+  %td= h group.asset_count
+  %td.actions
+    = link_to_remote icon('arrow_switch', 'Activate/Deactivate'), |
+      :url => (group.active?) ? deactivate_group_path(group) : activate_group_path(group), |
+      :method => "post", :loading => "$('##{dom_id(group, 'state_spinner')}').show();", |
+      :complete => [visual_effect(:highlight, dom_id(group, 'state'))] if can? :edit, group |
+    = link_to icon('magnifier', 'Show'), group, :class => "view" if can? :read, group
+    = link_to icon('pencil', 'Edit'), edit_group_path(group), :class => "edit" if can? :edit, group
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => group_path(group), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(group, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(group, 'row')), |
+        visual_effect(:fade, dom_id(group, 'row')), |
+        "$('##{dom_id(group, 'spinner')}').hide();" ] |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(group, 'spinner')
+    

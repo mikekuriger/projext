@@ -1,0 +1,367 @@
+@import base.sass
+
+html
+  margin: 0
+  padding: 0
+
+
+body
+  margin: 0
+  padding: 0
+  font: 0.8125em Verdana, sans-serif
+  line-height: 1
+  color: #333
+  background: #FFF
+
+
+a
+  color: #0066B3
+  background: inherit
+  text-decoration: none
+
+
+h1
+  font: bold 2.1em Arial, Arial, Sans-Serif
+  color: #036DA7 
+
+
+h2
+  font: 1.5em Arial, Arial, Sans-Serif
+  letter-spacing: 1px
+
+
+h3
+  font: bold 1em Arial, Arial, sans-serif
+  letter-spacing: 2px
+
+
+h4
+  font: bold 1.1em Arial, Arial, sans-serif
+  letter-spacing: 1px
+
+
+.hidebutton
+  color: #ffffff
+  background-color: #ffffff
+  border: none
+  width: 1px
+  height: 1px
+
+
+div
+  &#header
+    width: 100%
+    overflow: hidden
+    background: #BBD9EE
+
+    h1
+      float: left
+      width: 770px
+      margin: 0 auto
+      text-align: center
+      padding: 30px 0 20px
+      color: #fff
+
+  &#footer
+    text-align: center
+
+  &#search
+    float: right
+    width: 20%
+    margin: 10px 10px 10px 0
+
+
+#search .box
+  padding: 1em
+  margin: 0 0 1em 0
+  background: #FFF6BF
+
+
+div#menu
+  float: left
+  width: 100%
+  margin: 0 auto
+  text-align: left
+  clear: both
+
+
+#nav
+  background: #E7F1F8
+  height: 25px
+
+
+ul#mainNav
+  list-style-type: none
+  margin: 0
+  padding: 0
+  float: left
+
+  li
+    list-style-type: none
+    margin: 0
+    padding: 0
+    float: left
+    margin-left: 3px
+    margin-right: 3px
+    text-align: center
+
+
+  a
+    float: left
+    padding: 5px
+    text-decoration: none
+    color: #666
+    border-right: 1px solid #fff
+
+    &:hover
+      background: #fff
+      color: #000
+
+
+  li.activelink a
+    background: #FFF
+    color: #003
+
+
+    &:hover
+      background: #FFF
+      color: #003
+
+
+
+#mainNav li
+  ul
+    position: absolute
+    top: 105px
+    width: 10em
+    left: -999em
+    border: 1px solid #ddd
+    text-align: left
+
+  &:hover ul
+    left: auto
+
+  ul li
+    width: 10em
+    background: none
+    background-color: #e3e3e3
+    border-bottom: 1px solid #ddd
+    border-right: 1px solid #ddd
+    margin-left: 0px
+    padding-left: 0px
+    text-align: left
+
+    a
+      width: 10em
+      background: none
+      background-color: #e3e3e3
+      border-bottom: 1px solid #ddd
+      border-right: 1px solid #ddd
+      margin-left: 0px
+      padding-left: 0px
+      text-align: left
+
+      &:hover
+        background-color: #fdfcf6
+
+
+#right
+  float: left
+  width: 76%
+  padding: 1em
+  margin-bottom: 1.2em
+  background: #eee
+  text-align: justify
+
+
+#left
+  float: right
+  width: 20%
+  margin: 0 0 10px 0
+
+  .box
+    padding: 1em
+    margin: 0 0 1em 0
+    background: #FFF6BF
+
+
+#main
+  float: left
+  width: 100%
+  padding: 1em
+  margin-bottom: 1.2em
+  background: #eee
+
+
+#content
+  font: 95%/1.3 TrebuchetMS,Arial,sans-serif
+  margin: 0 auto
+  padding: 10px 35px 10px 10px
+  background: #fff
+
+
+ul
+  padding: 0
+  margin: 0
+
+
+li
+  list-style-type: none
+
+
+.list, #serverlist
+  border: 1px solid #666666
+
+
+.list
+  td, th
+    font-family: Verdana, Arial, Helvetica, sans-serif
+    font-size: 8pt
+    font-weight: normal
+    padding: 4px 7px
+    border-right: 1px solid #666666
+
+
+#serverlist
+  td, th
+    font-family: Verdana, Arial, Helvetica, sans-serif
+    font-size: 8pt
+    font-weight: normal
+    padding: 4px 7px
+    border-right: 1px solid #666666
+
+
+.list th, #serverlist th
+  padding: 4px 7px
+  background: #97AFBF
+
+
+.list tr.even, #serverlist tr.even
+  background-color: #BBD9EE
+
+
+.list tr:hover td, #serverlist tr:hover td, .list tr.even:hover td, #serverlist tr.even:hover td
+  background-color: #FFFFFF
+
+
+#main
+  .itemdetail
+    li
+      margin-bottom: 9px
+
+      ul
+        list-style-type: disc
+        margin-left: 2em
+        margin-top: 7px
+
+    fieldset
+      border: 1px solid gray
+
+  .assetdetail fieldset
+    border: 1px solid gray
+
+  .itemdetail fieldset label
+    display: inline
+    width: 100%
+    line-height: 12px
+    font-weight: bold
+    background-color: #a8a8a8
+    padding: 2px
+
+
+#rackdiagram td
+  font-weight: bold
+  background-color: #777777
+  color: #dddd99
+
+  &.filled
+    font-weight: bold
+    background-color: #777777
+    color: #dddd99
+
+  &.empty
+    font-weight: bold
+    background-color: #333333
+    color: #dddd99
+
+  &.other, &.openbsd39, &.freebsd60, &.freebsd61, &.freebsd62
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #555555
+    color: #eeeeee
+
+  &.none
+    font-weight: bold
+    font-variant: small-caps
+    background-color: black
+    color: #dddd00
+
+  &.brocade
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #444499
+    color: #eeeeee
+
+  &.solaris, &.solaris8, &.solaris25, &.solaris26, &.solaris7, &.solaris9, &.solaris10
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #660066
+    color: #dddd00
+
+  &.windows, &.windows2000, &.windows2003_64, &.windowsserver2003, &.windowsxp
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #0000dd
+    color: #cccccc
+
+  &.redhat, &.rhel4_64, &.rhel5, &.rhel52, &.rhel52_64, &.rhel53, &.rhel53_64, &.rhel5_64, &.rhelas3, &.rhelas4
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #cc0000
+    color: #000000
+
+  &.OVS, &.OVS215
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #990000
+    color: #ffffff
+
+  &.fedora, &.fedora11, &.fedora7, &.fedora8, &.fedoracore2, &.fedoracore3, &.fedoracore4, &.fedoracore5, &.fedoracore6
+    font-size: 12px
+    font-variant: small-caps
+    background-color: #cccc00
+    color: #000000
+
+  &.centos, &.centos51, &.centos51_64, &.centos52, &.centos52_64, &.centos53, &.centos53_64
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #00cc00
+    color: #000000
+
+  &.dataontap
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #336611
+    color: #dddd00
+
+  &.fastt
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #886644
+    color: #dddd00
+
+  &.screenos6
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #8800ff
+    color: #000000
+
+  &.osx
+    font-weight: bold
+    font-variant: small-caps
+    background-color: #FF00FF
+    color: #000000
+
+
+.sortable tr:hover th
+  cursor: pointer

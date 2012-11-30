@@ -1,0 +1,22 @@
+- title "Equipment Racks"
+
+%table.list
+  %tr
+    %th Building/Room
+    %th Name
+    %th Description
+    %th State
+    %th Actions
+  - for equipment_rack in @equipment_racks
+    %tr
+      %td
+        = h [ equipment_rack.try(:room).try(:building).try(:name), equipment_rack.try(:room).try(:name) ].join(', ')
+      %td= h equipment_rack.name
+      %td= h equipment_rack.description
+      %td= h equipment_rack.state
+      %td.actions
+        = link_to 'Show', equipment_rack
+        = link_to 'Edit', edit_equipment_rack_path(equipment_rack)
+        = link_to 'Destroy', equipment_rack, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Equipment Rack", new_equipment_rack_path

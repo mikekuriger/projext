@@ -1,0 +1,21 @@
+- title "Switch Module"
+
+%p
+  %strong Name:
+  =h @switch_module.name
+%p
+  %strong Description:
+  =h @switch_module.description
+%p
+  %strong Serial:
+  =h @switch_module.serial
+%p
+  %strong Hardware Model:
+  =h @switch_module.hardware_model_id
+
+%p
+  = link_to "Edit", edit_switch_module_path(@switch_module)
+  |
+  = link_to "Destroy", @switch_module, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", switch_modules_path

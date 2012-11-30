@@ -1,0 +1,10 @@
+- title "Edit Virtual Server"
+
+- javascript 'jrails.autocomplete'
+
+= render :partial => 'form'
+
+%p
+  = link_to "Show", virtual_server_path(@virtual_server)
+  |
+  = link_to "View All", virtual_servers_path

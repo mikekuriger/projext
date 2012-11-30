@@ -1,0 +1,13 @@
+- javascript 'jquery.comboselect'
+- stylesheet 'jquery.comboselect'
+
+- semantic_form_for @service do |f|
+  = f.error_messages
+  - f.inputs :name => 'General Information' do
+    = f.input :cluster
+    = f.input :function
+    = f.input :state, :as => :radio, :label => 'Active', :collection => [['Yes', 'active'], ['No', 'inactive']]
+
+  - f.inputs :name => 'Members' do
+    = f.input :assets, :as => :comboselect
+  = f.buttons

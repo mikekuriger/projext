@@ -1,0 +1,10 @@
+- semantic_form_for @operatingsystem do |f|
+  = f.error_messages
+  - f.inputs do
+    = f.input :name
+    = f.input :description
+    = f.input :manufacturer
+    = f.input :ostype
+    = f.input :version
+    = f.input :architecture
+  = f.buttons

@@ -1,0 +1,37 @@
+one:
+  id: 1
+  farm_id: 1
+  network: 10.140.207.0
+  subnetbits: 24
+  gateway: MyString
+  vlan: MyString
+  description: MyString
+  notes: MyText
+
+two:
+  id: 2
+  farm_id: 1
+  network: 10.140.206.0
+  subnetbits: 24
+  gateway: MyString
+  vlan: MyString
+  description: MyString
+  notes: MyText
+
+# == Schema Information
+#
+# Table name: networks
+#
+#  id          :integer(4)      not null, primary key
+#  farm_id     :integer(4)
+#  network     :string(255)
+#  subnetbits  :integer(4)
+#  netmask     :string(255)
+#  gateway     :string(255)
+#  vlan        :string(255)
+#  description :string(255)
+#  notes       :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

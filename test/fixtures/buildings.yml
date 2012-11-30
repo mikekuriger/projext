@@ -1,0 +1,39 @@
+one:
+  id: 1
+  name: Building One
+  description: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  country: MyString
+
+two:
+  id: 2
+  name: Building Two
+  description: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  country: MyString
+
+# == Schema Information
+#
+# Table name: buildings
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(255)
+#  description :string(255)
+#  address1    :string(255)
+#  address2    :string(255)
+#  city        :string(255)
+#  state       :string(255)
+#  zip         :string(255)
+#  country     :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

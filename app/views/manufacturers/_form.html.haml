@@ -1,0 +1,12 @@
+- semantic_form_for @manufacturer do |f|
+  = f.error_messages
+  - f.inputs do
+    = f.input :name
+    = f.input :address1
+    = f.input :address2
+    = f.input :city
+    = f.input :state
+    = f.input :zip
+    = f.input :url
+    = f.input :notes
+  = f.buttons

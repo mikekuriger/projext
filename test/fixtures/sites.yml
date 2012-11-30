@@ -1,0 +1,31 @@
+one:
+  name: MyString
+  ip_id: 1
+  vip_id: 1
+  cluster_id: 1
+  customer_id: 1
+  state: MyString
+
+two:
+  name: MyString
+  ip_id: 1
+  vip_id: 1
+  cluster_id: 1
+  customer_id: 1
+  state: MyString
+
+# == Schema Information
+#
+# Table name: sites
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(255)
+#  ip_id       :integer(4)
+#  vip_id      :integer(4)
+#  cluster_id  :integer(4)
+#  customer_id :integer(4)
+#  state       :string(255)     default("active")
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

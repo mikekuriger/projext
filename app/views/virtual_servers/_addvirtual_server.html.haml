@@ -1,0 +1,20 @@
+#addvirtual_server
+  %h3 New Virtual Server
+  - virtual_server = VirtualServer.new
+  #addvirtual_serverform
+    - semantic_remote_form_for virtual_server, |
+      :loading => "$('#add_spinner').show();", |
+      :loaded => "$('#add_spinner').hide();", |
+      :update => 'virtual_serverlist', |
+      :position => 'bottom', |
+      :failure => "alert('Unable to create, status ' + request.status)", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(virtual_server, 'row')) |
+        ] do |f| |
+      - f.inputs do
+        = f.input :hostname
+        = f.input :domain, :default => 'warnerbros.com'
+        = f.input :parent, :label => 'Host Server', :collection => Server.all(:conditions => ['virtualization_host = ?', true])
+        = f.input :group
+        = f.commit_button
+        = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'add_spinner'

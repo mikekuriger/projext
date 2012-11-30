@@ -1,0 +1,27 @@
+- title "Purchase Orders"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th Created
+    %th Sent
+    %th Vendor
+    %th Number
+    %th Amount
+    %th Notes
+  - for purchase_order in @purchase_orders
+    %tr
+      %td= h purchase_order.name
+      %td= h purchase_order.description
+      %td= h purchase_order.created
+      %td= h purchase_order.sent
+      %td= h purchase_order.vendor_id
+      %td= h purchase_order.number
+      %td= h purchase_order.amount
+      %td= h purchase_order.notes
+      %td= link_to 'Show', purchase_order
+      %td= link_to 'Edit', edit_purchase_order_path(purchase_order)
+      %td= link_to 'Destroy', purchase_order, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Purchase Order", new_purchase_order_path

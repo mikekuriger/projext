@@ -1,0 +1,20 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @operatingsystems, :entry_name => 'operatingsystem'
+  = will_paginate @operatingsystems
+
+%table{:id => "operatingsystemlist", :class => "list"}
+  %tr
+    %th Name
+    %th Description
+    %th Manufacturer
+    %th OS Type
+    %th Version
+    %th Architecture
+    %th Actions
+  = render :partial => "operatingsystem", :collection => @operatingsystems
+
+.wham_pagination
+  .page_info
+    = page_entries_info @operatingsystems, :entry_name => 'operatingsystem'
+  = will_paginate @operatingsystems

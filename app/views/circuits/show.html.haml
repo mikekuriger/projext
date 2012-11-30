@@ -1,0 +1,29 @@
+- title "Circuit"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @circuit.name
+      %li
+        %label Description
+        =h @circuit.description
+      %li
+        %label Vendor
+        =link_to @circuit.vendor.name, @circuit.vendor if @circuit.vendor
+      %li
+        %label Circuit ID
+        =h @circuit.vendor_circuit_id
+      %li
+        %label Notes
+        %blockquote
+          %pre= @circuit.notes
+
+%p
+  = link_to "Edit", edit_circuit_path(@circuit)
+  |
+  = link_to "Destroy", @circuit, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", circuits_path

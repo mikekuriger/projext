@@ -1,0 +1,29 @@
+%tr{:id => dom_id(cable, 'row'), :class => cycle("odd", "even")}
+  %td
+    = link_to cable.interface.asset.name, cable.interface.asset if cable.interface.asset
+    &nbsp;
+  %td
+    = link_to cable.interface.name, cable.interface if cable.interface.name
+    &nbsp;
+  %td= h cable.try(:medium).try(:name)
+  %td
+    = link_to cable.interface_target.name, cable.interface_target if cable.interface_target.name
+    &nbsp;
+  %td
+    = link_to cable.interface_target.asset.name, cable.interface_target.asset if cable.interface_target.asset
+    &nbsp;
+  %td= h cable.notes
+  %td.actions
+    = link_to icon('magnifier', 'Show'), cable, :class => "view" if can? :read, cable
+    = link_to icon('pencil', 'Edit'), edit_cable_path(cable), :class => "edit" if can? :edit, cable
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => cable_path(cable), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(cable, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(cable, 'row')), |
+        visual_effect(:fade, dom_id(cable, 'row')), |
+        "$('##{dom_id(cable, 'spinner')}').hide();" ] |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(cable, 'spinner')
+    

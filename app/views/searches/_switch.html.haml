@@ -1,0 +1,11 @@
+%tr{:id => dom_id(switch, 'row'), :class => cycle("odd", "even")}
+  %td= link_to switch.excerpts.name, switch
+  %td= switch.try(:excerpts).try(:fqdn)
+  %td= switch.try(:excerpts).try(:serial)
+  -# %td= result.try(:excerpts).try(:group_name)
+  / %td= result.to_yaml
+  -# %td= result.farm.name unless result.farm.nil?
+  %td.actions
+    = link_to icon('magnifier', 'Show'), switch, :class => "view" if can? :read, switch
+    = link_to icon('pencil', 'Edit'), edit_polymorphic_path(switch), :class => "edit" if can? :edit, switch
+    / = link_to 'Destroy', switch, :confirm => 'Are you sure?', :method => :delete

@@ -1,0 +1,19 @@
+%tr{:id => dom_id(storage_array, 'row'), :class => cycle("odd", "even")}
+  %td= h storage_array.name
+  %td
+    = h storage_array.description
+    &nbsp;
+  %td= storage_array.storage_heads.size
+  %td= storage_array.storage_shelves.size
+  %td= storage_array.total_disks
+  %td.action
+    = link_to icon('magnifier', 'Show'), storage_array, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_storage_array_path(storage_array), :class => "edit" if can? :edit, storage_array
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => storage_array_path(storage_array), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(storage_array, 'row')), |
+        visual_effect(:fade, dom_id(storage_array, 'row')) |
+      ] if can? :delete, storage_array |

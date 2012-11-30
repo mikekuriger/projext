@@ -1,0 +1,33 @@
+%tr{:id => dom_id(user, 'row'), :class => cycle("odd", "even")}
+  %td= h user.email
+  %td
+    = h user.first_name
+    &nbsp;
+  %td
+    = h user.last_name
+    &nbsp;
+  %td= h user.type
+  %td= h user.api_is_enabled?
+  %td
+    = h user.roles.map{|r| r.name}.join(", ")
+    &nbsp;
+  %td{:id => dom_id(user, 'state')}
+    = h user.state
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(user, 'state_spinner')
+  %td
+    = link_to_remote icon('arrow_switch', 'Activate/Deactivate'), |
+      :url => (user.active?) ? disable_user_path(user) : activate_user_path(user), |
+      :method => "post", |
+      :loading => "$('##{dom_id(user, 'state_spinner')}').show();", |
+      :complete => [visual_effect(:highlight, dom_id(user, 'state'))] if can? :edit, user |
+    = link_to icon('magnifier', 'Show'), user, :class => "view" if can? :read, user
+    = link_to icon('pencil', 'Edit'), edit_user_path(user), :class => "edit" if can? :edit, user
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => user_path(user), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(user, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(user, 'row')), |
+        visual_effect(:fade, dom_id(user, 'row'))] if can? :delete, user |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(user, 'spinner')

@@ -1,0 +1,34 @@
+admin:
+  name: admin
+
+guest:
+  name: guest
+
+syseng:
+  name: syseng
+
+neteng:
+  name: neteng
+  
+webeng:
+  name: webeng
+  
+executive:
+  name: executive
+  
+api:
+  name: api
+
+whamd:
+  name: whamd
+  
+# == Schema Information
+#
+# Table name: roles
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

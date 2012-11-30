@@ -1,0 +1,44 @@
+%tr{ :id => dom_id(cluster, 'row'), :class => [ cycle("odd", "even"), cluster.state ].join(' ') }
+  %td= link_to cluster.name, cluster
+  %td
+    =h cluster.description
+    &nbsp;
+  %td= h cluster.state
+  %td
+    = link_to cluster.assets.uniq.size, '#', :id => dom_id(cluster, 'assetcount')
+    - if cluster.assets.uniq.size > 0
+      :javascript
+        $("##{dom_id(cluster, 'assetcount')}").qtip({
+          content: '#{cluster.assets.uniq.each.map{|a| link_to(a.name, a)}.join(', ')}',
+          show: {
+            solo: true
+          },
+          hide: {
+            delay: 1000,
+            fixed: true
+          },
+          position: {
+            corner: {
+              target: 'rightMiddle',
+              tooltip: 'leftMiddle'
+            }
+          },
+          style: {
+            tip: 'leftMiddle',
+            name: 'blue'
+          }
+        });
+  %td.action
+    = link_to icon('magnifier', 'Show'), cluster, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_cluster_path(cluster), :class => "edit"
+    = link_to_remote icon('delete', 'Delete'), |
+      :class => "delete", |
+      :confirm => 'Are you sure?', |
+      :method => :delete, |
+      :loading => "$('##{dom_id(cluster, 'state_spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(cluster, 'row')), |
+        visual_effect(:fade, dom_id(cluster, 'row')) |
+      ] |
+      
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(cluster, 'state_spinner')

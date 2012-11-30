@@ -1,0 +1,25 @@
+one:
+  room_id: 1
+  name: MyString
+  description: MyString
+  state: MyString
+
+two:
+  room_id: 1
+  name: MyString
+  description: MyString
+  state: MyString
+
+# == Schema Information
+#
+# Table name: equipment_racks
+#
+#  id          :integer(4)      not null, primary key
+#  room_id     :integer(4)
+#  name        :string(255)
+#  description :string(255)
+#  state       :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

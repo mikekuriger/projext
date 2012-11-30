@@ -1,0 +1,11 @@
+%tr{:id => dom_id(firewall, 'row'), :class => cycle("odd", "even")}
+  %td= link_to firewall.excerpts.name, firewall
+  %td= firewall.try(:excerpts).try(:fqdn)
+  %td= firewall.try(:excerpts).try(:serial)
+  -# %td= result.try(:excerpts).try(:group_name)
+  / %td= result.to_yaml
+  -# %td= result.farm.name unless result.farm.nil?
+  %td.actions
+    = link_to icon('magnifier', 'Show'), firewall, :class => "view" if can? :read, firewall
+    = link_to icon('pencil', 'Edit'), edit_polymorphic_path(firewall), :class => "edit" if can? :edit, firewall
+    / = link_to 'Destroy', firewall, :confirm => 'Are you sure?', :method => :delete

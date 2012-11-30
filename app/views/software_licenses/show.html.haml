@@ -1,0 +1,15 @@
+- title "Software License"
+
+%p
+  %strong Name:
+  =h @software_license.name
+%p
+  %strong Description:
+  =h @software_license.description
+
+%p
+  = link_to "Edit", edit_software_license_path(@software_license)
+  |
+  = link_to "Destroy", @software_license, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", software_licenses_path

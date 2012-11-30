@@ -1,0 +1,83 @@
+Roadmap
+=======
+
+---
+
+Version 2.0
+-----------
+*Projected Release Date: TBD*
+
+### Features
+- Rewritten from the ground up in Ruby, using the Rails framework. This allows for more rapid development on future features, and tighter integration with the customer portal.
+- Can now store maintenance and support contract information for assets.
+- Revised asset lifecycle tracking to match WB's asset lifecycle policy.
+- Added tracking for software/other misc. equipment as assets.
+- Enhance storage tracking
+- Enhance network tracking
+- Added virtual machine support
+- Admin interface now exists for *everything*
+
+---
+
+Version 2.1
+-----------
+*Projected Release Date: TBD*
+
+### Features
+- Add dynamic diagrams using Graphviz
+- Make URL publicly available for buffy + DMZ servers
+  - Would allow for remote agents
+  - Would require re-architecting to use Zend_Auth/Zend_ACL
+  - Frontend for device connections
+  - Consider changing device connection DB schema?
+
+---
+
+Version ??
+----------
+
+### Future Features
+- Add dependency tracking between elements (clusters, groups, etc.)
+- Import warnerbros.com sites
+- Set up API for use by agent and other components
+- Set up network walking
+- Set up context switching everywhere for Ajax/XML/CSV/YML/etc. content delivery. It's currently in place in some areas, but not in all
+- Add reports based on collectd data
+- Database/code optimization
+- Incorporate Flexigrid (http://www.webplicity.net/flexigrid/)?
+- Add virtual interface tracking
+
+---
+
+
+DONE:
+
+- Database redundancy
+- Set up logging
+- Finish server add form
+- Finish server edit form
+- Create devicehistory model
+- Set up device modification actions
+- Modify device modification actions to log properly
+- Update device modification actions to generate history properly
+- Admin interfaces:
+  - Groups
+  - Hardware manufacturers
+  - Software manufacturers
+  - Functions
+  - Clusters
+  - Device purposes
+  - Operating systems
+  - Device CPUs
+- Add virtual server support
+  - Create tables
+- Add extra fields to server detail page
+- Fix SLB import script (for VIPs)
+- Fix rack diagram
+- DNS import script (for sites)
+- Add site list functionality
+- Finish DeviceController detail action
+- Create agent
+- Add clusters, functions, etc. to searched data
+- Add SAP asset ID and WBS element fields to device model
+- Switch to git

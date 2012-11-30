@@ -1,0 +1,29 @@
+- title "Load Balancers"
+
+%table
+  %tr
+    %th Name
+    %th Hostname
+    %th Domain
+    %th Serial
+    %th Hardware model
+    %th Group
+    %th Farm
+    %th Equipment rack
+    %th Actions
+  - for load_balancer in @load_balancers
+    %tr
+      %td= h load_balancer.name
+      %td= h load_balancer.hostname
+      %td= h load_balancer.domain
+      %td= h load_balancer.serial
+      %td= h load_balancer.hardware_model_id
+      %td= h load_balancer.group_id
+      %td= h load_balancer.farm_id
+      %td= h load_balancer.equipment_rack_id
+      %td
+        = link_to 'Show', load_balancer
+        = link_to 'Edit', edit_load_balancer_path(load_balancer)
+        = link_to 'Destroy', load_balancer, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Load Balancer", new_load_balancer_path

@@ -1,0 +1,27 @@
+- title "Networks"
+
+%table.list
+  %tr
+    %th Farm
+    %th Network
+    %th Subnetbits
+    %th Netmask
+    %th Gateway
+    %th Vlan
+    %th Description
+    %th Notes
+  - for network in @networks
+    %tr
+      %td= link_to network.farm.name, network.farm if network.farm
+      %td= h network.network
+      %td= h network.subnetbits
+      %td= h network.netmask
+      %td= h network.gateway
+      %td= h network.vlan
+      %td= h network.description
+      %td= h network.notes
+      %td= link_to 'Show', network
+      %td= link_to 'Edit', edit_network_path(network)
+      %td= link_to 'Destroy', network, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Network", new_network_path

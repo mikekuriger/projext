@@ -1,0 +1,10 @@
+- title "Edit Storage Array"
+
+- javascript('jquery.selso', 'jrails.autocomplete')
+
+= render :partial => 'form'
+
+%p
+  = link_to "Show", storage_array_path(@storage_array)
+  |
+  = link_to "View All", storage_arrays_path

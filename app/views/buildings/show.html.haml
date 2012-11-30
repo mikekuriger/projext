@@ -1,0 +1,33 @@
+- title "Building"
+
+%p
+  %strong Name:
+  =h @building.name
+%p
+  %strong Description:
+  =h @building.description
+%p
+  %strong Address1:
+  =h @building.address1
+%p
+  %strong Address2:
+  =h @building.address2
+%p
+  %strong City:
+  =h @building.city
+%p
+  %strong State:
+  =h @building.state
+%p
+  %strong Zip:
+  =h @building.zip
+%p
+  %strong Country:
+  =h @building.country
+
+%p
+  = link_to "Edit", edit_building_path(@building)
+  |
+  = link_to "Destroy", @building, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", buildings_path

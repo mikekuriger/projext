@@ -1,0 +1,23 @@
+%ul.tooltip
+  %li
+    = image_tag @firewall.hardware_model.picture.url(:small) if @firewall.hardware_model
+  %li
+    %label Name
+    = @firewall.name
+  %li
+    %label Manufacturer
+    = link_to @firewall.manufacturer.name, @firewall.manufacturer if @firewall.manufacturer
+  %li
+    %label Model
+    = link_to @firewall.hardware_model.name, @firewall.hardware_model if @firewall.hardware_model
+  %li
+    %label Group
+    = link_to @firewall.group.name, @firewall.group if @firewall.group
+  %li
+    %label Farm
+    = link_to @firewall.farm.name, @firewall.farm if @firewall.farm
+  %li
+    %label Actions
+    = link_to icon('magnifier', 'Show'), @firewall, :class => "view"
+    |
+    = link_to icon('pencil', 'Edit'), edit_firewall_path(@firewall), :class => "edit"

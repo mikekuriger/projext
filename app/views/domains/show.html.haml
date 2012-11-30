@@ -1,0 +1,15 @@
+- title "Domain"
+
+%p
+  %strong Name:
+  =h @domain.name
+%p
+  %strong Customer:
+  =link_to @domain.customer.name, @domain.customer if @domain.customer
+
+%p
+  = link_to "Edit", edit_domain_path(@domain)
+  |
+  = link_to "Destroy", @domain, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", domains_path

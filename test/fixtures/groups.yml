@@ -1,0 +1,28 @@
+utility:
+  id: 1
+  name: utility
+  description: Utility
+
+unused:
+  id: 2
+  name: unused
+  description: unused
+  
+inactive:
+  id: 3
+  name: inactive
+  description: Inactive Group
+  state: inactive
+
+# == Schema Information
+#
+# Table name: groups
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(255)
+#  description :string(255)
+#  state       :string(255)     default("active")
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

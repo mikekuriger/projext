@@ -1,0 +1,7 @@
+.fields
+  - f.inputs do
+    = link_to_remove_fields "Remove Interface", f
+    = f.input :name
+    = f.input :mac, :label => 'MAC Address'
+    = f.input :speed, :as => :select, :collection => Interface::SPEED_OPTIONS
+    = f.input :connector_type, :as => :select, :collection => Interface::CONNECTOR_TYPE_OPTIONS, :allow_blank => true

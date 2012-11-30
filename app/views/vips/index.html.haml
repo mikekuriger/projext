@@ -1,0 +1,8 @@
+- title "VIPs"
+
+#vips
+  = render 'vips'
+
+= render :partial => "addvip" if can? :create, Vip
+
+= render :partial => 'shared/export', :object => @vips

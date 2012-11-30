@@ -1,0 +1,44 @@
+- title "Servers"
+
+- javascript 'jquery.qtip.min'
+
+= (session[:show_inactive]) ? link_to("Hide Inactive", servers_url(:hide_inactive => 'Y')) : link_to("Show Inactive", servers_url(:show_inactive => 'Y'))
+
+.perpage_select
+  - form_tag servers_url, :method => :get do
+    Items Per Page:
+    = servers_per_page_select @servers
+
+#assetsearch
+  .box
+    %ul#search
+      - form_tag search_servers_url, :method => :get do
+        %li
+          %input.search_button{ :name => 'q', :type => 'text', :size=> '20', :value => (@query || 'Search Servers'), :onclick => 'this.focus();this.select()', :onfocus => 'this.select()' }/
+        = submit_tag 'Search', :class => 'hidebutton'
+
+- @entry_name = (session[:show_inactive] ? 'server' : 'active server')
+#servers
+  = render 'servers'
+
+= render :partial => "addserver", :locals => { :server => @server } if can? :create, Server
+
+/ - if can? :create, Server
+/   %h3 New Server
+/   - semantic_form_for Server.new do |f|
+/     = f.error_messages
+/     - f.inputs do
+/       = f.input :hostname
+/       = f.input :domain, :input_html => { :value => 'warnerbros.com' }
+/       = f.input :serial
+/       = f.input :group
+/       = f.input :farm
+/     = f.buttons
+
+= render :partial => 'shared/export', :object => @servers
+
+%ul
+  %li= "#{icon('bullet_star', 'Virtual Machine')} = Virtual Server"
+  %li= "#{icon('asterisk_yellow', 'Virtual Host')} = Virtual Host"
+  
+%p= link_to "New Server (full form)", new_server_path

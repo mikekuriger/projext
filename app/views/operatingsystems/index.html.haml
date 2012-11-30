@@ -1,0 +1,8 @@
+- title "Operating Systems"
+
+#operatingsystems
+  = render 'operatingsystems'
+
+= render :partial => "addoperatingsystem" if can? :create, Operatingsystem
+
+= render :partial => 'shared/export', :object => @operatingsystems

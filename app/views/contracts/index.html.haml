@@ -1,0 +1,35 @@
+- title "Contracts"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th Number
+    %th Support Level
+    %th Vendor
+    %th Start
+    %th End
+    %th Quote
+    %th Purchase Order
+    %th Notes
+    %th # of Attached Docs
+    %th Actions
+  - for contract in @contracts
+    %tr
+      %td= link_to contract.name, contract
+      %td= h contract.description
+      %td= h contract.number
+      %td= h contract.supportlevel
+      %td= link_to contract.vendor.name, contract.vendor if contract.vendor
+      %td= h contract.start
+      %td= h contract.end
+      %td= link_to contract.quote.name, contract.quote if contract.quote
+      %td= h contract.purchaseorder_id
+      %td= h contract.notes
+      %td= h contract.attachings.count
+      %td.actions
+        = link_to 'Show', contract
+        = link_to 'Edit', edit_contract_path(contract)
+        = link_to 'Destroy', contract, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Contract", new_contract_path

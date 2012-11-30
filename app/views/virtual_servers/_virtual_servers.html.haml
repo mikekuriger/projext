@@ -1,0 +1,29 @@
+.perpage_select
+  - form_tag virtual_servers_url, :method => :get do
+    Items Per Page:
+    = virtual_servers_per_page_select @virtual_servers
+
+.wham_pagination
+  .page_info
+    = page_entries_info @virtual_servers, :entry_name => (session[:show_inactive] ? 'virtual server' : 'active virtual server')
+  = will_paginate @virtual_servers
+
+%table{:id => "virtual_serverlist", :class => "list"}
+  %tr
+    %th Hostname
+    %th Serial
+    %th Hardware
+    %th Interfaces
+    %th OS
+    %th Group
+    %th Farm
+    %th Services
+    %th State
+    %th Actions
+  = render :partial => "virtual_server", :collection => @virtual_servers
+
+.wham_pagination
+  .page_info
+    = page_entries_info @virtual_servers, :entry_name => (session[:show_inactive] ? 'virtual server' : 'active virtual server')
+  = will_paginate @virtual_servers
+

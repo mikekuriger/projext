@@ -1,0 +1,10 @@
+- title "Clusters"
+
+- javascript 'jquery.qtip.min'
+
+#clusters
+  = render 'clusters'
+
+= render :partial => "addcluster" if can? :create, Cluster
+
+= render :partial => 'shared/export', :object => @clusters

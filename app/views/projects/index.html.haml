@@ -1,0 +1,11 @@
+- title "Projects"
+
+= (session[:show_inactive]) ? link_to ("Hide Inactive", projects_url(:hide_inactive => 'Y')) : link_to ("Show Inactive", projects_url(:show_inactive => 'Y'))
+
+#projects
+  = render 'projects'
+
+= render :partial => "addproject" if can? :create, Project
+
+= render :partial => 'shared/export', :object => @projects
+

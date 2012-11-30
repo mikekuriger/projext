@@ -1,0 +1,163 @@
+- title "Server"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @server.try(:name)
+      %li
+        %label Hostname
+        =h @server.hostname
+      %li
+        %label Domain
+        =h @server.domain
+      %li
+        %label Description
+        =h @server.try(:description)
+      %li
+        = link_to @server.operatingsystem.name, @server.operatingsystem if @server.operatingsystem
+      %li
+        %label Serial
+        =h @server.serial
+      %li
+        %label UUID
+        =h @server.uuid
+      %li
+        %label WB Asset ID
+        =h @server.wb_asset_id
+      %li
+        %label OOB
+        =h @server.oob
+
+  %fieldset#hardware
+    %legend Hardware
+    %ul
+      %li
+        %label Manufacturer
+        =h @server.try(:hardware_model).try(:manufacturer).try(:name)
+      %li
+        %label Model
+        =h @server.try(:hardware_model).try(:name)
+      %li
+        %label Size (RMU)
+        =h @server.rack_units 
+      %li
+        %label Physical Memory
+        =h @server.physical_memory
+      %li
+        %label Processor
+        =h "#{@server.cpu_count} x #{@server.try(:cpu).to_s}"
+      %li
+        %label Network Interfaces
+        %ul
+          - @server.interfaces.each do |interface|
+            %li
+              %label Name
+              = h interface.name
+              %ul
+                %li
+                  %label Speed
+                  =h interface.speed
+                %li
+                  %label MAC Address
+                  =h interface.mac(:standard)
+                %li
+                  %label IP
+                  =h interface.ip.ip unless interface.ip.nil?
+                %li
+                  %label Connector
+                  =h interface.connector_type
+                %li
+                  %label Connected Device
+                  - if (interface.connected_interface && interface.connected_interface.asset)
+                    =link_to interface.connected_interface.asset.name, interface.connected_interface.asset
+                    = ':'
+                    =link_to interface.connected_interface.name, interface.connected_interface
+
+  %fieldset#classification
+    %legend Classification
+    %ul
+      %li
+        %label Group
+        = link_to @server.group.name, @server.group unless @server.group.nil?
+      %li
+        %label Farm
+        = link_to @server.farm.name, @server.farm unless @server.farm.nil?
+      %li
+        %label Services
+        %ul
+          - @server.services.each do |service|
+            %li= h "#{service.cluster.name} -> #{service.function.name}"
+
+  %fieldset#location
+    %legend Physical Location
+    %ul
+      %li
+        %label Location
+        = h @server.location
+      %li
+        %label Rack Elevation
+        =h @server.rack_elevation
+
+  %fieldset#finance
+    %legend Finance
+    %ul
+      %li
+        %label Purchase Date:
+        =h @server.purchase_date.to_s(:long) unless @server.purchase_date.nil?
+      %li
+        %label Vendor
+        = link_to @server.vendor.name, @server.vendor unless @server.vendor.nil?
+      %li
+        %label Leased
+        =h @server.leased
+      %li
+        %label SAP - Asset ID
+        =h @server.sap_asset_id
+      %li
+        %label SAP - WBS Element
+        =h @server.sap_wbs_element
+    
+  %fieldset#miscellaneous
+    %legend Miscellaneous
+    %ul
+      %li
+        %label Monitorable
+        =h @server.monitorable
+      %li
+        %label State
+        =h @server.state
+      %li
+        %label Agent
+        =h @server.agent.email if @server.agent
+    
+    
+  %fieldset#notesandcomments
+    %legend Notes and Comments
+    %ul
+      %li
+        %label Notes
+        %pre= @server.notes
+        
+    %ul#commentlist
+      %label Comments
+      = render :partial => "comments/comment", :collection => @server.comments
+    #newcomment
+      - @newcomment = @server.comments.new
+      - remote_form_for [@server, @newcomment], :loading => "$('#loading').show();", :loaded => "$('#loading').hide();", :update => 'commentlist', :position => 'bottom', :failure => "alert('Unable to create, status ' + request.status)", :complete => visual_effect(:highlight, dom_id(@newcomment, 'li')) do |f|
+        %ul
+          %li
+            = hidden_field_tag :model, "Server"
+            = f.text_field "comment"
+          %li
+            = f.submit "Add Comment"
+            = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'loading'
+
+%p
+  = link_to "Edit", edit_server_path(@server)
+  |
+  = link_to "Destroy", @server, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", servers_path

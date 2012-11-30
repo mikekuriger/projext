@@ -1,0 +1,41 @@
+- title "Vendors"
+
+%table.list
+  %tr
+    %th Name
+    %th Address1
+    %th Address2
+    %th City
+    %th State
+    %th Zip
+    %th Country
+    %th Url
+    %th Notes
+    %th Actions
+  - for vendor in @vendors
+    %tr
+      %td= h vendor.name
+      %td= h vendor.address1
+      %td= h vendor.address2
+      %td= h vendor.city
+      %td= h vendor.state
+      %td= h vendor.zip
+      %td= h vendor.country
+      %td= h vendor.url
+      %td= h vendor.notes
+      %td
+        = link_to icon('magnifier', 'Show'), vendor, :class => "view"
+        = link_to icon('pencil', 'Edit'), edit_vendor_path(vendor), :class => "edit"
+        = link_to icon('delete', 'Destroy'), vendor, :class => "delete", :confirm => 'Are you sure?', :method => :delete
+
+= will_paginate @vendors
+
+= render :partial => 'shared/export', :object => @vendors
+
+- if can? :create, Vendor
+  %h3 New Vendor
+  - semantic_form_for Vendor.new do |f|
+    = f.error_messages
+    = f.inputs
+    = f.buttons
+

@@ -1,0 +1,40 @@
+- title "Firewalls"
+
+%table.list
+  %tr
+    %th Name
+    %th Hostname
+    %th Domain
+    %th Serial
+    %th Model
+    %th Group
+    %th Farm
+    %th Rack
+    %th Actions
+  - for firewall in @firewalls
+    %tr
+      %td= h firewall.name
+      %td= h firewall.hostname
+      %td= h firewall.domain
+      %td= h firewall.serial
+      %td= h firewall.try(:hardware_model).try(:name)
+      %td= h firewall.try(:group).try(:name)
+      %td= h firewall.try(:farm).try(:name)
+      %td
+        = h firewall.try(:building).try(:name)
+        - unless firewall.room.nil?
+          = h ", #{firewall.room.try(:name)}"
+        - unless firewall.equipment_rack.nil?
+          %br
+          = h firewall.equipment_rack.try(:name)
+        - if firewall.rack_elevation
+          = h ", Unit #{firewall.rack_elevation}"
+          - unless firewall.hardware_model.nil?
+            = (firewall.hardware_model.rackunits > 0) ? " - #{firewall.rack_elevation + firewall.hardware_model.rackunits}" : ""
+      
+      %td.actions
+        = link_to 'Show', firewall
+        = link_to 'Edit', edit_firewall_path(firewall)
+        = link_to 'Destroy', firewall, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Firewall", new_firewall_path

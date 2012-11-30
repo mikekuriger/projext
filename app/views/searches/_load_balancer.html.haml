@@ -1,0 +1,11 @@
+%tr{:id => dom_id(load_balancer, 'row'), :class => cycle("odd", "even")}
+  %td= link_to load_balancer.excerpts.name, load_balancer
+  %td= load_balancer.try(:excerpts).try(:fqdn)
+  %td= load_balancer.try(:excerpts).try(:serial)
+  -# %td= result.try(:excerpts).try(:group_name)
+  / %td= result.to_yaml
+  -# %td= result.farm.name unless result.farm.nil?
+  %td.actions
+    = link_to icon('magnifier', 'Show'), load_balancer, :class => "view" if can? :read, load_balancer
+    = link_to icon('pencil', 'Edit'), edit_polymorphic_path(load_balancer), :class => "edit" if can? :edit, load_balancer
+    / = link_to 'Destroy', load_balancer, :confirm => 'Are you sure?', :method => :delete

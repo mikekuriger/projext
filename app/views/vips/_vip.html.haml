@@ -1,0 +1,34 @@
+%tr{:id => dom_id(vip, 'row'), :class => cycle("odd", "even")}
+  %td= link_to vip.name, vip
+  %td
+    = h vip.description
+    &nbsp;
+  %td
+    = link_to vip.load_balancer.name, vip.load_balancer if vip.load_balancer
+    &nbsp;
+  %td
+    = link_to vip.ip.name, vip.ip if vip.ip
+    &nbsp;
+  %td
+    = link_to vip.port.name, vip.port if vip.port
+    &nbsp;
+  %td
+    = h vip.notes
+    &nbsp;
+  %td{:id => dom_id(vip, 'state')}
+    = h vip.state
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(vip, 'state_spinner')
+  %td.actions
+    = link_to icon('magnifier', 'Show'), vip, :class => "view" if can? :read, vip
+    = link_to icon('pencil', 'Edit'), edit_vip_path(vip), :class => "edit" if can? :edit, vip
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => vip_path(vip), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(vip, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(vip, 'row')), |
+        visual_effect(:fade, dom_id(vip, 'row')), |
+        "$('##{dom_id(vip, 'spinner')}').hide();" ] |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(vip, 'spinner')
+    

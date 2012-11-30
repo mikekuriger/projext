@@ -1,0 +1,8 @@
+- title "Sites"
+
+#sites
+  = render 'sites'
+
+= render :partial => "addsite" if can? :create, Site
+
+= render :partial => 'shared/export', :object => @sites

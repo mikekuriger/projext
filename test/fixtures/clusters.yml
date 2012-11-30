@@ -1,0 +1,28 @@
+production:
+  id: 1
+  name: production
+  description: Production Cluster
+
+preview6:
+  id: 2
+  name: preview6
+  description: Preview6 Cluster
+  
+inactive:
+  id: 3
+  name: inactive-cluster
+  description: Inactive Cluster
+  state: inactive
+
+# == Schema Information
+#
+# Table name: clusters
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(255)
+#  description :string(255)
+#  state       :string(255)     default("active")
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

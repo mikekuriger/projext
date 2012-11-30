@@ -1,0 +1,27 @@
+- title "Ip"
+
+%p
+  %strong Network:
+  =h @ip.network_id
+%p
+  %strong Ip:
+  =h @ip.ip
+%p
+  %strong Pingable:
+  =h @ip.pingable
+%p
+  %strong Lastpinged:
+  =h @ip.lastpinged
+%p
+  %strong Lastresponse:
+  =h @ip.lastresponse
+%p
+  %strong Notes:
+  =h @ip.notes
+
+%p
+  = link_to "Edit", edit_ip_path(@ip)
+  |
+  = link_to "Destroy", @ip, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", ips_path

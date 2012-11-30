@@ -1,0 +1,18 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @projects, :entry_name => 'project'
+  = will_paginate @projects
+
+%table{:id => "projectlist", :class => "list"}
+  %tr
+    %th Name
+    %th Description
+    %th State
+    %th Actions
+  = render :partial => "project", :collection => @projects
+
+.wham_pagination
+  .page_info
+    = page_entries_info @projects, :entry_name => 'project'
+  = will_paginate @projects
+

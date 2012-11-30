@@ -1,0 +1,22 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @manufacturers, :entry_name => 'manufacturer'
+  = will_paginate @manufacturers
+
+%table{:id => "manufacturerlist", :class => "list"}
+  %tr
+    %th Name
+    %th Address1
+    %th Address2
+    %th City
+    %th State
+    %th Zip
+    %th Url
+    %th Notes
+    %th Actions
+  = render :partial => "manufacturer", :collection => @manufacturers
+
+.wham_pagination
+  .page_info
+    = page_entries_info @manufacturers, :entry_name => 'manufacturer'
+  = will_paginate @manufacturers

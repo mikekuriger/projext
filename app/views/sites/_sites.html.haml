@@ -1,0 +1,21 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @sites, :entry_name => 'site'
+  = will_paginate @sites
+
+%table{:id => "sitelist", :class => "list"}
+  %tr
+    %th Name
+    %th IP
+    %th VIP
+    %th Cluster
+    %th Customer
+    %th State
+    %th Actions
+  = render :partial => "site", :collection => @sites
+
+.wham_pagination
+  .page_info
+    = page_entries_info @sites, :entry_name => 'site'
+  = will_paginate @sites
+

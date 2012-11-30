@@ -1,0 +1,9 @@
+= semantic_menu :id => "subNav", :class => "subNav" do |m|
+  - m.add "All", assets_path if can? :read, Asset
+  - m.add "Servers", servers_path if can? :read, Server
+  - m.add "Switches", switches_path if can? :read, Switch
+  - m.add "Load Balancers", load_balancers_path if can? :read, LoadBalancer
+  - m.add "Firewalls", firewalls_path if can? :read, Firewall
+  - m.add "Routers", routers_path if can? :read, Router
+  - m.add "Storage", storage_path if (can? :read, StorageArray or can? :read, StorageHead or can? :read, StorageShelf)
+  - m.add "Software", software_licenses_path if can? :read, SoftwareLicense

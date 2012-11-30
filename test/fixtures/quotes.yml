@@ -1,0 +1,38 @@
+one:
+  name: MyString
+  description: MyString
+  date: 2010-01-13
+  expiration: 2010-01-13
+  vendor_id: 1
+  number: MyString
+  notes: MyText
+
+two:
+  name: MyString
+  description: MyString
+  date: 2010-01-13
+  expiration: 2010-01-13
+  vendor_id: 1
+  number: MyString
+  notes: MyText
+
+# == Schema Information
+#
+# Table name: quotes
+#
+#  id                      :integer(4)      not null, primary key
+#  name                    :string(255)
+#  description             :string(255)
+#  date                    :date
+#  expiration              :date
+#  vendor_id               :integer(4)
+#  number                  :string(255)
+#  notes                   :text
+#  attachment_file_name    :string(255)
+#  attachment_content_type :string(255)
+#  attachment_file_size    :string(255)
+#  attachment_updated_at   :string(255)
+#  created_at              :datetime
+#  updated_at              :datetime
+#
+

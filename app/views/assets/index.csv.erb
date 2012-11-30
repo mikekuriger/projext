@@ -1,0 +1,12 @@
+<%- headers = ["Id", "Type", "Name", "Description", "Serial", "Location", "Status"] -%>
+<%= CSV.generate_line headers %>
+<%- @assets.each do |asset| -%>
+<%- row = [ asset.id,
+            asset.type,
+            asset.name,
+            asset.description,
+            asset.serial,
+            "#{asset.try(:building).try(:name)}, #{asset.try(:room).try(:name)}, #{asset.try(:equipment_rack).try(:name)}, Unit #{asset.rack_elevation}",
+            asset.state ] -%>
+<%=   CSV.generate_line row %>
+<%- end -%>

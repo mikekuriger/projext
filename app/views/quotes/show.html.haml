@@ -1,0 +1,42 @@
+- title "Quote"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name:
+        =h @quote.name
+      %li
+        %label Description:
+        =h @quote.description
+      %li
+        %label Number:
+        =h @quote.number
+      %li
+        %label Date:
+        =h @quote.date
+      %li
+        %label Expiration:
+        =h @quote.expiration
+      %li
+        %label Vendor:
+        =link_to @quote.vendor.name, @quote.vendor if @quote.vendor
+      %li
+        %label Notes:
+        =h @quote.notes
+        
+  %fieldset#documents
+    %legend Attached Documents
+    %ul
+      - @quote.documents.each do |document|
+        %li
+          = image_tag document.url(:small)
+          = link_to 'Download Document', document.url
+
+%p
+  = link_to "Edit", edit_quote_path(@quote)
+  |
+  = link_to "Destroy", @quote, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", quotes_path

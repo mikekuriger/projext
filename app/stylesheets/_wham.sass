@@ -1,0 +1,234 @@
+/* @group header */
+
+#header
+  background = !header_color
+  h1 a
+    top: 1em
+    position: relative
+
+/* @group search box */
+#search
+  .box
+    float: right
+    height: 100%
+    width: 100px
+    background = !searchbox_color
+    padding: 5px
+    margin: 5px
+    ul#search
+      position: relative
+      top: 0px
+      left: -75px
+      input.search_button
+        width: 90px
+
+.hidebutton
+  color: white
+  background-color = !searchbox_color
+  border: none
+  width: 1px
+  height: 1px
+  
+ul#search
+  list-style-type: none
+  
+#assetsearch
+  .box
+    float: right
+    height: 25px
+    width: 150px
+    background = !searchbox_color
+    padding: 5px
+    margin: 5px
+    ul#search
+      position: relative
+      top: 0px
+//      left: -75px
+      input.search_button
+        width: 90px
+        
+/* @end */
+
+/* @end */
+
+/* @group navigation */
+#nav
+  background = !nav_color
+
+ul#mainNav
+  list-style-type: none
+  margin: 0
+  padding: 0
+  float: left
+
+  li
+    list-style-type: none
+    margin: 0
+    padding: 0
+    float: left
+    margin-left: 3px
+    margin-right: 3px
+    text-align: center
+
+
+  a
+    float: left
+    padding: 5px
+    text-decoration: none
+    color: #666
+    border-right: 1px solid #fff
+
+    &:hover
+      background: #fff
+      color: #000
+
+
+  li.activelink a
+    background: #FFF
+    color: #003
+
+
+    &:hover
+      background: #FFF
+      color: #003
+
+
+
+#mainNav li
+  ul
+    position: absolute
+    top: 75px
+    width: 10em
+    left: -999em
+    border: 1px solid #ddd
+    text-align: left
+
+  &:hover ul
+    left: auto
+
+  ul li
+    width: 10em
+    background: none
+    background-color: #e3e3e3
+    border-bottom: 1px solid #ddd
+    border-right: 1px solid #ddd
+    margin-left: 0px
+    padding-left: 0px
+    text-align: left
+
+    a
+      width: 10em
+      background: none
+      background-color: #e3e3e3
+      border-bottom: 1px solid #ddd
+      border-right: 1px solid #ddd
+      margin-left: 0px
+      padding-left: 0px
+      text-align: left
+
+      &:hover
+        background-color: #fdfcf6
+
+/* @end */
+
+/* @group Main content */
+#content
+  margin:
+    top: 5px
+    bottom: 5px
+  .main
+    padding: 10px
+    background: #eee
+
+fieldset
+  border: 1px solid
+  border-color = !quiet_color
+  margin: 1em
+  padding: .5em
+
+//.match
+//  color: red
+  
+/* @end */
+
+/* @group Forms */
+form.formtastic
+  +float-form(75%)
+  +grid-inputs(10px,1.4em)
+  label
+    margin-top: .25em
+    abbr
+      color: red
+  .boolean input
+    position: absolute
+    right: 40%
+  .date fieldset,
+  .time fieldset,
+  .datetime fieldset
+    position: relative
+    left: 17.5em
+    label
+      display: block
+    legend
+      label
+        position: relative
+        top: 2.5em
+        left: -8.5em
+        font-weight: normal
+        font-variant: normal
+    
+/* @end */
+
+/* @group Asset List Tables */
+.list
+  border: 1px solid #666666
+  padding: 0
+  td, th
+    font-size: 8pt
+    font-weight: normal
+    padding: 4px 7px
+    border-right: 1px solid #666666
+  th
+    font-weight: bold
+    color: white
+    padding: 4px 7px
+    background: #97AFBF
+  tr
+    &.even
+      background-color: #BBD9EE
+    &:hover td
+      background-color: #FFFFFF
+
+/* @end */
+
+/* @group Item Detail */
+.itemdetail
+  li
+    margin-bottom: 9px
+
+    ul
+      list-style-type: disc
+      margin-left: 2em
+      margin-top: 7px
+
+  fieldset
+    border: 1px solid gray
+
+.assetdetail fieldset
+  border: 1px solid gray
+
+.itemdetail fieldset label
+  display: inline
+  width: 100%
+  line-height: 12px
+  font-weight: bold
+  background-color: #a8a8a8
+  padding: 2px
+/* @end */
+
+
+/* @group footer */
+#footer
+  align: center
+  text-align: center
+/* @end */

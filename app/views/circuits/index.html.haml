@@ -1,0 +1,24 @@
+- title "Circuits"
+
+%table{:id => "circuitlist", :class => "list"}
+  %tr
+    %th Name
+    %th Description
+    %th Vendor
+    %th Circuit ID
+    %th Notes
+    %th Actions
+  - for circuit in @circuits
+    %tr
+      %td= h circuit.name
+      %td= h circuit.description
+      %td= link_to circuit.vendor.name, circuit.vendor if circuit.vendor
+      %td= h circuit.vendor_circuit_id
+      %td
+        %pre= circuit.notes
+      %td
+        = link_to 'Show', circuit
+        = link_to 'Edit', edit_circuit_path(circuit)
+        = link_to 'Destroy', circuit, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Circuit", new_circuit_path

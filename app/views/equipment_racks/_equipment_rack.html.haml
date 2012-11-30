@@ -1,0 +1,21 @@
+= equipment_rack.name
+= "#{equipment_rack.units} units"
+
+%table
+  - equipment_rack.units.downto(1).each do |unit|
+    - asset = equipment_rack.asset_at_unit(unit)
+    %tr
+      %td= "U#{unit}"
+      - if asset.nil?
+        - htmlclass = 'none'
+      - else
+        - htmlclass = (asset.operatingsystem ? asset.operatingsystem.name : 'none')
+      %td{:class => htmlclass}
+        = ((asset.nil?) ? 'Empty' : link_to(asset.name, asset))
+
+/ :javascript
+/   racks['#{equipment_rack.name}'] = paper.rect((rack_horiz_offset + (rack_width_px*(#{equipment_rack_counter} - 1))), rack_vert_offset, rack_width_px, rack_height_px);
+/ 
+/   // servers[i] = paper.rect(rack_horiz_offset, (rack_vert_offset + rack_height_px - rmu_height_px - (rmu_height_px*i)), rack_width_px, rmu_height_px);
+/   // servers[i].attr("fill", "#f00");
+/   // servers[i].attr("stroke", "#fff");

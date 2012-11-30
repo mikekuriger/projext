@@ -1,0 +1,47 @@
+%tr{:id => dom_id(crontab, 'row'), :class => cycle("odd", "even")}
+  %td= link_to crontab.name, crontab
+  %td
+    = h crontab.description
+    &nbsp;
+  %td
+    = link_to crontab.cluster.name, crontab.cluster if crontab.cluster
+    &nbsp;
+  %td
+    = h crontab.command
+  %td
+    = link_to crontab.assets.size, '#', :id => dom_id(crontab, 'assetcount')
+    - if crontab.assets.size > 0
+      :javascript
+        $("##{dom_id(crontab, 'assetcount')}").qtip({
+          content: '#{crontab.assets.each.map{|a| link_to(a.name, a)}.join(', ')}',
+          show: {
+            solo: true
+          },
+          hide: {
+            delay: 1000,
+            fixed: true
+          },
+          position: {
+            corner: {
+              target: 'rightMiddle',
+              tooltip: 'leftMiddle'
+            }
+          },
+          style: {
+            tip: 'leftMiddle',
+            name: 'blue'
+          }
+        });
+  %td.actions
+    = link_to icon('magnifier', 'Show'), crontab, :class => "view" if can? :read, crontab
+    = link_to icon('pencil', 'Edit'), edit_crontab_path(crontab), :class => "edit" if can? :edit, crontab
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => crontab_path(crontab), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(crontab, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(crontab, 'row')), |
+        visual_effect(:fade, dom_id(crontab, 'row')), |
+        "$('##{dom_id(crontab, 'spinner')}').hide();" ] |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(crontab, 'spinner')

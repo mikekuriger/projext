@@ -1,0 +1,24 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @servers, :entry_name => @entry_name
+  = will_paginate @servers
+  
+%table{:id => "serverlist", :class => "list", :cellspacing => 0}
+  %tr
+    %th Hostname
+    %th Serial
+    %th Hardware
+    %th Interfaces
+    %th OS
+    %th Group
+    %th Farm
+    %th Services
+    %th State
+    %th Last Seen
+    %th Actions
+  = render :partial => "servers/server", :collection => @servers
+
+.wham_pagination
+  .page_info
+    = page_entries_info @servers, :entry_name => @entry_name
+  = will_paginate @servers

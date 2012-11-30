@@ -1,0 +1,24 @@
+- title "Rooms"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th Building
+    %th Number
+    %th Floor
+    %th Size
+  - for room in @rooms
+    %tr
+      %td= link_to room.name, room
+      %td= h room.description
+      %td= link_to room.building.name, room.building if room.building
+      %td= h room.number
+      %td= h room.floor
+      %td= h room.size
+      %td.actions
+        = link_to 'Show', room
+        = link_to 'Edit', edit_room_path(room)
+        = link_to 'Destroy', room, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Room", new_room_path

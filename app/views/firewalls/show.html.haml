@@ -1,0 +1,121 @@
+- title "Firewall"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @firewall.try(:name)
+      %li
+        %label Hostname
+        =h @firewall.hostname
+      %li
+        %label Domain
+        =h @firewall.domain
+      %li
+        %label Description
+        =h @firewall.try(:description)
+      %li
+        %label Serial
+        =h @firewall.serial
+      %li
+        %label WB Asset ID
+        =h @firewall.wb_asset_id
+
+  %fieldset#hardware
+    %legend Hardware
+    %ul
+      %li
+        %label Manufacturer
+        =h @firewall.try(:hardware_model).try(:manufacturer).try(:name)
+      %li
+        %label Model
+        =h @firewall.try(:hardware_model).try(:name)
+      %li
+        %label Size (RMU)
+        =h @firewall.rack_units 
+      %li
+        %label Physical Memory
+        =h @firewall.physical_memory
+      %li
+        %label Processor
+        =h "#{@firewall.cpu_count} x #{@firewall.try(:cpu).to_s}"
+      %li
+        %label Network Interfaces
+        %ul
+          - @firewall.interfaces.each do |interface|
+            %li
+              %label Name
+              = h interface.name
+              %ul
+                %li
+                  %label Speed
+                  = h interface.speed
+                %li
+                  %label MAC Address
+                  = h interface.mac
+                %li
+                  %label IP
+                  = h interface.ip.ip unless interface.ip.nil?
+
+  %fieldset#classification
+    %legend Classification
+    %ul
+      %li
+        %label Group
+        = link_to @firewall.group.name, @firewall.group unless @firewall.group.nil?
+      %li
+        %label Farm
+        = link_to @firewall.farm.name, @firewall.farm unless @firewall.farm.nil?
+      %li
+        %label Services
+        %ul
+          - @firewall.services.each do |service|
+            %li= h "#{service.cluster.name} -> #{service.function.name}"
+
+  %fieldset#location
+    %legend Physical Location
+    %ul
+      %li
+        %label Location
+        = h @firewall.location
+      %li
+        %label Rack Elevation
+        =h @firewall.rack_elevation
+
+  %fieldset#finance
+    %legend Finance
+    %ul
+      %li
+        %label Purchase Date:
+        =h @firewall.purchase_date.to_s(:long) unless @firewall.purchase_date.nil?
+      %li
+        %label Vendor
+        = link_to @firewall.vendor.name, @firewall.vendor unless @firewall.vendor.nil?
+      %li
+        %label Leased
+        =h @firewall.leased
+      %li
+        %label SAP - Asset ID
+        =h @firewall.sap_asset_id
+      %li
+        %label SAP - WBS Element
+        =h @firewall.sap_wbs_element
+
+  %fieldset#miscellaneous
+    %legend Miscellaneous
+    %ul
+      %li
+        %label Monitorable
+        =h @firewall.monitorable
+      %li
+        %label State
+        =h @firewall.state
+
+%p
+  = link_to "Edit", edit_firewall_path(@firewall)
+  |
+  = link_to "Destroy", @firewall, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", firewalls_path

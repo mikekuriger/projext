@@ -1,0 +1,31 @@
+/ - title "Application"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @app.name
+      %li
+        %label Description
+        =h @app.description
+      %li
+        %label Project
+        =h @app.project.name
+      %li
+        %label Clusters/Sites
+        %ul
+          - @app.clusters.each do |cluster|
+            %li
+              = link_to cluster.name, cluster if can? :read, cluster
+              %ul
+                - cluster.sites.each do |site|
+                  %li= link_to site.name, site
+
+%p
+  = link_to "Edit", edit_app_path(@app)
+  |
+  = link_to "Destroy", @app, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", apps_path

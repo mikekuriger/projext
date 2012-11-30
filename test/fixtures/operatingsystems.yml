@@ -1,0 +1,15 @@
+# one:
+#   name: MyString
+#   description: MyString
+#   manufacturer_id: 1
+#   ostype: MyString
+#   version: MyString
+#   architecture: MyString
+# 
+# two:
+#   name: MyString
+#   description: MyString
+#   manufacturer_id: 1
+#   ostype: MyString
+#   version: MyString
+#   architecture: MyString

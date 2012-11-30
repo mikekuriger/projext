@@ -1,0 +1,33 @@
+- title "Router"
+
+%p
+  %strong Name:
+  =h @router.name
+%p
+  %strong Hostname:
+  =h @router.hostname
+%p
+  %strong Domain:
+  =h @router.domain
+%p
+  %strong Serial:
+  =h @router.serial
+%p
+  %strong Hardware Model:
+  =h @router.hardware_model_id
+%p
+  %strong Group:
+  =h @router.group_id
+%p
+  %strong Farm:
+  =h @router.farm_id
+%p
+  %strong Equipment Rack:
+  =h @router.equipment_rack_id
+
+%p
+  = link_to "Edit", edit_router_path(@router)
+  |
+  = link_to "Destroy", @router, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", routers_path

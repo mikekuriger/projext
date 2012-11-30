@@ -1,0 +1,248 @@
+Legend:
+x == completed
+- == uncompleted/unselected option
+* == selected option
+
+Things to fix based on syseng feedback:
+- Fix RT customer/project import script (Etienne)
+x Fix Nagios import script
+- Sortable asset lists
+- Context-specific search (in addition to global search)
+  - Example: have a search box on the farms page that searches only farms
+  - Is this the same as filtering?
+x Configurable per-page values for pagination (so that they can see all if they choose)
+x Links for assets on the search results page need to go to the right edit screen
+x Export links for search results
+- Add parameter assignment capabilities to edit screens (device, service_assignment, cluster, function, etc.)
+
+Things that are Broken:
+- Need to add validations for cables so you can't assign duplicates
+- Fix document attachments for POs, quotes, etc.
+- Paperclip doesn't work with Passenger on Mac OS X
+x whamd isn't passing parameters properly to wham on Passenger via rest-client
+  x Is this a rest-client issue or a passenger issue? (FIXED: was a problem with Ruby 1.8.5 on r15s06, upgrading to 1.8.7 fixed it)
+
+Fields to add:
+- Asset
+  - IMEI?
+- Hardware Model
+  - part number: manufacturer's part number
+- Interface
+  - primary (boolean): designates an interface as the primary for an asset
+- Custom Fields
+  - Per asset (IMEI)
+
+To Read:
+http://robots.thoughtbot.com/post/254496652/aint-no-calla-back-girl
+
+Important things before launch:
+x Make sure production/staging search works
+x Make sure rack diagram works
+- Make sure agent works
+x Make sure puppet node classifier works
+  x Parameters need to work
+  - Use tags instead?
+  x Add API key authentication for clients (refer to http://ropiku.tumblr.com/post/77138388/clearance-login-with-username and http://github.com/ropiku/clearance-username)
+  - Also: http://stackoverflow.com/questions/247110/looking-for-suggestions-for-building-a-secure-rest-api-within-ruby-on-rails, http://www.compulsivoco.com/2009/05/rails-api-authentication-using-restful-authentication/
+- Make adding groups/farms/etc. EASY
+x Make 'slugs' for URLs (friendly_id)
+- CSV output (via http://fastercsv.rubyforge.org/classes/FasterCSV.html, http://rubyforge.org/projects/spreadsheet)
+x Integrate models from customer portal (Customer, Project, etc.)
+x Add Application model for CP/WHAM
+x Enforce referential integrity (http://railspikes.com/2009/8/19/activerecord-refererential-integrity-is-broken-let-s-fix-it)
+- Add foreign keys to database
+- Add indexes to database
+- Consolidate migrations
+x Replace hoptoad with exception_notification
+
+Models:
+-------
+- Asset
+  x belongs_to :group
+  x has_many :interfaces
+  x has_many :cables, :through => :interfaces
+  x has_many :services
+  - Subclasses:
+    x Software License
+    x Server
+    x Switch
+    x Router
+    x Firewall
+    x Load Balancer
+      - has_many :vips
+    x Storage Head
+      - has_many :interfaces
+      x has_many :shelves
+    x Storage Shelf
+      x disk_count
+      - has_many :disks (?)
+x Storage Array
+  - For associating storage controllers and shelves
+x Interface
+  x :conns (thanks, acts_as_network plugin!)
+x Processor
+x Cable
+  x May need has_many_polymorphs (http://github.com/fauna/has_many_polymorphs) (didn't need this)
+x Vendor
+x Manufacturer
+x Operating System
+x User
+  - Need to add all necessary attributes
+x Group
+x Cluster
+  x has_many :sites
+x Function
+x Service
+  x belongs_to :cluster
+  x belongs_to :function
+  x has_many :assets, :through => :service_assignments
+x Tag
+x Building
+  x has_many :assets
+x Room
+  x has_many :assets  
+x Contract
+  - Subclasses:
+    - Lease
+    - SupportContract
+x Site
+x VIP
+- Port?
+x Purchase Order
+x Quote
+- Domains?
+- Mail domains?
+- Distribution lists
+- Aliases
+x Parameters!
+x ParameterAssignments (handled through polymorphism: assignable)
+- Globals?
+
+Customer Portal Integration:
+- Reconcile externalusers
+- Projects
+x Add Applications:
+  x Project habtm Application
+  x Application habtm Cluster
+x  Customers
+- resource_records
+
+Searchable Data Points:
+x Asset name
+x Asset hostname
+x Asset serial
+x Asset MAC addresses
+x IPs
+- VIPs
+x Sites/domains
+
+x For state machine:
+Options:
+- AASM (http://github.com/rubyist/aasm)
+- Alter Ego (http://alter-ego.rubyforge.org/)
+* state_machine
+
+x For authorization/access control:
+Options:
+- Role Requirement - http://code.google.com/p/rolerequirement/
+- Restful ACL (restful_acl) - http://github.com/mdarby/restful_acl
+- Rails Authorization - http://github.com/DocSavage/rails-authorization-plugin
+- declarative_authorization - http://github.com/stffn/declarative_authorization
+- Aegis
+* CanCan
+
+x For authentication:
+* Clearance
+
+x For tagging:
+- has_many_polymorphs
+* acts-as-taggable-on
+
+x For search:
+* thinking-sphinx - http://github.com/freelancing-god/thinking-sphinx
+
+x For menus:
+- semantic-menu (http://github.com/danielharan/semantic-menu)
+* simple_navigation (http://github.com/mexpolk/simple_navigation)
+
+x For comments:
+* acts_as_commentable
+
+For exception notification:
+* exception_notification (http://github.com/rails/exception_notification)
+
+x For model versioning:
+* paper_trail (http://github.com/airblade/paper_trail)
+- vestal_versions (http://github.com/laserlemon/vestal_versions)
+- acts_as_audited (http://github.com/collectiveidea/acts_as_audited)
+
+For breadcrumbs:
+- acts_as_breadcrumbs (http://www.makeupwishlist.com/2007/05/02/acts_as_breadcrumbs)
+- crummy (http://github.com/zachinglis/crummy)
+* crumble (http://github.com/mattmatt/crumble) (winner for now)
+- http://www.jroller.com/obie/entry/the_breadcrumbs_example
+- http://szeryf.wordpress.com/2008/06/13/easy-and-flexible-breadcrumbs-for-rails/
+- http://smsohan.blogspot.com/2009/07/implementing-breadcrumb-in-rails.html
+
+CSS Frameworks/Grid systems:
+- YUI grids (http://developer.yahoo.com/yui/grids/)
+* 960.gs (http://www.960.gs) (use liquid version: http://www.designinfluences.com/fluid960gs/)
+- Blueprint (http://www.blueprintcss.org/)
+- Golden Grid (http://code.google.com/p/the-golden-grid/)
+- Typogridphy (http://csswizardry.com/typogridphy/)
+- Bluetrip (combines Blueprint/Tripoli)
+
+Generators:
+- http://www.gridsystemgenerator.com/
+- http://www.spry-soft.com/grids/
+- http://headless-studios.com/960.ls/ (HTML layout generator)
+
+CSS tools:
+- http://gridder.andreehansson.se/ (grid overlay bookmark)
+- Tripoli (typography) (http://devkick.com/lab/tripoli/)
+
+JS stuff:
+- Raphael/gRaphael
+- cufon (font replacement)
+- 
+
+Miscellaneous:
+- Install Pickle (http://github.com/ianwhite/pickle)
+x Remove netmask field from networks
+- Change networks.subnetbits to networks.cidr?
+- Possibly use timeline_fu (http://github.com/jamesgolick/timeline_fu) for something
+x Reconsider concept of 'application' and how it relates to 'cluster'
+- Add Ajax to pagination (http://asciicasts.com/episodes/175-ajax-history-and-bookmarks)
+- Possibly use Searchlogic to enhance searches (http://github.com/binarylogic/searchlogic)
+- Possibly use default_value_for for default UUIDs for users, etc. (http://github.com/FooBarWidget/default_value_for)
+- Check out trusted_params (http://github.com/ryanb/trusted-params)
+- Consider using EAV to replace parameters:
+  - http://code.google.com/p/has-magic-columns/
+  - http://www.vaporbase.com/postings/Choosing_a_Schema_for_Dynamic_Records
+  - http://www.vanutsteen.nl/2008/11/12/ruby-on-rails-custom-fields-on-a-per-user-basis/
+  - http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_customizable/lib/acts_as_customizable.rb
+  - http://agilewebdevelopment.com/plugins/acts_as_configurable
+  - http://flex-attributes.rubyforge.org/
+
+Feature ideas:
+- Application dependencies (3/3/10 - don't remember what this means)
+- Consider adding change management tracking capabilities?
+- In-place editing (http://github.com/janv/rest_in_place)
+
+Dashboard Ideas:
+- Recently updated elements:
+  - assets (all types)
+  - groups
+  - service assignments
+- Alerts:
+  - Low IP space
+  - Servers not checking in (whamd)
+  - Pending support expirations/expired support
+- Data completion:
+  - Assets with partially-completed data
+    - Example: no interfaces/partial list of interfaces
+    - Example: No cables defined
+  - Groups/functions/etc. without descriptions
+  - Interfaces without MAC/IP address
+- Summary data:
+  - Counts for various elements

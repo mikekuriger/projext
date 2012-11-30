@@ -1,0 +1,23 @@
+%ul.tooltip
+  %li
+    = image_tag @server.hardware_model.picture.url(:small) if @server.hardware_model
+  %li
+    %label Name
+    = @server.name
+  %li
+    %label Manufacturer
+    = link_to @server.manufacturer.name, @server.manufacturer if @server.manufacturer
+  %li
+    %label Model
+    = link_to @server.hardware_model.name, @server.hardware_model if @server.hardware_model
+  %li
+    %label Group
+    = link_to @server.group.name, @server.group if @server.group
+  %li
+    %label Farm
+    = link_to @server.farm.name, @server.farm if @server.farm
+  %li
+    %label Actions
+    = link_to icon('magnifier', 'Show'), @server, :class => "view"
+    |
+    = link_to icon('pencil', 'Edit'), edit_server_path(@server), :class => "edit"

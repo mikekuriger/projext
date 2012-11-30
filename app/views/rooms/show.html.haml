@@ -1,0 +1,27 @@
+- title "Room"
+
+%p
+  %strong Name:
+  =h @room.name
+%p
+  %strong Description:
+  =h @room.description
+%p
+  %strong Building:
+  =h @room.building_id
+%p
+  %strong Number:
+  =h @room.number
+%p
+  %strong Floor:
+  =h @room.floor
+%p
+  %strong Size:
+  =h @room.size
+
+%p
+  = link_to "Edit", edit_room_path(@room)
+  |
+  = link_to "Destroy", @room, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", rooms_path

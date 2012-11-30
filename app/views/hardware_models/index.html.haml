@@ -1,0 +1,31 @@
+- title "Hardware Models"
+
+%table.list
+  %tr
+    %th Name
+    %th Picture
+    %th Description
+    %th Manufacturer
+    %th Size (RMU)
+    %th Actions
+  - for hardware_model in @hardware_models
+    %tr{:id => dom_id(hardware_model, 'row'), :class => cycle("odd", "even")}
+      %td= link_to hardware_model.name, hardware_model
+      %td
+        = image_tag hardware_model.picture.url(:thumb) if hardware_model.picture?
+        &nbsp;
+      %td
+        = h hardware_model.description
+        &nbsp;
+      %td
+        = h hardware_model.try(:manufacturer).try(:name)
+        &nbsp;
+      %td
+        = h hardware_model.rackunits
+        &nbsp;
+      %td.actions
+        = link_to icon('magnifier', 'Show'), hardware_model, :class => "view"
+        = link_to icon('pencil', 'Edit'), edit_hardware_model_path(hardware_model), :class => "edit"
+        = link_to icon('delete', 'Delete'), hardware_model, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Hardware Model", new_hardware_model_path

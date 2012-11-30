@@ -1,0 +1,21 @@
+#addserver
+  %h3 New Server
+  - server = Server.new
+  #addserverform
+    - semantic_remote_form_for server, |
+      :loading => "$('#add_spinner').show();", |
+      :loaded => "$('#add_spinner').hide();", |
+      :update => 'serverlist', |
+      :position => 'bottom', |
+      :failure => "alert('Unable to create, status ' + request.status)", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(server, 'row')) |
+        ] do |f| |
+      - f.inputs do
+        = f.input :hostname
+        = f.input :domain, :default => 'warnerbros.com'
+        = f.input :serial
+        = f.input :group
+        = f.input :farm
+        = f.commit_button
+        = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'add_spinner'

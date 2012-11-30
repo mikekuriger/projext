@@ -1,0 +1,27 @@
+- title "Interfaces"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th State
+    %th Asset
+    %th Ip
+    %th Speed
+    %th Mac
+    %th Connector
+  - for interface in @interfaces
+    %tr
+      %td= h interface.name
+      %td= h interface.description
+      %td= h interface.state
+      %td= h interface.asset_id
+      %td= h interface.ip_id
+      %td= h interface.speed
+      %td= h interface.mac
+      %td= h interface.connector_id
+      %td= link_to 'Show', interface
+      %td= link_to 'Edit', edit_interface_path(interface)
+      %td= link_to 'Destroy', interface, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Interface", new_interface_path

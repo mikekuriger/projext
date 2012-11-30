@@ -1,0 +1,38 @@
+- title "Search Results"
+
+- javascript 'jquery.qtip.min'
+
+= render 'servers' if can? :read, Server
+%br
+= render 'services' if can? :read, Service
+%br
+= render 'switches' if can? :read, Switch
+%br
+= render 'firewalls' if can? :read, Firewall
+%br
+= render 'load_balancers' if can? :read, LoadBalancer
+%br
+= render 'sites' if can? :read, Site
+%br
+= render 'vips' if can? :read, Vip
+%br
+= render 'assets' if can? :read, Asset
+
+/ #altformats
+/   %h3 Export
+/   %fieldset#export
+/     XLS (
+/     = link_to "All Records", :q => params[:q], :format => :xls, :page => 1, :per_page => @results.total_entries
+/     )
+/     %br
+/     CSV (
+/     = link_to "All Records", :q => params[:q], :format => :csv, :page => 1, :per_page => @results.total_entries
+/     )
+/     %br
+/     XML (
+/     = link_to "All Records", :q => params[:q], :format => :xml, :page => 1, :per_page => @results.total_entries
+/     )
+/     %br
+/     YML (
+/     = link_to "All Records", :q => params[:q], :format => :yaml, :page => 1, :per_page => @results.total_entries
+/     )

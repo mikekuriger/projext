@@ -1,0 +1,11 @@
+one:
+  name: MyString
+  description: MyString
+  manufacturer_id: 1
+  rackunits: 1
+
+two:
+  name: MyString
+  description: MyString
+  manufacturer_id: 1
+  rackunits: 1

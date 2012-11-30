@@ -1,0 +1,106 @@
+- stylesheet('jquery.comboselect', :media => 'screen', :cache => true)
+- javascript('jquery.comboselect', 'jquery.selso', 'jrails.autocomplete')
+
+- semantic_form_for @server do |f|
+  = f.error_messages
+  
+  - f.inputs :name => 'General Information', :id => 'general' do
+    = f.input :name
+    = f.input :hostname
+    = f.input :domain, :default => 'warnerbros.com'
+    = f.input :description
+    = f.input :serial
+    = f.input :state, :label => 'Status', :as => :select, :collection => Asset.state_machine.states.collect{|s| [s.name.to_s.humanize, s.name.to_s]}
+    
+    = f.input :type_helper, :label => 'Type', :as => :select, :collection => Asset::TYPE_OPTIONS
+    = f.input :wb_asset_id, :label => 'WB Asset ID'
+    = f.input :oob, :label => 'Out of Band Info'
+    
+  - f.inputs :name => 'Hardware', :id => 'hardware' do
+    = f.input :manufacturer_id, :as => :select, :collection => Manufacturer.all, :selected => (@server.manufacturer.nil? ? '' : @server.manufacturer.id), :include_blank => true
+    = f.input :hardware_model, :label => 'Model', :collection => (@server.manufacturer.nil?) ? [] : HardwareModel.find_all_by_manufacturer_id(@server.manufacturer.id), :include_blank => true
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'hardware_model_spinner'
+    :javascript
+      $(document).ready(function() {
+        $('#server_manufacturer_id').change(function() {
+          $('#hardware_model_spinner').show();
+          $('#server_hardware_model_id').html = "";
+          $('#server_hardware_model_id').load('/hardware_models.js?manufacturer_id=' + $('#server_manufacturer_id').val(), function() {
+            $('#hardware_model_spinner').hide();
+          });
+        })
+      });
+      
+    = f.input :physical_memory, :label => 'Physical Memory (MB)'
+    = f.input :cpu, :label => 'Processor Type'
+    = f.input :cpu_count, :label => 'Processor Count'
+
+    -# Nested model forms (http://railscasts.com/episodes/196-nested-model-form-part-1)
+    - f.inputs :name => 'Interfaces' do
+      - f.semantic_fields_for :interfaces do |builder|
+        = render 'interface_fields', :f => builder
+      %div= link_to_add_fields "Add Interface", f, :interfaces
+  
+  - f.inputs :name => 'Software', :id => 'software' do
+    = f.input :operatingsystem, :label => 'Operating System'
+    = f.input :kernel
+    
+  - f.inputs :name => 'Physical Location', :id => 'location' do
+    = f.input :building_id, :collection => Building.all, :selected => (@server.equipment_rack.nil? ? '' : @server.equipment_rack.room.building.id), :include_blank => true
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'building_spinner'
+    
+    = f.input :room_id, :collection => (@server.equipment_rack.nil? ? [] : @server.equipment_rack.room.building.rooms), :selected => (@server.equipment_rack.nil? ? '' : @server.equipment_rack.room.id), :include_blank => true
+    :javascript
+      $(document).ready(function() {
+        $('#server_building_id').change(function() {
+          $('#building_spinner').show();
+          $('#server_room_id').html = "";
+          $('#server_room_id').load('/rooms.js?building_id=' + $('#server_building_id').val(), function() {
+            $('#building_spinner').hide();
+          });
+        })
+      });
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'room_spinner'
+      
+    = f.input :equipment_rack, :label => 'Rack', :collection => (@server.equipment_rack.nil? ? [] : @server.equipment_rack.room.equipment_racks)
+    :javascript
+      $(document).ready(function() {
+        $('#server_room_id').change(function() {
+          $('#room_spinner').show();
+          $('#server_equipment_rack_id').html = "";
+          $('#server_equipment_rack_id').load('/racks.js?room_id=' + $('#server_room_id').val(), function() {
+            $('#room_spinner').hide();
+          });
+        })
+      });
+      
+    
+    = f.input :rack_elevation
+    
+  - f.inputs :name => 'Classification', :id => 'classification' do
+    %li
+      = f.label :group
+      = text_field_with_auto_complete :server, :group_name, { :size => 15 }, { :url => { :controller => 'groups', :action => 'autocomplete', :format => :js }, :method => :get, :param_name => 'search' }
+    = f.input :farm, :collection => Farm.with_state(:active)
+    
+    - f.inputs :name => 'Services' do
+      - f.semantic_fields_for :service_assignments do |builder|
+        = render 'service_assignment_fields', :f => builder
+      %div= link_to_add_fields "Add Service", f, :service_assignments
+
+    / = f.input :services, :as => :comboselect
+
+    
+  - f.inputs :name => 'Finance', :id => 'finance' do
+    = f.input :purchase_date, :label => 'Purchase Date', :as => :date, :start_year => Time.now.year - 15, :end_year => Time.now.year
+    = f.input :vendor, :label => 'Purchase Vendor'
+    = f.input :leased
+    = f.input :sap_asset_id, :label => 'SAP Asset ID'
+    = f.input :sap_wbs_element, :label => 'WBS Element'
+    
+  - f.inputs :name => 'Miscellaneous', :id => 'miscellaneous' do
+    = f.input :monitorable
+    = f.input :virtualization_host, :label => 'Can host VMs'
+    = f.input :agent if can? :assign_agents, @server
+    / = f.input :state
+  = f.buttons

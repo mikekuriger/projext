@@ -1,0 +1,30 @@
+- title "Equipment Rack"
+
+%p
+  %strong Building:
+  =h @equipment_rack.try(:room).try(:building).try(:name)
+%p
+  %strong Room:
+  =h @equipment_rack.try(:room).try(:name)
+%p
+  %strong Name:
+  =h @equipment_rack.name
+%p
+  %strong Description:
+  =h @equipment_rack.description
+%p
+  %strong Rack Units:
+  =h @equipment_rack.units
+%p
+  %strong State:
+  =h @equipment_rack.state
+
+/ #diagram
+/   = render :partial => "elevation_diagram", :locals => { :rack => @equipment_rack }
+  
+%p
+  = link_to "Edit", edit_equipment_rack_path(@equipment_rack)
+  |
+  = link_to "Destroy", @equipment_rack, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", equipment_racks_path

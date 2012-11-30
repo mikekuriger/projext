@@ -1,0 +1,29 @@
+- title "Customers"
+
+%table.list
+  %tr
+    %th Name
+    %th Address1
+    %th Address2
+    %th City
+    %th State
+    %th Zip
+    %th Url
+    %th Notes
+    %th Actions
+  - for customer in @customers
+    %tr{:id => dom_id(customer, 'row'), :class => cycle("odd", "even")}
+      %td= h customer.name
+      %td= h customer.address1
+      %td= h customer.address2
+      %td= h customer.city
+      %td= h customer.state
+      %td= h customer.zip
+      %td= h customer.url
+      %td= h customer.notes
+      %td
+        = link_to 'Show', customer
+        = link_to 'Edit', edit_customer_path(customer)
+        = link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Customer", new_customer_path

@@ -1,0 +1,23 @@
+%ul.tooltip
+  %li
+    = image_tag @load_balancer.hardware_model.picture.url(:small) if @load_balancer.hardware_model
+  %li
+    %label Name
+    = @load_balancer.name
+  %li
+    %label Manufacturer
+    = link_to @load_balancer.manufacturer.name, @load_balancer.manufacturer if @load_balancer.manufacturer
+  %li
+    %label Model
+    = link_to @load_balancer.hardware_model.name, @load_balancer.hardware_model if @load_balancer.hardware_model
+  %li
+    %label Group
+    = link_to @load_balancer.group.name, @load_balancer.group if @load_balancer.group
+  %li
+    %label Farm
+    = link_to @load_balancer.farm.name, @load_balancer.farm if @load_balancer.farm
+  %li
+    %label Actions
+    = link_to icon('magnifier', 'Show'), @load_balancer, :class => "view"
+    |
+    = link_to icon('pencil', 'Edit'), edit_load_balancer_path(@load_balancer), :class => "edit"

@@ -1,0 +1,45 @@
+- title "Purchase Order"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name:
+        =h @purchase_order.name
+      %li
+        %label Description:
+        =h @purchase_order.description
+      %li
+        %label Created:
+        =h @purchase_order.created
+      %li
+        %label Sent:
+        =h @purchase_order.sent
+      %li
+        %label Vendor:
+        =h @purchase_order.vendor_id
+      %li
+        %label Number:
+        =h @purchase_order.number
+      %li
+        %label Amount:
+        =h @purchase_order.amount
+      %li
+        %label Notes:
+        =h @purchase_order.notes
+
+  %fieldset#documents
+    %legend Attached Documents
+    %ul
+      - @purchase_order.documents.each do |document|
+        %li
+          = image_tag document.url(:small)
+          = link_to 'Download Document', document.url
+
+%p
+  = link_to "Edit", edit_purchase_order_path(@purchase_order)
+  |
+  = link_to "Destroy", @purchase_order, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", purchase_orders_path

@@ -1,0 +1,66 @@
+--- !ruby/object:Gem::Specification 
+name: ipadmin
+version: !ruby/object:Gem::Version 
+  version: 0.4.1
+platform: ruby
+authors: 
+- Dustin Spinhirne
+autorequire: ip_admin
+bindir: bin
+cert_chain: 
+date: 2006-07-02 00:00:00 -07:00
+default_executable: 
+dependencies: []
+
+description: 
+email: dspinhir@yahoo.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README
+files: 
+- lib/ip_admin.rb
+- lib/tree.rb
+- lib/cidr.rb
+- lib/methods.rb
+- lib/eui.rb
+- README
+- tests/methods_test.rb
+- tests/tree_test.rb
+- tests/cidr_test.rb
+- tests/eui_test.rb
+has_rdoc: true
+homepage: 
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">"
+    - !ruby/object:Gem::Version 
+      version: 0.0.0
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 1
+summary: A package for manipulating IPv4/IPv6 address space.
+test_files: 
+- tests/methods_test.rb
+- tests/tree_test.rb
+- tests/cidr_test.rb
+- tests/eui_test.rb

@@ -1,0 +1,38 @@
+- title "Networking Devices"
+
+%table
+  %tr
+    %th Name
+    %th Hostname
+    %th Type
+    %th Serial
+    %th Model
+    %th Group
+    %th Farm
+    %th Rack
+    %th Actions
+  - for networking_device in @networking_devices
+    %tr
+      %td= h networking_device.name
+      %td= h "#{networking_device.hostname}.#{networking_device.domain}"
+      %td= h networking_device.type
+      %td= h networking_device.serial
+      %td= h networking_device.try(:hardware_model).try(:name)
+      %td= h networking_device.try(:group).try(:name)
+      %td= h networking_device.try(:farm).try(:name)
+      %td
+        - unless networking_device.equipment_rack.nil?
+          = h "#{networking_device.equipment_rack.room.building.name}, #{networking_device.equipment_rack.room.name}"
+          %br
+          = h networking_device.equipment_rack.name
+        - if networking_device.rack_elevation
+          = h ", Unit #{networking_device.rack_elevation}"
+          - unless networking_device.hardware_model.nil?
+            = (networking_device.hardware_model.rackunits > 0) ? " - #{networking_device.rack_elevation + networking_device.hardware_model.rackunits}" : ""
+
+      %td
+        = link_to 'Show', networking_device
+        = link_to 'Edit', edit_networking_device_path(networking_device)
+        = link_to 'Destroy', networking_device, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Networking Device", new_networking_device_path

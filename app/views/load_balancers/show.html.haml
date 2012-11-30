@@ -1,0 +1,43 @@
+- title "Load Balancer"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @load_balancer.try(:name)
+      %li
+        %label Hostname
+        =h @load_balancer.hostname
+      %li
+        %label Domain
+        =h @load_balancer.domain
+      %li
+        %label Serial
+        =h @load_balancer.serial
+      %li
+        %label Manufacturer
+        =link_to @load_balancer.hardware_model.manufacturer.name, @load_balancer.hardware_model.manufacturer if (@load_balancer.hardware_model && @load_balancer.hardware_model.manufacturer)
+      %li
+        %label Model
+        =link_to @load_balancer.hardware_model.name, @load_balancer.hardware_model if @load_balancer.hardware_model
+      %li
+        %label Size (RMU)
+        =h @load_balancer.rack_units 
+      %li
+        %label Group
+        =link_to @load_balancer.group.name, @load_balancer.group if @load_balancer.group
+      %li
+        %label Farm
+        =link_to @load_balancer.farm.name, @load_balancer.farm if @load_balancer.farm
+      %li
+        %label Equipment Rack
+        =link_to @load_balancer.equipment_rack.name, @load_balancer.equipment_rack if @load_balancer.equipment_rack
+
+%p
+  = link_to "Edit", edit_load_balancer_path(@load_balancer)
+  |
+  = link_to "Destroy", @load_balancer, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", load_balancers_path

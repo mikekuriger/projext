@@ -1,0 +1,39 @@
+- title "Hardware Model"
+
+.itemdetail
+  %fieldset
+    %legend General Information
+    %ul
+      %li
+        =image_tag @hardware_model.picture.url(:small)
+      %li
+        %label Name
+        =h @hardware_model.name
+      %li
+        %label Description
+        =h @hardware_model.description
+      %li
+        %label Manufacturer
+        =link_to @hardware_model.manufacturer.name, @hardware_model.manufacturer if @hardware_model.manufacturer
+      %li
+        %label Rackunits
+        =h @hardware_model.rackunits
+  %fieldset
+    %legend Pictures
+    %ul
+      %li
+        %label Product Picture
+        =image_tag @hardware_model.picture.url(:thumb)
+      %li
+        %label Rack Picture (Front View)
+        =image_tag @hardware_model.rack_front.url(:thumb)
+      %li
+        %label Rack Picture (Rear View)
+        =image_tag @hardware_model.rack_rear.url(:thumb)
+
+%p
+  = link_to "Edit", edit_hardware_model_path(@hardware_model)
+  |
+  = link_to "Destroy", @hardware_model, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", hardware_models_path

@@ -1,0 +1,33 @@
+- title "Manufacturer"
+
+%p
+  %strong Name:
+  =h @manufacturer.name
+%p
+  %strong Address1:
+  =h @manufacturer.address1
+%p
+  %strong Address2:
+  =h @manufacturer.address2
+%p
+  %strong City:
+  =h @manufacturer.city
+%p
+  %strong State:
+  =h @manufacturer.state
+%p
+  %strong Zip:
+  =h @manufacturer.zip
+%p
+  %strong Url:
+  =h @manufacturer.url
+%p
+  %strong Notes:
+  =h @manufacturer.notes
+
+%p
+  = link_to "Edit", edit_manufacturer_path(@manufacturer)
+  |
+  = link_to "Destroy", @manufacturer, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", manufacturers_path

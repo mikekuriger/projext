@@ -1,0 +1,10 @@
+= semantic_menu :id => "subNav", :class => "subNav" do |m|
+  - m.add "Users", users_path if can? :read, User
+  - m.add "CPUs", cpus_path if can? :read, Cpu
+  - m.add "Buildings", buildings_path if can? :read, Building
+  - m.add "Rooms", rooms_path if can? :read, Room
+  - m.add "Racks", racks_path if can? :read, EquipmentRack
+  - m.add "Vendors", vendors_path if can? :read, Vendor
+  - m.add "Manufacturers", manufacturers_path if can? :read, Manufacturer
+  - m.add "Operating Systems", operatingsystems_path if can? :read, Operatingsystem
+  - m.add "Cable Media", media_path if can? :read, Medium

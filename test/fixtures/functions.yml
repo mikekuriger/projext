@@ -1,0 +1,28 @@
+apache:
+  id: 1
+  name: apache
+  description: Apache
+
+apache_pf:
+  id: 2
+  name: apache_pf
+  description: Apache (Pre-forking)
+  
+inactive:
+  id: 3
+  name: inactive-function
+  description: Inactive Function
+  state: inactive
+
+# == Schema Information
+#
+# Table name: functions
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(255)
+#  description :string(255)
+#  state       :string(255)     default("active")
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

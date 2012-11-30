@@ -1,0 +1,19 @@
+- title "Emails"
+
+%table.list
+  %tr
+    %th Name
+    %th Domain
+    %th Project
+    %th Actions
+  - for email in @emails
+    %tr
+      %td= h email.name
+      %td= link_to email.domain.name, email.domain if email.domain
+      %td= link_to email.project.name, email.project if email.project
+      %td
+        = link_to 'Show', email
+        = link_to 'Edit', edit_email_path(email)
+        = link_to 'Destroy', email, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Email", new_email_path

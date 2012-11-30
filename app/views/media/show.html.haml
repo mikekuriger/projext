@@ -1,0 +1,18 @@
+- title "Medium"
+
+%p
+  %strong Name:
+  =h @medium.name
+%p
+  %strong Description:
+  =h @medium.description
+%p
+  %strong State:
+  =h @medium.state
+
+%p
+  = link_to "Edit", edit_medium_path(@medium)
+  |
+  = link_to "Destroy", @medium, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", media_path

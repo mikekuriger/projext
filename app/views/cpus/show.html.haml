@@ -1,0 +1,21 @@
+- title "Cpu"
+
+%p
+  %strong Manufacturer:
+  =h @cpu.manufacturer_id
+%p
+  %strong Processor Type:
+  =h @cpu.cpu_type
+%p
+  %strong Cores:
+  =h @cpu.cores
+%p
+  %strong Speed:
+  =h @cpu.speed
+
+%p
+  = link_to "Edit", edit_cpu_path(@cpu)
+  |
+  = link_to "Destroy", @cpu, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", cpus_path

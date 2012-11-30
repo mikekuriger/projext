@@ -1,0 +1,19 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @groups, :entry_name => 'group'
+  = will_paginate @groups
+
+%table{:id => "grouplist", :class => "list"}
+  %tr
+    %th Name
+    %th Description
+    %th State
+    %th Asset Count
+    %th Actions
+  = render :partial => "group", :collection => @groups
+
+.wham_pagination
+  .page_info
+    = page_entries_info @groups, :entry_name => 'group'
+  = will_paginate @groups
+

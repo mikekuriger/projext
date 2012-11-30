@@ -1,0 +1,7 @@
+= semantic_menu :id => "subNav", :class => "subNav" do |m|
+  - m.add "Groups", groups_path, :class => (['groups'].include? request.path_parameters['controller']) ? 'active' : ''
+  - m.add "Farms", farms_path, :class => (['farms'].include? request.path_parameters['controller']) ? 'active' : ''
+  - m.add "Clusters", clusters_path, :class => (['clusters'].include? request.path_parameters['controller']) ? 'active' : ''
+  - m.add "Functions", functions_path, :class => (['functions'].include? request.path_parameters['controller']) ? 'active' : ''
+  - m.add "Services", services_path, :class => (['services'].include? request.path_parameters['controller']) ? 'active' : ''
+  - m.add "Parameters", parameters_path, :class => (['parameters'].include? request.path_parameters['controller']) ? 'active' : ''

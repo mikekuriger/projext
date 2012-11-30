@@ -1,0 +1,20 @@
+%tr{:id => dom_id(asset, 'row'), :class => cycle("odd", "even")}
+  %td= link_to asset.excerpts.name, asset
+  %td= asset.try(:excerpts).try(:fqdn)
+  %td= asset.try(:excerpts).try(:serial)
+  -# %td= result.try(:excerpts).try(:group_name)
+  / %td= result.to_yaml
+  -# %td= result.farm.name unless result.farm.nil?
+  %td.actions
+    = link_to icon('magnifier', 'Show'), asset, :class => "view" if can? :read, asset
+    = link_to icon('pencil', 'Edit'), edit_asset_path(asset), :class => "edit" if can? :edit, asset
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => asset_path(asset), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(asset, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(asset, 'row')), |
+        visual_effect(:fade, dom_id(asset, 'row')), |
+        "$('##{dom_id(asset, 'spinner')}').hide();" ] |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(asset, 'spinner')

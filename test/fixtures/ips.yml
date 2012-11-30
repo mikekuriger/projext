@@ -1,0 +1,33 @@
+one:
+  id: 1
+  network_id: 1
+  ip: 224.224.224.1
+  pingable: true
+  lastpinged: 2010-01-13 01:09:31
+  lastresponse: 2010-01-13 01:09:31
+  notes: MyText
+
+two:
+  id: 2
+  network_id: 1
+  ip: 224.224.224.2
+  pingable: false
+  lastpinged: 2010-01-13 01:09:31
+  lastresponse: 2010-01-13 01:09:31
+  notes: MyText
+
+# == Schema Information
+#
+# Table name: ips
+#
+#  id           :integer(4)      not null, primary key
+#  network_id   :integer(4)
+#  ip           :string(255)
+#  pingable     :boolean(1)
+#  lastpinged   :datetime
+#  lastresponse :datetime
+#  notes        :text
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+

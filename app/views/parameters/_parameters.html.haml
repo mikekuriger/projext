@@ -1,0 +1,17 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @parameters, :entry_name => 'parameter'
+  = will_paginate @parameters
+
+%table{:id => "parameterlist", :class => "list"}
+  %tr
+    %th Name
+    %th Description
+    %th State
+    %th Actions
+  = render :partial => "parameter", :collection => @parameters
+
+.wham_pagination
+  .page_info
+    = page_entries_info @parameters, :entry_name => 'parameter'
+  = will_paginate @parameters

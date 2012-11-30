@@ -1,0 +1,23 @@
+%ul.tooltip
+  %li
+    = image_tag @storage_array.hardware_model.picture.url(:small) if @storage_array.hardware_model
+  %li
+    %label Name
+    = @storage_array.name
+  %li
+    %label Manufacturer
+    = link_to @storage_array.manufacturer.name, @storage_array.manufacturer if @storage_array.manufacturer
+  %li
+    %label Model
+    = link_to @storage_array.hardware_model.name, @storage_array.hardware_model if @storage_array.hardware_model
+  %li
+    %label Group
+    = link_to @storage_array.group.name, @storage_array.group if @storage_array.group
+  %li
+    %label Farm
+    = link_to @storage_array.farm.name, @storage_array.farm if @storage_array.farm
+  %li
+    %label Actions
+    = link_to icon('magnifier', 'Show'), @storage_array, :class => "view"
+    |
+    = link_to icon('pencil', 'Edit'), edit_storage_array_path(@storage_array), :class => "edit"

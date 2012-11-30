@@ -1,0 +1,55 @@
+- output = Hash.new
+- output['classes'] = Array.new
+-#- cluster_store = Array.new
+-#- function_store = Array.new
+- output['parameters'] = { 'clusters' => Array.new, 'functions' => Array.new, 'services' => Array.new, 'software' => Array.new}
+- output['classes'].push "g_#{@server.try(:group).try(:name)}"
+
+-# Add the global parameters (they may be overridden later)
+- GlobalParameter.all.each do |a|
+  - output['parameters'][a.parameter.name] = a.value
+
+-# Loop through each service assigned to the server
+- @server.services.each do |service|
+  -# Set classes based on the service details
+  - output['classes'].push "c_#{service.cluster.name}"
+  - output['classes'].push "f_#{service.function.name}"
+  - output['classes'].push "s_#{service.cluster.name}_#{service.function.name}"
+  
+  -# Set parameters based on the service details
+  -# First, the names of cluster, function, service
+  - output['parameters']['clusters'].push service.cluster.name
+  - output['parameters']['functions'].push service.function.name
+  - output['parameters']['services'].push ({ 'cluster' => service.cluster.name, 'function' => service.function.name })
+  
+  -# First the cluster parameters
+  - service.cluster.parameter_assignments.each do |a|
+    - output['parameters'][a.parameter.name] = a.value
+  -# Then the function parameters
+  - service.function.parameter_assignments.each do |a|
+    - output['parameters'][a.parameter.name] = a.value
+  -# Then the service parameters
+  - service.parameter_assignments.each do |a|
+    - output['parameters'][a.parameter.name] = a.value
+  -# Now the service_assignment (AKA deviceservice) parameters
+  - service_assignment = ServiceAssignment.find_by_asset_id_and_service_id(@server.id, service.id)
+  - service_assignment.parameter_assignments.each do |a|
+    - output['parameters'][a.parameter.name] = a.value
+
+-# Finally, add the server parameters (they should override any of the more generic params)
+- @server.parameter_assignments.each do |a|
+  - output['parameters'][a.parameter.name] = a.value
+
+- output['parameters']['name'] = @server.name
+- output['parameters']['hostname'] = @server.hostname
+- output['parameters']['fqdn'] = @server.fqdn
+- output['parameters']['group'] = @server.try(:group).try(:name)
+- output['parameters']['monitorable'] = @server.monitorable
+
+-# Now eliminate duplicates
+- output['parameters']['clusters'].uniq!
+- output['parameters']['functions'].uniq!
+- output['parameters']['services'].uniq!
+- output['classes'].uniq!
+
+= output.to_yaml

@@ -1,0 +1,33 @@
+- title "Interface"
+
+%p
+  %strong Name:
+  =h @interface.name
+%p
+  %strong Description:
+  =h @interface.description
+%p
+  %strong State:
+  =h @interface.state
+%p
+  %strong Asset:
+  =link_to @interface.asset.name, @interface.asset if @interface.asset
+%p
+  %strong IP:
+  =link_to @interface.ip.ip, @interface.ip if @interface.ip
+%p
+  %strong Speed:
+  =h @interface.speed
+%p
+  %strong MAC Address:
+  =h @interface.mac
+%p
+  %strong Connector:
+  =h @interface.connector_type
+
+%p
+  = link_to "Edit", edit_interface_path(@interface)
+  |
+  = link_to "Destroy", @interface, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", interfaces_path

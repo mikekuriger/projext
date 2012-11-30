@@ -1,0 +1,54 @@
+- title "User"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Email
+        =h @user.email
+      %li
+        %label First Name
+        =h @user.first_name
+      %li
+        %label Last Name
+        =h @user.last_name
+      %li
+        %label Title
+        =h @user.title
+      %li
+        %label Phone
+        =h @user.phone
+      %li
+        %label Cell
+        =h @user.cell
+      %li
+        %label Pager
+        =h @user.pager
+      %li
+        %label Type
+        =h @user.type
+      %li
+        %label State
+        =h @user.state
+      %li
+        %label Roles
+        %ul
+          - if @user.roles.empty?
+            %li None
+          - else
+            - @user.roles.each do |r|
+              %li=h r.name
+      - if @user.api_is_enabled?
+        %li
+          %label API Key
+          =h @user.api_key
+        - if @user.type == 'Agent'
+          %li
+            %label Associated Server
+            =link_to @user.server.fqdn, @user.server unless @user.server.nil?
+
+%p
+  = link_to "Edit", edit_user_path(@user) if can? :edit, @user
+  = "| #{link_to "Destroy", @user, :confirm => 'Are you sure?', :method => :delete}" if can? :destroy, @user
+  = "| #{link_to "View All", users_path}" if can? :read, User

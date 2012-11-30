@@ -1,0 +1,23 @@
+- title "Ips"
+
+%table.list
+  %tr
+    %th Network
+    %th IP
+    %th Pingable
+    %th Lastpinged
+    %th Lastresponse
+    %th Notes
+  - for ip in @ips
+    %tr
+      %td= h ip.network_id
+      %td= h ip.ip
+      %td= h ip.pingable
+      %td= h ip.lastpinged
+      %td= h ip.lastresponse
+      %td= h ip.notes
+      %td= link_to 'Show', ip
+      %td= link_to 'Edit', edit_ip_path(ip)
+      %td= link_to 'Destroy', ip, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Ip", new_ip_path

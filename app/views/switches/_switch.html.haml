@@ -1,0 +1,23 @@
+%tr{:id => dom_id(switch, 'row'), :class => cycle("odd", "even")}
+  %td= link_to switch.fqdn, switch
+  %td
+    = h switch.serial
+    &nbsp;
+  %td
+    = link_to "#{switch.hardware_model.manufacturer.name} #{switch.hardware_model.name}", switch.hardware_model if switch.hardware_model
+    &nbsp;
+  %td
+    = link_to switch.group.name, switch.group if switch.group
+    &nbsp;
+  %td
+    = link_to switch.farm.name, switch.farm if switch.farm
+    &nbsp;
+  %td
+    = h switch.equipment_rack.name unless switch.equipment_rack.nil?
+    &nbsp;
+  %td.actions
+    = link_to icon('magnifier', 'Show'), switch, :class => "view" if can? :read, switch
+    = link_to icon('pencil', 'Edit'), edit_switch_path(switch), :class => "edit" if can? :edit, switch
+    = link_to_remote icon('delete', 'Delete'), :url => switch_path(switch), :confirm => "Are you sure?", :method => "delete", :loading => "$('##{dom_id(switch, 'spinner')}').show();", :complete => [ visual_effect(:highlight, dom_id(switch, 'row')), visual_effect(:fade, dom_id(switch, 'row')), "$('##{dom_id(switch, 'spinner')}').hide();" ]
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(switch, 'spinner')
+    

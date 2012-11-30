@@ -1,0 +1,31 @@
+- title "Site"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        = link_to @site.name, "http://#{@site.name}", :target => '_blank'
+      %li
+        %label IP
+        = link_to @site.ip.name, @site.ip unless @site.ip.nil?
+      %li
+        %label VIP
+        = link_to @site.vip.name, @site.vip unless @site.vip.nil?
+      %li
+        %label Cluster
+        = link_to @site.cluster.name, @site.cluster unless @site.cluster.nil?
+      %li
+        %label Customer
+        = link_to @site.customer.name, @site.customer unless @site.customer.nil?
+      %li
+        %label State
+        =h @site.state
+
+%p
+  = link_to "Edit", edit_site_path(@site)
+  |
+  = link_to "Destroy", @site, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", sites_path

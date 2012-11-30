@@ -1,0 +1,29 @@
+- title "Quotes"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th Date
+    %th Expiration
+    %th Vendor
+    %th Number
+    %th Notes
+    %th # of Attached Docs
+    %th Actions
+  - for quote in @quotes
+    %tr
+      %td= link_to quote.name, quote
+      %td= h quote.description
+      %td= h quote.date
+      %td= h quote.expiration
+      %td= link_to quote.vendor.name, quote.vendor if quote.vendor
+      %td= h quote.number
+      %td= h quote.notes
+      %td= h quote.attachings.count
+      %td
+        = link_to 'Show', quote
+        = link_to 'Edit', edit_quote_path(quote)
+        = link_to 'Destroy', quote, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Quote", new_quote_path

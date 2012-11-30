@@ -1,0 +1,19 @@
+- title "Apps"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th Project
+    %th Actions
+  - for app in @apps
+    %tr
+      %td= h app.name
+      %td= h app.description
+      %td= h app.project.name
+      %td.actions
+        = link_to 'Show', app
+        = link_to 'Edit', edit_app_path(app)
+        = link_to 'Destroy', app, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New App", new_app_path

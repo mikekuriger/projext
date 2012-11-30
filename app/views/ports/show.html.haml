@@ -1,0 +1,24 @@
+- title "Port"
+
+%p
+  %strong Name:
+  =h @port.name
+%p
+  %strong Description:
+  =h @port.description
+%p
+  %strong Protocol:
+  =h @port.protocol
+%p
+  %strong Begin Port:
+  =h @port.begin_port
+%p
+  %strong End Port:
+  =h @port.end_port
+
+%p
+  = link_to "Edit", edit_port_path(@port)
+  |
+  = link_to "Destroy", @port, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", ports_path

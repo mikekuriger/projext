@@ -1,0 +1,9 @@
+- title "Manufacturers"
+
+#manufacturers
+  = render 'manufacturers'
+
+= render :partial => "addmanufacturer" if can? :create, Manufacturer
+
+= render :partial => 'shared/export', :object => @manufacturers
+

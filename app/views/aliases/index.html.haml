@@ -1,0 +1,13 @@
+- title "Aliases"
+
+%table
+  %tr
+    %th Name
+  - for alias in @aliases
+    %tr
+      %td= h alias.name
+      %td= link_to 'Show', alias
+      %td= link_to 'Edit', edit_alias_path(alias)
+      %td= link_to 'Destroy', alias, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Alias", new_alias_path

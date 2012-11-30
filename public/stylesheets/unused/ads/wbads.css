@@ -1,0 +1,398 @@
+	/** WIDTHS **/
+		#wrapper {
+			width:								968px;
+		}
+				
+		/******************
+		** Headlines
+		** Body Copy
+		** Links
+		** Bullet Points
+		** etc.
+		******************/
+		
+		body, .normal {
+			color:								#000000;
+			font-family:					Arial;
+			font-size:						11px;
+			font-weight:					normal;
+			margin:								0px;
+			padding:							0px;
+			text-align:						center;
+		}
+		
+		/* main layout block */
+		#wrapper {
+			margin-left:					auto;
+			margin-right:					auto;
+			position:							relative;
+			text-align:						left;
+		}
+		
+		.wrapper {
+			position:							relative;
+			width:								100%;
+			height:								100%;
+		}
+		
+		/* link */
+		a {
+			color:								#2873BA;
+		}
+		
+		/* Page Title */
+		h1
+		{
+			color:								#629BD3;
+			font-size:						80px;
+			font-weight:					normal;
+			margin-bottom:				30px;
+			margin-top:						30px;
+			text-transform:				uppercase;
+		}
+		
+		/* Section Title */
+		h2
+		{
+			color:								#629BD3;
+			font-size:						40px;
+			font-weight:					normal;
+			margin-bottom:				20px;
+			margin-top:						20px;
+			text-transform: 			uppercase;
+		}
+		
+		/* Main Headline */
+		h3
+		{
+			color:								#A5B3C0;
+			font-size:						30px;
+			font-weight:					bold;
+			margin-bottom:				6px;
+			margin-top:						0px;
+		}
+				
+		/* Sub Headline */
+		h4
+		{
+			color:								#6F7F8F;
+			font-size:						16px;
+			font-weight:					bold;
+			margin-bottom:				11px;
+			margin-top:						0px;
+		}
+		
+		/* Paragraph Headline */
+		h5 {
+			color:								#6F7F8F;
+			font-weight:					bold;
+			text-transform:				uppercase;
+		}
+		
+		li {
+			font-weight:					bold;
+		}
+		
+		p {
+			margin-top:						0px;
+			margin-bottom:				11px;
+		}
+		
+		blockquote {
+			background-color:			#d2dae0;
+			margin:								0px;
+			padding:							9px;
+			
+		}
+		
+		img {
+			border:								1px solid #d2dae0;
+		}
+		
+		div.hr {
+			background-attachment:	scroll;
+			background-color:			#ffffff;
+			background-image:			url(../images/ADS_gradient.gif);
+			background-repeat:		repeat-y;
+			background-position:	center center;
+			height:								3px;
+			margin-top:						20px;
+			margin-bottom:				20px;
+
+		}
+		
+		div.hr hr {
+			display:							none;
+		}
+		
+		table, th, td {
+			border: 1px solid #d2dae0;
+			border-collapse: collapse;
+			margin: 0px;
+			padding: 3px;
+		}
+		
+		table th {
+			background-color: #A5B3CD;
+			color: #ffffff;
+			padding-top: 4px;
+			padding-bottom: 4px;
+			font-size:	11px;
+		}
+		
+		table td {
+			color: #6F7F8F;
+			font-size:	11px;
+		}
+		
+		table tr {
+			background-color:	#eaecef;
+		}
+		
+		table tr.odd {
+			background-color: #ffffff;
+		}
+		
+		/* search matches */
+		.match {
+			font-weight:				bold;
+			color:							#ff0000;
+		}
+		
+		/***************
+		** Navigation **
+		****************/
+		
+		/* nav logo */
+		div.navigation {
+			height:								73px;
+			width:								100%;
+		}
+
+ 		div.navigation div.userlinks {
+ 			margin-top:					10px;
+ 			margin-left:				10px;
+ 			float:					left;
+ 		}
+		
+		div.navigation div.logo {
+			background-color:			#ffffff;
+			background-image:			url(../images/ADS_logo_sprite.gif);
+			background-position:	right -51px;
+			background-repeat:		no-repeat;
+			display:							block;
+			height:								51px;
+			position:							absolute;
+			right:								0px;
+			width:								497px;
+		}
+
+		div.navigation ul {
+			background-color:			#000000;
+			margin:								0px;
+			padding:							0px;
+			position:							absolute;
+			top:									55px;
+			width:								100%;
+		}
+		
+		/* nav item */
+		div.navigation ul li
+		{
+			color:								#FFFFFF;
+			list-style-type:			none;
+			list-style-position:	outside;
+			margin:								0px;
+			padding:							0px;
+			text-align:						center;
+			width:								120px;
+		}
+		
+		/* horizontal-only, undone for vertical */
+		div.navigation ul li {
+			border-color:					#FFFFFF;
+			border-style:					solid;
+			border-width:					0px 1px 0px 0px;
+			float:								left;
+		}
+				
+		div.navigation ul li a {
+			background-color:			#000000;
+			border-color: 				#000000;
+			border-style:					solid;
+			border-width:					1px 0px 1px 0px;
+			color:								#ffffff;
+			display:							block;
+			height:								16px;
+			outline:							none;
+			padding-top:					2px;
+			text-decoration:			none;
+			width:								100%;
+		}
+		
+		div.navigation ul li a:hover {
+			background-color:			#6F7F8F;
+			border-color:					#6F7F8F;
+		}
+		
+		/***************************************
+		** Positioning for Horizontal / Vertical
+		****************************************/
+		
+		/* nav: alternate */
+		body.horizontal div.short-nav div.navigation, body.vertical div.navigation {
+			background-image:			url(../images/ADS_logobg.gif);
+			background-repeat:		repeat-x;
+		}
+		
+		body.horizontal div.short-nav div.navigation div.logo, body.vertical div.navigation div.logo {
+			background-position:	right top;
+		}
+		
+		/* nav: short length */
+		body.horizontal div.short-nav div.navigation {
+			height:								51px;
+		}
+		
+		body.horizontal div.short-nav div.navigation ul {
+			height:								19px;
+			overflow:							hidden;
+			width:								484px;
+			top:									18px;
+		}
+		
+		/* body: vertical-only */
+		body.vertical {
+			margin-left:					130px;
+			margin-top:						51px;
+		}
+		
+		/* nav: vertical-only */
+		body.vertical div.navigation {
+			margin-left:					-130px;
+			margin-top:						-51px;
+			overflow:							visible;
+			position:							absolute;
+			left:									0px;
+		}
+		
+		body.vertical div.navigation .wrapper {
+			padding-right:				130px;
+		}
+		
+		body.vertical div.navigation ul {
+			width:								120px;
+			position:							absolute;
+			top:									37px;
+		}
+		
+		body.vertical div.navigation ul li {
+			border-width:					0px;
+			float:								none;
+			margin-top:						-1px;
+		}
+		
+		body.vertical div.navigation ul li a {
+			border-color:					#FFFFFF;
+			height:								auto;
+			min-height:						16px;
+		}
+		
+		body.vertical div.navigation ul li a:hover {
+			background-color:			#6F7F8F;
+		}
+		
+		/* IE6 adjustment */
+		*html body.vertical div.navigation ul li a {
+			padding-bottom:				2px;
+			padding-top:					4px;
+		}
+		
+		
+		
+		
+		
+		
+	/**
+	Columns recommended by matthew taylor
+	**/
+	
+		
+		
+	/* column container */
+	.colmask {
+		position:relative;	/* This fixes the IE7 overflow hidden bug */
+		clear:both;
+		float:left;
+		width:100%;			/* width of whole page */
+		overflow:hidden;		/* This chops off any overhanging divs */
+	}
+	/* common column settings */
+	.colright,
+	.colmid,
+	.colleft {
+		float:left;
+		width:100%;			/* width of page */
+		position:relative;
+	}
+	.col1,
+	.col2,
+	.col3 {
+		float:left;
+		position:relative;
+		padding:0 0 1em 0;	/* no left and right padding on columns, we just make them narrower instead 
+						only padding top and bottom is included here, make it whatever value you need */
+		overflow:hidden;
+	}
+	/* 3 Column settings */
+	.threecol {
+		background:#eee;		/* right column background colour */
+	}
+	.threecol .colmid {
+		right:25%;			/* width of the right column */
+		background:#fff;		/* center column background colour */
+	}
+	.threecol .colleft {
+		right:50%;			/* width of the middle column */
+		background:#f4f4f4;	/* left column background colour */
+	}
+	.threecol .col1 {
+		width:46%;			/* width of center column content (column width minus padding on either side) */
+		left:102%;			/* 100% plus left padding of center column */
+	}
+	.threecol .col2 {
+		width:21%;			/* Width of left column content (column width minus padding on either side) */
+		left:31%;			/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
+	}
+	.threecol .col3 {
+		width:21%;			/* Width of right column content (column width minus padding on either side) */
+		left:85%;			/* Please make note of the brackets here:
+						(100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
+	}
+		
+	/* 2 Column (right menu) settings */
+	body.vertical .threecol, .rightmenu {
+		background:#eee;		/* right column background colour */
+	}
+	body.vertical .threecol .colleft, .rightmenu .colleft {
+		right:25%;			/* right column width */
+		background:#fff;		/* left column background colour */
+	}
+	body.vertical .threecol .col1,.rightmenu .col1 {
+		width:61%;			/* left column content width (left column width minus left and right padding) */
+		left:27%;			/* (right column width) plus (left column left padding) */
+	}
+	body.vertical .threecol .col3,.rightmenu .col2 {
+		width:21%;			/* right column content width (right column width minus left and right padding) */
+		left:31%;			/* (right column width) plus (left column left and right padding) plus (right column left padding) */
+	}
+	body.vertical .threecol .col2 {
+		display: none;
+	}
+	body.vertical .threecol .colmid {
+		right: 0%;
+	}
+	
+	body.vertical .colmask {
+		float: none;
+	}

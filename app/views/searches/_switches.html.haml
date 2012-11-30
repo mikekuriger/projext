@@ -1,0 +1,12 @@
+%h3= "Matched #{pluralize(@switches.total_entries, "Switch")}, displaying #{@switches.size}"
+
+%table.list
+  %tr
+    %th Name
+    %th Hostname
+    %th Serial
+    -# %th Group
+    / %th Dump
+    -# %th Farm
+    %th Actions
+  = render :partial => "switch", :collection => @switches

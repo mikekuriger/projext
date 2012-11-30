@@ -1,0 +1,91 @@
+/*
+  Welcome to Susy. Use this file to define screen styles.
+  Import this file using the following HTML or equivalent:
+  <link href="/stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css" />
+
+/* @group reset */
+@import compass/reset.sass
+/* @end */
+
+/* @group defaults */
+@import base.sass
+@import formtastic_base.sass
+/* @end */
+
+
+/* @group STRUCTURE */
+
+body
+  +susy
+
+#page
+  +container
+
+#header
+  +columns(10)
+  +pad(0,0)
+  +full
+  height: 4em
+  h1 a
+    +columns(7,10)
+    +pad(0,1,10)
+    +alpha
+    height: 0em
+  #search
+    +columns(2,10)
+    +pad(1,0,10)
+    +omega
+    height: 2em
+
+#nav
+  +columns(10)
+  +full
+
+#content
+  +columns(10)
+  +full
+
+#footer
+  +columns(10)
+  +full
+
+/* @end */
+
+  
+/* @group COMPONENTS by type */
+
+
+/* @end */
+
+
+/* @group OVERRIDES by content */
+
+
+
+/* @end */
+
+        
+/* @group OVERRIDES by page */
+
+
+
+/* @end */
+
+
+/* @group WHAM */
+@import wham.sass
+@import rackdiagram.sass
+@import pagination.sass
+/* @end */
+
+/* @group Formtastic */
+/* @end */
+
+/* @group DEBUG */
+
+/*   uncomment, adjust and use for debugging    */
+  
+//#page
+//  +show-grid("grid.png")
+
+/* @end */

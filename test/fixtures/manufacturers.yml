@@ -1,0 +1,22 @@
+one:
+  name: manufacturer numero uno
+  address1: MyString
+  address2: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  url: MyString
+  notes: MyText
+
+two:
+  name: hay no es bueno
+  address1: MyString
+  address2: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  url: MyString
+  notes: MyText
+
+three:
+  name: Intel

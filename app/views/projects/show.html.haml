@@ -1,0 +1,22 @@
+- title "Project"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @project.name
+      %li
+        %label Description
+        =h @project.description
+      %li
+        %label Customer
+        =link_to @project.customer.name, @project.customer if @project.customer
+
+%p
+  = link_to "Edit", edit_project_path(@project)
+  |
+  = link_to "Destroy", @project, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", projects_path

@@ -1,0 +1,23 @@
+%ul.tooltip
+  %li
+    = image_tag @virtual_server.hardware_model.picture.url(:small) if @virtual_server.hardware_model
+  %li
+    %label Name
+    = @virtual_server.name
+  %li
+    %label Manufacturer
+    = link_to @virtual_server.manufacturer.name, @virtual_server.manufacturer if @virtual_server.manufacturer
+  %li
+    %label Model
+    = link_to @virtual_server.hardware_model.name, @virtual_server.hardware_model if @virtual_server.hardware_model
+  %li
+    %label Group
+    = link_to @virtual_server.group.name, @virtual_server.group if @virtual_server.group
+  %li
+    %label Farm
+    = link_to @virtual_server.farm.name, @virtual_server.farm if @virtual_server.farm
+  %li
+    %label Actions
+    = link_to icon('magnifier', 'Show'), @virtual_server, :class => "view"
+    |
+    = link_to icon('pencil', 'Edit'), edit_polymorphic_path(@virtual_server), :class => "edit"

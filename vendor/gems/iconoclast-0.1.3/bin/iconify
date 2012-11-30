@@ -1,0 +1,92 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(
+    File.join(File.dirname(__FILE__), '..', 'lib', 'iconoclast'))
+
+Main do
+  
+  description <<-EOS
+  Iconoclast icons!
+
+  Gives you the ability to add, refresh, and remove famfamfam icons in your rails/merb app
+  EOS
+
+  examples <<-EOS
+    To add icons to your app
+
+    	cd /your/rails/app/dir  
+
+    	iconify #copies icons to public/images
+
+    	iconify my_images/icons #copies icons to /your/rails/apps/dir/myimages/icons
+
+    To remove icons from your app (and only famfamfam icons)
+
+    	iconify remove #removes only famfamfam icons from public/images
+
+    	iconify remove my_images/icons #removes only famfamfam icons from /your/rails/apps/dir/myimages/icons
+
+  EOS
+
+  mixin :path_argument do
+    argument "path" do
+      argument_optional
+      attribute
+      default File.expand_path("." + "/public/images")
+    end
+  end
+  
+  mixin :collection_option do
+    option "collection" do
+      argument_optional
+      attribute
+      default 'famfamfam'
+    end
+  end
+  
+  mixin :set_option do
+    option "set" do
+      argument_optional
+      attribute
+      default 'silk'
+    end
+  end
+
+  mixin :format_option do
+    option "format" do
+      argument_optional
+      attribute
+      default 'png'
+    end
+  end
+
+  mode "remove" do
+    mixin :path_argument
+    mixin :collection_option
+    mixin :set_option
+    mixin :format_option
+    run do
+      Iconoclast.remove_icons path, {:collection => collection, :set => set, :format => format}
+    end
+  end
+
+  mode "refresh" do
+    mixin :path_argument
+    mixin :collection_option
+    mixin :set_option
+    mixin :format_option
+    run do
+      Iconoclast.remove_icons path, {:collection => collection, :set => set, :format => format}
+      Iconoclast.install_icons path, {:collection => collection, :set => set, :format => format}
+    end
+  end
+
+  mixin :path_argument
+  mixin :collection_option
+  mixin :set_option
+  mixin :format_option
+
+  run do
+    Iconoclast.install_icons path, {:collection => collection, :set => set, :format => format}
+  end
+end

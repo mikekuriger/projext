@@ -1,0 +1,21 @@
+- javascript 'jquery.comboselect'
+- stylesheet 'jquery.comboselect'
+
+- semantic_form_for @crontab do |f|
+  = f.error_messages
+  - f.inputs do
+    = f.input :name
+    = f.input :description
+    = f.input :cluster
+    = f.input :minute
+    = f.input :hour
+    = f.input :dayofmonth
+    = f.input :month
+    = f.input :dayofweek
+    = f.input :user
+    = f.input :command
+
+  - f.inputs :name => 'Members' do
+    = f.input :assets, :as => :comboselect
+
+  = f.buttons

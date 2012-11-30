@@ -1,0 +1,21 @@
+- title "Switch Modules"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th Serial
+    %th Hardware model
+    %th actions
+  - for switch_module in @switch_modules
+    %tr
+      %td= h switch_module.name
+      %td= h switch_module.description
+      %td= h switch_module.serial
+      %td= h switch_module.hardware_model_id
+      %td
+        = link_to 'Show', switch_module
+        = link_to 'Edit', edit_switch_module_path(switch_module)
+        = link_to 'Destroy', switch_module, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Switch Module", new_switch_module_path

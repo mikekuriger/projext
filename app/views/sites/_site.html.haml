@@ -1,0 +1,31 @@
+%tr{:id => dom_id(site, 'row'), :class => cycle("odd", "even")}
+  %td= link_to site.name, "http://#{site.name}", :target => '_blank'
+  %td
+    = link_to site.ip.name, site.ip if site.ip
+    &nbsp;
+  %td
+    = link_to site.vip.name, site.vip if site.vip
+    &nbsp;
+  %td
+    = link_to site.cluster.name, site.cluster if site.cluster
+    &nbsp;
+  %td
+    = link_to site.customer.name, site.customer if site.customer
+    &nbsp;
+  %td{:id => dom_id(site, 'state')}
+    = h site.state
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(site, 'state_spinner')
+  %td.actions
+    = link_to icon('magnifier', 'Show'), site, :class => "view" if can? :read, site
+    = link_to icon('pencil', 'Edit'), edit_site_path(site), :class => "edit" if can? :edit, site
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => site_path(site), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(site, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(site, 'row')), |
+        visual_effect(:fade, dom_id(site, 'row')), |
+        "$('##{dom_id(site, 'spinner')}').hide();" ] |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(site, 'spinner')
+    

@@ -1,0 +1,23 @@
+- title "Ports"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th Protocol
+    %th Begin port
+    %th End port
+    %th actions
+  - for port in @ports
+    %tr
+      %td= h port.name
+      %td= h port.description
+      %td= h port.protocol
+      %td= h port.begin_port
+      %td= h port.end_port
+      %td
+        = link_to 'Show', port
+        = link_to 'Edit', edit_port_path(port)
+        = link_to 'Destroy', port, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Port", new_port_path

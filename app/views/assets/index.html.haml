@@ -1,0 +1,17 @@
+- title "All Assets"
+
+#assets
+  = render 'assets'
+
+- if can? :create, Asset
+  %h3 New Asset
+  - semantic_form_for Asset.new do |f|
+    = f.error_messages
+    - f.inputs do
+      = f.input :name
+      = f.input :serial
+      = f.input :group
+      = f.input :farm
+    = f.buttons
+    
+= render :partial => 'shared/export', :object => @assets

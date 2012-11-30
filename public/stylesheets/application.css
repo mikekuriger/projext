@@ -1,0 +1,616 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+:focus {
+  outline: 0; }
+
+textarea {
+  resize: none; }
+
+ins {
+  text-decoration: none; }
+
+del {
+  text-decoration: line-through; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+form.formtastic {
+  margin: 0;
+  padding: 0; }
+  form.formtastic ul, form.formtastic ol, form.formtastic li, form.formtastic fieldset, form.formtastic legend, form.formtastic input, form.formtastic textarea, form.formtastic select, form.formtastic p {
+    margin: 0;
+    padding: 0; }
+  form.formtastic fieldset {
+    border: 0; }
+  form.formtastic em, form.formtastic strong {
+    font-style: normal;
+    font-weight: normal; }
+  form.formtastic ol, form.formtastic ul {
+    list-style: none; }
+  form.formtastic abbr, form.formtastic acronym {
+    border: 0;
+    font-variant: normal; }
+  form.formtastic input, form.formtastic textarea, form.formtastic select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit; }
+  form.formtastic input, form.formtastic textarea, form.formtastic select {
+    font-size: 100%; }
+  form.formtastic legend {
+    color: #000; }
+  form.formtastic fieldset {
+    display: inline-block; }
+    form.formtastic fieldset.buttons {
+      padding-left: 25%; }
+    form.formtastic fieldset.buttons li {
+      float: left;
+      padding-right: 0.5em; }
+    form.formtastic fieldset:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden; }
+
+html[xmlns] form.formtastic fieldset {
+  display: block; }
+
+* html form.formtastic fieldset {
+  height: 1%; }
+
+form.formtastic fieldset ol li {
+  margin-bottom: 1.5em;
+  display: inline-block; }
+  form.formtastic fieldset ol li:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+
+html[xmlns] form.formtastic fieldset ol li {
+  display: block; }
+
+* html form.formtastic fieldset ol li {
+  height: 1%; }
+
+form.formtastic fieldset ol li label {
+  display: block;
+  width: 25%;
+  float: left;
+  padding-top: .2em; }
+form.formtastic fieldset ol li li label {
+  line-height: 100%;
+  padding-top: 0; }
+  form.formtastic fieldset ol li li label input {
+    line-height: 100%;
+    vertical-align: middle;
+    margin-top: -0.1em; }
+form.formtastic fieldset ol li fieldset {
+  position: relative; }
+  form.formtastic fieldset ol li fieldset legend {
+    position: absolute;
+    width: 25%;
+    padding-top: 0.1em; }
+    form.formtastic fieldset ol li fieldset legend span, form.formtastic fieldset ol li fieldset legend.label label {
+      position: absolute; }
+  form.formtastic fieldset ol li fieldset ol {
+    float: left;
+    width: 74%;
+    margin: 0;
+    padding: 0 0 0 25%; }
+    form.formtastic fieldset ol li fieldset ol li {
+      padding: 0;
+      border: 0; }
+form.formtastic fieldset ol li p.inline-hints {
+  color: #666;
+  margin: 0.5em 0 0 25%; }
+form.formtastic fieldset ol li p.inline-errors {
+  color: #cc0000;
+  margin: 0.5em 0 0 25%; }
+form.formtastic fieldset ol li ul.errors {
+  color: #cc0000;
+  margin: 0.5em 0 0 25%;
+  list-style: square; }
+  form.formtastic fieldset ol li ul.errors li {
+    padding: 0;
+    border: none;
+    display: list-item; }
+form.formtastic fieldset ol li.string input, form.formtastic fieldset ol li.password input, form.formtastic fieldset ol li.numeric input, form.formtastic fieldset ol li.text textarea {
+  width: 74%; }
+form.formtastic fieldset ol li.hidden {
+  display: none; }
+form.formtastic fieldset ol li.boolean label {
+  padding-left: 25%;
+  width: auto; }
+  form.formtastic fieldset ol li.boolean label input {
+    margin: 0 0.5em 0 0.2em; }
+form.formtastic fieldset ol li.radio fieldset ol, form.formtastic fieldset ol li.check_boxes fieldset ol {
+  margin-bottom: -0.6em; }
+  form.formtastic fieldset ol li.radio fieldset ol li, form.formtastic fieldset ol li.check_boxes fieldset ol li {
+    margin: 0.1em 0 0.5em 0; }
+    form.formtastic fieldset ol li.radio fieldset ol li label, form.formtastic fieldset ol li.check_boxes fieldset ol li label {
+      float: none;
+      width: 100%; }
+      form.formtastic fieldset ol li.radio fieldset ol li label input, form.formtastic fieldset ol li.check_boxes fieldset ol li label input {
+        margin-right: 0.2em; }
+form.formtastic fieldset ol li.date fieldset ol li, form.formtastic fieldset ol li.time fieldset ol li, form.formtastic fieldset ol li.datetime fieldset ol li {
+  float: left;
+  width: auto;
+  margin: 0 .3em 0 0; }
+form.formtastic fieldset ol li.date fieldset ol li label, form.formtastic fieldset ol li.time fieldset ol li label, form.formtastic fieldset ol li.datetime fieldset ol li label {
+  display: none; }
+form.formtastic fieldset ol li.date fieldset ol li label input, form.formtastic fieldset ol li.time fieldset ol li label input, form.formtastic fieldset ol li.datetime fieldset ol li label input {
+  display: inline;
+  margin: 0;
+  padding: 0; }
+
+form.formtastic fieldset ol div.auto_complete {
+  z-index: 1; }
+  form.formtastic fieldset ol div.auto_complete li {
+    margin-bottom: auto; }
+
+5494af .wham_pagination {
+  background: white; }
+
+.wham_pagination a {
+  padding: .2em .5em;
+  display: block;
+  float: left;
+  margin-right: 1px; }
+.wham_pagination span {
+  padding: .2em .5em;
+  display: block;
+  float: left;
+  margin-right: 1px; }
+  .wham_pagination span.disabled {
+    color: #999;
+    border: 1px solid #DDD; }
+  .wham_pagination span.current {
+    font-weight: bold;
+    background: #5494af;
+    color: white;
+    border: 1px solid #5494af; }
+.wham_pagination a {
+  text-decoration: none;
+  color: #105CB6;
+  border: 1px solid #5494af; }
+  .wham_pagination a:hover, .wham_pagination a:focus {
+    color: #003;
+    border-color: #003; }
+.wham_pagination .page_info {
+  background: #5494af;
+  color: white;
+  padding: .4em .6em;
+  width: 22em;
+  margin-bottom: .3em;
+  text-align: center; }
+  .wham_pagination .page_info b {
+    color: #003;
+    background: #73c7ec;
+    padding: .1em .25em; }
+.wham_pagination:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden; }
+
+* html .wham_pagination {
+  height: 1%; }
+*:first-child+html .wham_pagination {
+  overflow: hidden; }
+
+.digg_pagination {
+  background: white; }
+  .digg_pagination a {
+    padding: .2em .5em;
+    display: block;
+    float: left;
+    margin-right: 1px; }
+  .digg_pagination span {
+    padding: .2em .5em;
+    display: block;
+    float: left;
+    margin-right: 1px; }
+    .digg_pagination span.disabled {
+      color: #999;
+      border: 1px solid #DDD; }
+    .digg_pagination span.current {
+      font-weight: bold;
+      background: #2E6AB1;
+      color: white;
+      border: 1px solid #2E6AB1; }
+  .digg_pagination a {
+    text-decoration: none;
+    color: #105CB6;
+    border: 1px solid #9AAFE5; }
+    .digg_pagination a:hover, .digg_pagination a:focus {
+      color: #003;
+      border-color: #003; }
+  .digg_pagination .page_info {
+    background: #2E6AB1;
+    color: white;
+    padding: .4em .6em;
+    width: 22em;
+    margin-bottom: .3em;
+    text-align: center; }
+    .digg_pagination .page_info b {
+      color: #003;
+      background: #6aa6ed;
+      padding: .1em .25em; }
+  .digg_pagination:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+
+* html .digg_pagination {
+  height: 1%; }
+*:first-child+html .digg_pagination {
+  overflow: hidden; }
+
+.apple_pagination {
+  background: #F1F1F1;
+  border: 1px solid #E5E5E5;
+  text-align: center;
+  padding: 1em; }
+  .apple_pagination a {
+    padding: .2em .3em; }
+  .apple_pagination span {
+    padding: .2em .3em; }
+    .apple_pagination span.disabled {
+      color: #AAA; }
+    .apple_pagination span.current {
+      font-weight: bold;
+      background: transparent url(apple-circle.gif) no-repeat 50% 50%; }
+  .apple_pagination a {
+    text-decoration: none;
+    color: black; }
+    .apple_pagination a:hover, .apple_pagination a:focus {
+      text-decoration: underline; }
+
+.flickr_pagination {
+  text-align: center;
+  padding: .3em; }
+  .flickr_pagination a {
+    padding: .2em .5em; }
+  .flickr_pagination span {
+    padding: .2em .5em; }
+    .flickr_pagination span.disabled {
+      color: #AAA; }
+    .flickr_pagination span.current {
+      font-weight: bold;
+      color: #FF0084; }
+  .flickr_pagination a {
+    border: 1px solid #DDDDDD;
+    color: #0063DC;
+    text-decoration: none; }
+    .flickr_pagination a:hover, .flickr_pagination a:focus {
+      border-color: #003366;
+      background: #0063DC;
+      color: white; }
+  .flickr_pagination .page_info {
+    color: #aaa;
+    padding-top: .8em; }
+  .flickr_pagination .prev_page, .flickr_pagination .next_page {
+    border-width: 2px; }
+  .flickr_pagination .prev_page {
+    margin-right: 1em; }
+  .flickr_pagination .next_page {
+    margin-left: 1em; }
+
+html {
+  margin: 0;
+  padding: 0; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font: 0.8125em Verdana, sans-serif;
+  line-height: 1;
+  color: #333;
+  background: #FFF; }
+
+a {
+  color: #0066B3;
+  background: inherit;
+  text-decoration: none; }
+
+h1 {
+  font: bold 2.1em Arial, Arial, Sans-Serif;
+  color: #036DA7; }
+
+h2 {
+  font: 1.5em Arial, Arial, Sans-Serif;
+  letter-spacing: 1px; }
+
+h3 {
+  font: bold 1em Arial, Arial, sans-serif;
+  letter-spacing: 2px; }
+
+h4 {
+  font: bold 1.1em Arial, Arial, sans-serif;
+  letter-spacing: 1px; }
+
+.hidebutton {
+  color: #ffffff;
+  background-color: #ffffff;
+  border: none;
+  width: 1px;
+  height: 1px; }
+
+div#header {
+  width: 100%;
+  overflow: hidden;
+  background: #BBD9EE; }
+  div#header h1 {
+    float: left;
+    width: 770px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px 0 20px;
+    color: #fff; }
+div#footer {
+  text-align: center; }
+div#search {
+  float: right;
+  width: 20%;
+  margin: 10px 10px 10px 0; }
+
+#search .box {
+  padding: 1em;
+  margin: 0 0 1em 0;
+  background: #FFF6BF; }
+
+div#menu {
+  float: left;
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+  clear: both; }
+
+#nav {
+  background: #E7F1F8;
+  height: 25px; }
+
+ul#mainNav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  float: left; }
+  ul#mainNav li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    margin-left: 3px;
+    margin-right: 3px;
+    text-align: center; }
+  ul#mainNav a {
+    float: left;
+    padding: 5px;
+    text-decoration: none;
+    color: #666;
+    border-right: 1px solid #fff; }
+    ul#mainNav a:hover {
+      background: #fff;
+      color: #000; }
+  ul#mainNav li.activelink a {
+    background: #FFF;
+    color: #003; }
+    ul#mainNav li.activelink a:hover {
+      background: #FFF;
+      color: #003; }
+
+#mainNav li ul {
+  position: absolute;
+  top: 105px;
+  width: 10em;
+  left: -999em;
+  border: 1px solid #ddd;
+  text-align: left; }
+#mainNav li:hover ul {
+  left: auto; }
+#mainNav li ul li {
+  width: 10em;
+  background: none;
+  background-color: #e3e3e3;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  margin-left: 0px;
+  padding-left: 0px;
+  text-align: left; }
+  #mainNav li ul li a {
+    width: 10em;
+    background: none;
+    background-color: #e3e3e3;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    margin-left: 0px;
+    padding-left: 0px;
+    text-align: left; }
+    #mainNav li ul li a:hover {
+      background-color: #fdfcf6; }
+
+#right {
+  float: left;
+  width: 76%;
+  padding: 1em;
+  margin-bottom: 1.2em;
+  background: #eee;
+  text-align: justify; }
+
+#left {
+  float: right;
+  width: 20%;
+  margin: 0 0 10px 0; }
+  #left .box {
+    padding: 1em;
+    margin: 0 0 1em 0;
+    background: #FFF6BF; }
+
+#main {
+  float: left;
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 1.2em;
+  background: #eee; }
+
+#content {
+  font: 95%/1.3 TrebuchetMS,Arial,sans-serif;
+  margin: 0 auto;
+  padding: 10px 35px 10px 10px;
+  background: #fff; }
+
+ul {
+  padding: 0;
+  margin: 0; }
+
+li {
+  list-style-type: none; }
+
+.list, #serverlist {
+  border: 1px solid #666666; }
+
+.list td, .list th {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 8pt;
+  font-weight: normal;
+  padding: 4px 7px;
+  border-right: 1px solid #666666; }
+
+#serverlist td, #serverlist th {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 8pt;
+  font-weight: normal;
+  padding: 4px 7px;
+  border-right: 1px solid #666666; }
+
+.list th, #serverlist th {
+  padding: 4px 7px;
+  background: #97AFBF; }
+
+.list tr.even, #serverlist tr.even {
+  background-color: #BBD9EE; }
+
+.list tr:hover td, #serverlist tr:hover td, .list tr.even:hover td, #serverlist tr.even:hover td {
+  background-color: #FFFFFF; }
+
+#main .itemdetail li {
+  margin-bottom: 9px; }
+  #main .itemdetail li ul {
+    list-style-type: disc;
+    margin-left: 2em;
+    margin-top: 7px; }
+#main .itemdetail fieldset {
+  border: 1px solid gray; }
+#main .assetdetail fieldset {
+  border: 1px solid gray; }
+#main .itemdetail fieldset label {
+  display: inline;
+  width: 100%;
+  line-height: 12px;
+  font-weight: bold;
+  background-color: #a8a8a8;
+  padding: 2px; }
+
+#rackdiagram td {
+  font-weight: bold;
+  background-color: #777777;
+  color: #dddd99; }
+  #rackdiagram td.filled {
+    font-weight: bold;
+    background-color: #777777;
+    color: #dddd99; }
+  #rackdiagram td.empty {
+    font-weight: bold;
+    background-color: #333333;
+    color: #dddd99; }
+  #rackdiagram td.other, #rackdiagram td.openbsd39, #rackdiagram td.freebsd60, #rackdiagram td.freebsd61, #rackdiagram td.freebsd62 {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #555555;
+    color: #eeeeee; }
+  #rackdiagram td.none {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: black;
+    color: #dddd00; }
+  #rackdiagram td.brocade {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #444499;
+    color: #eeeeee; }
+  #rackdiagram td.solaris, #rackdiagram td.solaris8, #rackdiagram td.solaris25, #rackdiagram td.solaris26, #rackdiagram td.solaris7, #rackdiagram td.solaris9, #rackdiagram td.solaris10 {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #660066;
+    color: #dddd00; }
+  #rackdiagram td.windows, #rackdiagram td.windows2000, #rackdiagram td.windows2003_64, #rackdiagram td.windowsserver2003, #rackdiagram td.windowsxp {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #0000dd;
+    color: #cccccc; }
+  #rackdiagram td.redhat, #rackdiagram td.rhel4_64, #rackdiagram td.rhel5, #rackdiagram td.rhel52, #rackdiagram td.rhel52_64, #rackdiagram td.rhel53, #rackdiagram td.rhel53_64, #rackdiagram td.rhel5_64, #rackdiagram td.rhelas3, #rackdiagram td.rhelas4 {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #cc0000;
+    color: #000000; }
+  #rackdiagram td.OVS, #rackdiagram td.OVS215 {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #990000;
+    color: #ffffff; }
+  #rackdiagram td.fedora, #rackdiagram td.fedora11, #rackdiagram td.fedora7, #rackdiagram td.fedora8, #rackdiagram td.fedoracore2, #rackdiagram td.fedoracore3, #rackdiagram td.fedoracore4, #rackdiagram td.fedoracore5, #rackdiagram td.fedoracore6 {
+    font-size: 12px;
+    font-variant: small-caps;
+    background-color: #cccc00;
+    color: #000000; }
+  #rackdiagram td.centos, #rackdiagram td.centos51, #rackdiagram td.centos51_64, #rackdiagram td.centos52, #rackdiagram td.centos52_64, #rackdiagram td.centos53, #rackdiagram td.centos53_64 {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #00cc00;
+    color: #000000; }
+  #rackdiagram td.dataontap {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #336611;
+    color: #dddd00; }
+  #rackdiagram td.fastt {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #886644;
+    color: #dddd00; }
+  #rackdiagram td.screenos6 {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #8800ff;
+    color: #000000; }
+  #rackdiagram td.osx {
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: #FF00FF;
+    color: #000000; }
+
+.sortable tr:hover th {
+  cursor: pointer; }

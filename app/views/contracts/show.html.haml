@@ -1,0 +1,51 @@
+- title "Contract"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @contract.name
+      %li
+        %label Description
+        =h @contract.description
+      %li
+        %label Number
+        =h @contract.number
+      %li
+        %label Support Level
+        =h @contract.supportlevel
+      %li
+        %label Vendor
+        =link_to @contract.vendor.name, @contract.vendor if @contract.vendor
+      %li
+        %label Start
+        =h @contract.start
+      %li
+        %label End
+        =h @contract.end
+      %li
+        %label Quote
+        =link_to @contract.quote.name, @contract.quote if @contract.quote
+      %li
+        %label Purchase Order
+        =link_to @contract.purchase_order.name, @contract.purchase_order if @contract.purchase_order
+      %li
+        %label Notes
+        =h @contract.notes
+        
+  %fieldset#documents
+    %legend Attached Documents
+    %ul
+      - @contract.documents.each do |document|
+        %li
+          = image_tag document.url(:small)
+          = link_to 'Download Document', document.url
+
+%p
+  = link_to "Edit", edit_contract_path(@contract)
+  |
+  = link_to "Destroy", @contract, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", contracts_path

@@ -1,0 +1,13 @@
+- semantic_form_for @contact do |f|
+  = f.error_messages
+  - f.inputs :name => 'General Information', :id => 'general' do
+    = f.input :first_name, :label => 'First Name'
+    = f.input :middle_name, :label => 'Middle Name'
+    = f.input :last_name, :label => 'Last Name'
+    = f.input :title
+    = f.input :phone
+    = f.input :cell
+    = f.input :email
+    = f.input :notes
+    
+  = f.buttons

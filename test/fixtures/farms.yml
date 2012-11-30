@@ -1,0 +1,24 @@
+one:
+  id: 1
+  name: Farm 1
+  description: test farm number 1
+  state: active
+
+two:
+  id: 2
+  name: Farm 2
+  description: test farm number 2
+  state: inactive
+
+# == Schema Information
+#
+# Table name: farms
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(255)
+#  description :string(255)
+#  state       :string(255)     default("active")
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

@@ -1,0 +1,22 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @users, :entry_name => 'user'
+  = will_paginate @users
+
+%table{:id => "userlist", :class => "list"}
+  %tr
+    %th Email
+    %th First Name
+    %th Last Name
+    %th Type
+    %th API Enabled?
+    %th Roles
+    %th Status
+    %th Actions
+  = render :partial => "user", :collection => @users
+
+.wham_pagination
+  .page_info
+    = page_entries_info @users, :entry_name => 'user'
+  = will_paginate @users
+

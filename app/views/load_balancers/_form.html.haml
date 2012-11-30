@@ -1,0 +1,59 @@
+- semantic_form_for @load_balancer do |f|
+  = f.error_messages
+  - f.inputs :name => 'General Information', :id => 'general' do
+    = f.input :name
+    = f.input :hostname
+    = f.input :domain
+    = f.input :serial
+    = f.input :state, :label => 'Status', :as => :select, :collection => Asset.state_machine.states.collect{|s| [s.name.to_s.humanize, s.name.to_s]}
+    = f.input :type_helper, :label => 'Type', :as => :select, :collection => Asset::TYPE_OPTIONS
+
+  - f.inputs :name => 'Hardware', :id => 'hardware' do
+    = f.input :manufacturer_id, :as => :select, :collection => Manufacturer.all, :selected => (@load_balancer.manufacturer.nil? ? '' : @load_balancer.manufacturer.id), :include_blank => true
+    = f.input :hardware_model, :label => 'Model', :collection => (@load_balancer.manufacturer.nil?) ? [] : HardwareModel.find_all_by_manufacturer_id(@load_balancer.manufacturer.id), :include_blank => true
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'hardware_model_spinner'
+    :javascript
+      $(document).ready(function() {
+        $('#load_balancer_manufacturer_id').change(function() {
+          $('#hardware_model_spinner').show();
+          $('#load_balancer_hardware_model_id').html = "";
+          $('#load_balancer_hardware_model_id').load('/hardware_models.js?manufacturer_id=' + $('#load_balancer_manufacturer_id').val(), function() {
+            $('#hardware_model_spinner').hide();
+          });
+        })
+      });
+    
+  - f.inputs :name => 'Classification', :id => 'classification' do
+    = f.input :group
+    = f.input :farm
+    
+  - f.inputs :name => 'Physical Location', :id => 'location' do
+    = f.input :building_id, :collection => Building.all, :selected => (@load_balancer.equipment_rack.nil? ? '' : @load_balancer.equipment_rack.room.building.id), :include_blank => true
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'building_spinner'
+    
+    = f.input :room_id, :collection => (@load_balancer.equipment_rack.nil? ? [] : @load_balancer.equipment_rack.room.building.rooms), :selected => (@load_balancer.equipment_rack.nil? ? '' : @load_balancer.equipment_rack.room.id), :include_blank => true
+    :javascript
+      $(document).ready(function() {
+        $('#load_balancer_building_id').change(function() {
+          $('#building_spinner').show();
+          $('#load_balancer_room_id').html = "";
+          $('#load_balancer_room_id').load('/rooms.js?building_id=' + $('#load_balancer_building_id').val(), function() {
+            $('#building_spinner').hide();
+          });
+        })
+      });
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'room_spinner'
+      
+    = f.input :equipment_rack, :label => 'Rack', :collection => (@load_balancer.equipment_rack.nil? ? [] : @load_balancer.equipment_rack.room.equipment_racks)
+    :javascript
+      $(document).ready(function() {
+        $('#load_balancer_room_id').change(function() {
+          $('#room_spinner').show();
+          $('#load_balancer_equipment_rack_id').html = "";
+          $('#load_balancer_equipment_rack_id').load('/racks.js?room_id=' + $('#load_balancer_room_id').val(), function() {
+            $('#room_spinner').hide();
+          });
+        })
+      });
+    
+  = f.buttons

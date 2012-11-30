@@ -1,0 +1,17 @@
+- title "Domains"
+
+%table.list
+  %tr
+    %th Name
+    %th Customer
+    %th Actions
+  - for domain in @domains
+    %tr
+      %td= h domain.name
+      %td= link_to domain.customer.name, domain.customer if domain.customer
+      %td
+        = link_to 'Show', domain
+        = link_to 'Edit', edit_domain_path(domain)
+        = link_to 'Destroy', domain, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Domain", new_domain_path

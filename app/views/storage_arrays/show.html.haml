@@ -1,0 +1,53 @@
+- title "Storage Array"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @storage_array.name
+      %li
+        %label Hostname
+        =h @storage_array.hostname
+      %li
+        %label Domain
+        =h @storage_array.domain
+      %li
+        %label Description
+        =h @storage_array.description
+      %li
+        %label Serial
+        =h @storage_array.serial
+      %li
+        %label WB Asset ID
+        =h @storage_array.wb_asset_id
+
+  %fieldset#controllers
+    %legend Controllers
+    %ul
+      - @storage_array.storage_heads.each do |head|
+        %li= link_to head.name, head
+  
+  %fieldset#shelves
+    %legend Shelves
+    %ul
+      - @storage_array.storage_shelves.each do |shelf|
+        %li= link_to shelf.name, shelf
+
+  %fieldset#classification
+    %legend Classification
+    %ul
+      %li
+        %label Group
+        = link_to @storage_array.group.name, @storage_array.group unless @storage_array.group.nil?
+      %li
+        %label Farm
+        = link_to @storage_array.farm.name, @storage_array.farm unless @storage_array.farm.nil?
+
+%p
+  = link_to "Edit", edit_storage_array_path(@storage_array)
+  |
+  = link_to "Destroy", @storage_array, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", storage_arrays_path

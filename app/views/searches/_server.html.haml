@@ -1,0 +1,86 @@
+%tr{:id => dom_id(server, 'row'), :class => cycle("odd", "even")}
+  %td
+    / = server.try(:excerpts).try(:fqdn)
+    = link_to server.fqdn, server
+  %td
+    / = server.try(:excerpts).try(:serial)
+    = server.serial
+    &nbsp;
+  %td
+    = link_to server.hardware_model.name, server.hardware_model if server.hardware_model
+    &nbsp;
+  %td
+    = server.interfaces.collect{|int| "#{link_to int.name, int}:#{link_to int.ip.ip if int.ip}<br>"}
+  %td
+    = link_to server.operatingsystem.name, server.operatingsystem if server.operatingsystem
+    &nbsp;
+  %td
+    = link_to server.group.name, server.group if server.group
+    &nbsp;
+  %td
+    = link_to server.farm.name, server.farm if server.farm
+    &nbsp;
+  %td
+    - unless server.services.empty?
+      %ul
+      - server.services.each do |service|
+        %li
+          = "#{link_to service.cluster.name, service.cluster, :id => dom_id(service.cluster, server.id)}:#{link_to service.function.name, service.function, :id => dom_id(service.function, server.id)}"
+          :javascript
+            $("##{dom_id(service.cluster, server.id)}").qtip({
+              content: 'Other #{service.cluster.name} cluster members:<br>#{service.cluster.assets.uniq.each.map{|a| link_to(a.name, a)}.join(', ')}',
+              show: {
+                solo: true
+              },
+              hide: {
+                delay: 1000,
+                fixed: true
+              },
+              position: {
+                corner: {
+                  target: 'topMiddle',
+                  tooltip: 'bottomMiddle'
+                }
+              },
+              style: {
+                tip: 'bottomMiddle',
+                name: 'blue'
+              }
+            });
+          - if service.function.assets.size < 20
+            :javascript
+              $("##{dom_id(service.function, server.id)}").qtip({
+                content: 'Other devices with the #{service.function.name} function:<br>#{service.function.assets.uniq.each.map{|a| link_to(a.name, a)}.join(', ')}',
+                show: {
+                  solo: true
+                },
+                hide: {
+                  delay: 1000,
+                  fixed: true
+                },
+                position: {
+                  corner: {
+                    target: 'topMiddle',
+                    tooltip: 'bottomMiddle'
+                  }
+                },
+                style: {
+                  tip: 'bottomMiddle',
+                  name: 'blue'
+                }
+              });
+          
+  %td= h server.state.humanize if server.state
+  %td.actions
+    = link_to icon('magnifier', 'Show'), server, :class => "view" if can? :read, server
+    = link_to icon('pencil', 'Edit'), (server.type == 'VirtualServer') ? edit_virtual_server_path(server) : edit_server_path(server), :class => "edit" if can? :edit, server
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => server_path(server), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(server, 'spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(server, 'row')), |
+        visual_effect(:fade, dom_id(server, 'row')), |
+        "$('##{dom_id(server, 'spinner')}').hide();" ] |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(server, 'spinner')

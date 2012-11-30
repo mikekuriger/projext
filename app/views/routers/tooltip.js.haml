@@ -1,0 +1,23 @@
+%ul.tooltip
+  %li
+    = image_tag @router.hardware_model.picture.url(:small) if @router.hardware_model
+  %li
+    %label Name
+    = @router.name
+  %li
+    %label Manufacturer
+    = link_to @router.manufacturer.name, @router.manufacturer if @router.manufacturer
+  %li
+    %label Model
+    = link_to @router.hardware_model.name, @router.hardware_model if @router.hardware_model
+  %li
+    %label Group
+    = link_to @router.group.name, @router.group if @router.group
+  %li
+    %label Farm
+    = link_to @router.farm.name, @router.farm if @router.farm
+  %li
+    %label Actions
+    = link_to icon('magnifier', 'Show'), @router, :class => "view"
+    |
+    = link_to icon('pencil', 'Edit'), edit_router_path(@router), :class => "edit"

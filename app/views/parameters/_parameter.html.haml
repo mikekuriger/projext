@@ -1,0 +1,27 @@
+%tr{ :id => dom_id(parameter, 'row'), :class => [ cycle("odd", "even"), parameter.state ].join(' ') }
+  %td= link_to parameter.name, parameter
+  %td
+    =h parameter.description
+    &nbsp;
+  %td{:id => dom_id(parameter, 'state')}
+    = h parameter.state
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(parameter, 'state_spinner')
+  %td.action
+    = link_to_remote icon('arrow_switch', 'Activate/Deactivate'), |
+      :url => (parameter.active?) ? deactivate_parameter_path(parameter) : activate_parameter_path(parameter), |
+      :method => "post", |
+      :loading => "$('##{dom_id(parameter, 'state_spinner')}').show();", |
+      :complete => [visual_effect(:highlight, dom_id(parameter, 'state'))] if can? :edit, parameter |
+    = link_to icon('magnifier', 'Show'), parameter, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_parameter_path(parameter), :class => "edit"
+    = link_to_remote icon('delete', 'Delete'), |
+      :class => "delete", |
+      :confirm => 'Are you sure?', |
+      :method => :delete, |
+      :loading => "$('##{dom_id(parameter, 'state_spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(parameter, 'row')), |
+        visual_effect(:fade, dom_id(parameter, 'row')) |
+      ] |
+      
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(parameter, 'state_spinner')

@@ -1,0 +1,33 @@
+- title "Network"
+
+%p
+  %strong Farm:
+  =link_to @network.farm.name, @network.farm if @network.farm
+%p
+  %strong Network:
+  =h @network.network
+%p
+  %strong Subnetbits:
+  =h @network.subnetbits
+%p
+  %strong Netmask:
+  =h @network.netmask
+%p
+  %strong Gateway:
+  =h @network.gateway
+%p
+  %strong VLAN:
+  =h @network.vlan
+%p
+  %strong Description:
+  =h @network.description
+%p
+  %strong Notes:
+  =h @network.notes
+
+%p
+  = link_to "Edit", edit_network_path(@network)
+  |
+  = link_to "Destroy", @network, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", networks_path

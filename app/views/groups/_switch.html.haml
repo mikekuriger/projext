@@ -1,0 +1,21 @@
+%tr{:id => dom_id(switch, 'row'), :class => cycle("odd", "even")}
+  %td= h switch.fqdn
+  %td= h switch.serial
+  %td= h "#{switch.hardware_model.manufacturer.name} #{switch.hardware_model.name}" unless switch.hardware_model.nil?
+  %td= link_to switch.group.name, switch.group if switch.group
+  %td
+    - unless switch.equipment_rack.nil?
+      = link_to switch.equipment_rack.room.building.name, switch.equipment_rack.room.building
+      , 
+      = link_to switch.equipment_rack.room.name, switch.equipment_rack.room
+      %br
+      = link_to switch.equipment_rack.name, switch.equipment_rack
+    - if switch.rack_elevation
+      = h ", Unit #{switch.rack_elevation}"
+      - unless switch.hardware_model.nil?
+        = (switch.hardware_model.rackunits > 0) ? " - #{switch.rack_elevation + switch.hardware_model.rackunits}" : ""
+  %td= h switch.try(:state).try(:capitalize)
+  %td.action
+    = link_to icon('magnifier', 'Show'), switch, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_switch_path(switch), :class => "edit" if can? :edit, switch
+    = link_to_remote icon('delete', 'Delete'), :url => switch_path(switch), :confirm => "Are you sure?", :method => "delete", :complete => [ visual_effect(:highlight, dom_id(switch, 'row')), visual_effect(:fade, dom_id(switch, 'row'))] if can? :delete, switch

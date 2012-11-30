@@ -1,0 +1,73 @@
+- title "Switch"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        =image_tag @switch.hardware_model.picture.url(:small) if (@switch.hardware_model && @switch.hardware_model.picture?)
+      %li
+        %label Name
+        =h @switch.name
+      %li
+        %label Hostname
+        =h @switch.hostname
+      %li
+        %label Domain
+        =h @switch.domain
+      %li
+        %label Serial
+        =h @switch.serial
+      %li
+        %label OOB
+        =h @switch.oob
+      %li
+        %label Hardware Model
+        =link_to @switch.hardware_model.name, @switch.hardware_model if @switch.hardware_model
+      %li
+        %label Onboard Interfaces
+        %ul
+          - @switch.interfaces.each do |interface|
+            %li
+              = link_to((interface.name.empty? ? 'No Name' : interface.name), interface)
+              = "(#{interface.speed}, #{interface.connector_type})"
+              - if (interface.connected_interface && interface.connected_interface.asset)
+                , connected to 
+                =link_to interface.connected_interface.asset.name, interface.connected_interface.asset 
+                = ':'
+                =link_to interface.connected_interface.name, interface.connected_interface
+              
+              
+      %li
+        %label Modules
+        %ul
+          - @switch.switch_modules.each do |switch_module|
+            %li= link_to switch_module.name, switch_module
+            - if switch_module.interfaces
+              %ul
+                - switch_module.interfaces.each do |interface|
+                  %li
+                    = link_to((interface.name.empty? ? 'No Name' : interface.name), interface)
+                    = "(#{interface.speed}, #{interface.connector_type})"
+                  - if (interface.connected_interface && interface.connected_interface.asset)
+                    , connected to 
+                    =link_to interface.connected_interface.asset.name, interface.connected_interface.asset 
+                    = ':'
+                    =link_to interface.connected_interface.name, interface.connected_interface
+
+      %li
+        %label Group
+        =link_to @switch.group.name, @switch.group if @switch.group
+      %li
+        %label Farm
+        =link_to @switch.farm.name, @switch.farm if @switch.farm
+      %li
+        %label Location
+        = h @switch.location
+
+%p
+  = link_to "Edit", edit_switch_path(@switch)
+  |
+  = link_to "Destroy", @switch, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", switches_path

@@ -1,0 +1,36 @@
+- title "Vendor"
+
+%p
+  %strong Name:
+  =h @vendor.name
+%p
+  %strong Address1:
+  =h @vendor.address1
+%p
+  %strong Address2:
+  =h @vendor.address2
+%p
+  %strong City:
+  =h @vendor.city
+%p
+  %strong State:
+  =h @vendor.state
+%p
+  %strong Zip:
+  =h @vendor.zip
+%p
+  %strong Country:
+  =h @vendor.country
+%p
+  %strong Url:
+  =h @vendor.url
+%p
+  %strong Notes:
+  =h @vendor.notes
+
+%p
+  = link_to "Edit", edit_vendor_path(@vendor)
+  |
+  = link_to "Destroy", @vendor, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", vendors_path

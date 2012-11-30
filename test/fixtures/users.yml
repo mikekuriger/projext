@@ -1,0 +1,34 @@
+# admin:
+#   id: 1
+#   email: 'e@wb.com'
+#   encrypted_password: '807a33a4c8aec84d9b79de3f9e9c6cbe0505fa22'
+#   salt: '975e4108b1403fb370a248df1f22beae5987f3f1'
+#   email_confirmed: 1
+#   first_name: 'Eric'
+#   last_name: 'Dennis'
+# 
+# guest:
+#   id: 2
+#   email: 'guest@wb.com'
+#   encrypted_password: '807a33a4c8aec84d9b79de3f9e9c6cbe0505fa22'
+#   salt: '975e4108b1403fb370a248df1f22beae5987f3f1'
+#   email_confirmed: 1
+#   first_name: 'Guest'
+#   last_name: 'User'
+# == Schema Information
+#
+# Table name: users
+#
+#  id                 :integer(4)      not null, primary key
+#  created_at         :datetime
+#  updated_at         :datetime
+#  email              :string(255)
+#  encrypted_password :string(128)
+#  salt               :string(128)
+#  confirmation_token :string(128)
+#  remember_token     :string(128)
+#  email_confirmed    :boolean(1)      default(FALSE), not null
+#  first_name         :string(255)
+#  last_name          :string(255)
+#
+

@@ -1,0 +1,21 @@
+%tr{:id => dom_id(router, 'row'), :class => cycle("odd", "even")}
+  %td= h router.fqdn
+  %td= h router.serial
+  %td= h "#{router.hardware_model.manufacturer.name} #{router.hardware_model.name}" unless router.hardware_model.nil?
+  %td= link_to router.group.name, router.group if router.group
+  %td
+    - unless router.equipment_rack.nil?
+      = link_to router.equipment_rack.room.building.name, router.equipment_rack.room.building
+      , 
+      = link_to router.equipment_rack.room.name, router.equipment_rack.room
+      %br
+      = link_to router.equipment_rack.name, router.equipment_rack
+    - if router.rack_elevation
+      = h ", Unit #{router.rack_elevation}"
+      - unless router.hardware_model.nil?
+        = (router.hardware_model.rackunits > 0) ? " - #{router.rack_elevation + router.hardware_model.rackunits}" : ""
+  %td= h router.try(:state).try(:capitalize)
+  %td.action
+    = link_to icon('magnifier', 'Show'), router, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_router_path(router), :class => "edit" if can? :edit, router
+    = link_to_remote icon('delete', 'Delete'), :url => router_path(router), :confirm => "Are you sure?", :method => "delete", :complete => [ visual_effect(:highlight, dom_id(router, 'row')), visual_effect(:fade, dom_id(router, 'row'))] if can? :delete, router

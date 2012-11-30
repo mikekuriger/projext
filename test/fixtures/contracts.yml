@@ -1,0 +1,60 @@
+one:
+  name: MyString
+  description: MyString
+  number: MyString
+  supportlevel: MyString
+  vendor_id: 1
+  start: 2010-01-11
+  end: 2010-01-11
+  quote_id: 1
+  purchaseorder_id: 1
+  notes: MyText
+
+two:
+  name: MyString
+  description: MyString
+  number: MyString
+  supportlevel: MyString
+  vendor_id: 1
+  start: 2010-01-11
+  end: 2010-01-11
+  quote_id: 2
+  purchaseorder_id: 2
+  notes: MyText
+ 
+# two:
+#   name: MyString
+#   description: MyString
+#   number: MyString
+#   supportlevel: MyString
+#   vendor_id: 1
+#   start: 2010-01-11
+#   end: 2010-01-11
+#   quote_id: 1
+#   purchaseorder_id: 1
+#   notes: MyText
+
+# == Schema Information
+#
+# Table name: contracts
+#
+#  id                      :integer(4)      not null, primary key
+#  name                    :string(255)
+#  type                    :string(255)     default("Contract")
+#  description             :string(255)
+#  number                  :string(255)
+#  supportlevel            :string(255)
+#  vendor_id               :integer(4)
+#  start                   :date
+#  end                     :date
+#  quote_id                :integer(4)
+#  purchaseorder_id        :integer(4)
+#  notes                   :text
+#  created_at              :datetime
+#  updated_at              :datetime
+#  attachment_file_name    :string(255)
+#  attachment_content_type :string(255)
+#  attachment_file_size    :integer(4)
+#  attachment_updated_at   :datetime
+#
+

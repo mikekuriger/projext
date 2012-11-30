@@ -1,0 +1,11 @@
+.fields
+  - f.inputs do
+    = link_to_remove_fields "Remove Module", f
+    = f.input :name
+    = f.input :serial
+    %br
+    %div
+      - f.semantic_fields_for :interfaces do |builder|
+        = render 'interface_fields', :f => builder
+      %div= link_to_add_fields "Add Interface to Module", f, :interfaces
+    %br

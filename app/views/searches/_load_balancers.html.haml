@@ -1,0 +1,12 @@
+%h3= "Matched #{pluralize(@load_balancers.total_entries, "Load Balancer")}, displaying #{@load_balancers.size}"
+
+%table.list
+  %tr
+    %th Name
+    %th Hostname
+    %th Serial
+    -# %th Group
+    / %th Dump
+    -# %th Farm
+    %th Actions
+  = render :partial => "load_balancer", :collection => @load_balancers

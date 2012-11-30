@@ -1,0 +1,5 @@
+%li{:id => dom_id(comment, 'li')}
+  = "On #{comment.updated_at.to_s(:long)}, "
+  = (comment.user.nil?) ? "someone" : comment.user.name
+  = "said: "
+  = comment.comment

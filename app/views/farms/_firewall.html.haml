@@ -1,0 +1,21 @@
+%tr{:id => dom_id(firewall, 'row'), :class => cycle("odd", "even")}
+  %td= h firewall.fqdn
+  %td= h firewall.serial
+  %td= h "#{firewall.hardware_model.manufacturer.name} #{firewall.hardware_model.name}" unless firewall.hardware_model.nil?
+  %td= link_to firewall.group.name, firewall.group if firewall.group
+  %td
+    - unless firewall.equipment_rack.nil?
+      = link_to firewall.equipment_rack.room.building.name, firewall.equipment_rack.room.building
+      , 
+      = link_to firewall.equipment_rack.room.name, firewall.equipment_rack.room
+      %br
+      = link_to firewall.equipment_rack.name, firewall.equipment_rack
+    - if firewall.rack_elevation
+      = h ", Unit #{firewall.rack_elevation}"
+      - unless firewall.hardware_model.nil?
+        = (firewall.hardware_model.rackunits > 0) ? " - #{firewall.rack_elevation + firewall.hardware_model.rackunits}" : ""
+  %td= h firewall.try(:state).try(:capitalize)
+  %td.action
+    = link_to icon('magnifier', 'Show'), firewall, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_firewall_path(firewall), :class => "edit" if can? :edit, firewall
+    = link_to_remote icon('delete', 'Delete'), :url => firewall_path(firewall), :confirm => "Are you sure?", :method => "delete", :complete => [ visual_effect(:highlight, dom_id(firewall, 'row')), visual_effect(:fade, dom_id(firewall, 'row'))] if can? :delete, firewall

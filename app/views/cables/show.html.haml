@@ -1,0 +1,23 @@
+- title "Cable"
+
+.itemdetail
+  %fieldset
+    %legend General Information
+    %ul
+      %li
+        %label Cable
+        = "#{link_to @cable.interface.asset.name, @cable.interface.asset}:#{link_to @cable.interface.name, @cable.interface}"
+        = "<--"
+        = @cable.medium.name if @cable.medium
+        = "-->"
+        = "#{link_to @cable.interface_target.name, @cable.interface_target}:#{link_to @cable.interface_target.asset.name, @cable.interface_target.asset}"
+      %li
+        %label Notes
+        =h @cable.notes
+
+%p
+  = link_to "Edit", edit_cable_path(@cable)
+  |
+  = link_to "Destroy", @cable, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", cables_path

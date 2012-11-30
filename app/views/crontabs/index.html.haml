@@ -1,0 +1,13 @@
+- title "Crontabs"
+
+- javascript 'jquery.qtip.min'
+
+= (session[:show_inactive]) ? link_to ("Hide Inactive", crontabs_url(:hide_inactive => 'Y')) : link_to ("Show Inactive", crontabs_url(:show_inactive => 'Y'))
+
+#crontabs
+  = render 'crontabs'
+
+= render :partial => "addcrontab" if can? :create, Crontab
+
+= render :partial => 'shared/export', :object => @crontabs
+

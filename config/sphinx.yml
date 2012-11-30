@@ -1,0 +1,19 @@
+development:
+  bin_path: /usr/local/bin
+  morphology: stem_en
+  enable_star: true
+  port: 9312
+test:
+  morphology: stem_en
+  enable_star: true
+  port: 9312
+staging:
+  bin_path: /usr/bin
+  morphology: stem_en
+  enable_star: true
+  port: 9313
+production:
+  bin_path: /usr/bin
+  morphology: stem_en
+  enable_star: true
+  port: 9312

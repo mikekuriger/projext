@@ -1,0 +1,8 @@
+- title "Functions"
+
+#functions
+  = render 'functions'
+
+= render :partial => "addfunction" if can? :create, Function
+
+= render :partial => 'shared/export', :object => @functions

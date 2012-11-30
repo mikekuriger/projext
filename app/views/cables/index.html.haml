@@ -1,0 +1,8 @@
+- title "Cables"
+
+#cables
+  = render 'cables'
+
+= render :partial => "addcable" if can? :create, Cable
+
+%p= link_to "New Cable", new_cable_path

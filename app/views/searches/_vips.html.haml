@@ -1,0 +1,10 @@
+%h3= "Matched #{pluralize(@vips.total_entries, "VIP")}, displaying #{@vips.size}"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th IP
+    %th Load Balancer
+    %th Actions
+  = render :partial => "vip", :collection => @vips

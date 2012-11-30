@@ -1,0 +1,31 @@
+%tr{:id => dom_id(server, 'row'), :class => cycle("odd", "even")}
+  %td= h server.fqdn
+  %td= h server.serial
+  %td= h "#{server.hardware_model.manufacturer.name} #{server.hardware_model.name}" unless server.hardware_model.nil?
+  %td= link_to server.operatingsystem.name, server.operatingsystem if server.operatingsystem
+  %td= link_to server.farm.name, server.farm if server.farm
+  %td
+    - unless server.equipment_rack.nil?
+      = link_to server.equipment_rack.room.building.name, server.equipment_rack.room.building
+      , 
+      = link_to server.equipment_rack.room.name, server.equipment_rack.room
+      %br
+      = link_to server.equipment_rack.name, server.equipment_rack
+    - if server.rack_elevation
+      = h ", Unit #{server.rack_elevation}"
+      - unless server.hardware_model.nil?
+        = (server.hardware_model.rackunits > 0) ? " - #{server.rack_elevation + server.hardware_model.rackunits}" : ""
+  %td= server.services.collect{|service| "#{link_to service.cluster.name, service.cluster if service.cluster}:#{link_to service.function.name, service.function if service.function}" if service}.join('<br>')
+  %td= h server.try(:state).try(:capitalize)
+  / %td= h server.last_seen
+  %td.action
+    = link_to icon('magnifier', 'Show'), server, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_server_path(server), :class => "edit" if can? :edit, server
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => server_path(server), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(server, 'row')), |
+        visual_effect(:fade, dom_id(server, 'row')) |
+      ] if can? :delete, server |

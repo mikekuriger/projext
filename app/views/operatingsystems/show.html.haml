@@ -1,0 +1,27 @@
+- title "Operatingsystem"
+
+%p
+  %strong Name:
+  =h @operatingsystem.name
+%p
+  %strong Description:
+  =h @operatingsystem.description
+%p
+  %strong Manufacturer:
+  =h @operatingsystem.try(:manufacturer).try(:name)
+%p
+  %strong OS Type:
+  =h @operatingsystem.ostype
+%p
+  %strong Version:
+  =h @operatingsystem.version
+%p
+  %strong Architecture:
+  =h @operatingsystem.architecture
+
+%p
+  = link_to "Edit", edit_operatingsystem_path(@operatingsystem)
+  |
+  = link_to "Destroy", @operatingsystem, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", operatingsystems_path

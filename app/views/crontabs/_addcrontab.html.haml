@@ -1,0 +1,18 @@
+#addcrontab
+  %h3 Add Crontab
+  - crontab = Crontab.new
+  #addcrontabform
+    - semantic_remote_form_for crontab, |
+      :loading => "$('#add_spinner').show();", |
+      :loaded => "$('#add_spinner').hide();", |
+      :update => 'crontablist', |
+      :position => 'bottom', |
+      :failure => "alert('Unable to create, status ' + request.status)", |
+      :complete => visual_effect(:highlight, dom_id(crontab, 'row')) do |f| |
+      
+      - f.inputs do
+        = f.input :name
+        = f.input :description
+        = f.input :cluster, :required => true
+        = f.commit_button
+        = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'add_spinner'

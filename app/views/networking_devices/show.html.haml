@@ -1,0 +1,33 @@
+- title "Networking Device"
+
+%p
+  %strong Name:
+  =h @networking_device.name
+%p
+  %strong Hostname:
+  =h @networking_device.hostname
+%p
+  %strong Domain:
+  =h @networking_device.domain
+%p
+  %strong Serial:
+  =h @networking_device.serial
+%p
+  %strong Hardware Model:
+  =h @networking_device.hardware_model_id
+%p
+  %strong Group:
+  =h @networking_device.group_id
+%p
+  %strong Farm:
+  =h @networking_device.farm_id
+%p
+  %strong Equipment Rack:
+  =h @networking_device.equipment_rack_id
+
+%p
+  = link_to "Edit", edit_networking_device_path(@networking_device)
+  |
+  = link_to "Destroy", @networking_device, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", networking_devices_path

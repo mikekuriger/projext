@@ -1,0 +1,281 @@
+=Introduction
+
+ IPAdmin arose from a work-related project to create a Rails IP 
+ Administration package. I needed a back-end module that could easily
+ handle such advanced tasks as automating the subnetting/supernetting
+ of IP space, performing calculations on IP CIDR blocks, and other
+ various items. At that time there were no modules that could
+ do any of the things that I needed, so I set out to create my own. 
+ Since it proved to be fairly useful to me, I decided to share the
+ code with the Ruby community. 
+ 
+ I apologize in advance for the short release cycles, but I am making
+ changes on a constant basis since this is a very active project.
+ I tend to post new releases to rubyforge since it is a very easy
+ way for me to distribute my changes to my co-workers.
+ 
+ I have added things that I find immediately useful for me. I am
+ open to suggestions if there is something that I could add to make
+ your life easier. Comments are also welcome (positive ones in particular).  
+ 
+ Dustin Spinhirne
+
+
+=CIDR - Classless Inter-Domain Routing
+
+ A class & series of methods for creating and manipulating CIDR network
+ addresses. Both IPv4 and IPv6 are supported.
+ 
+ This class accepts a CIDR address in (x.x.x.x/yy or xxxx::/yy) format for
+ IPv4 and IPv6, or (x.x.x.x/y.y.y.y) for IPv4. An optional tag hash may be 
+ provided with each CIDR as a way of adding custom labels to the object.
+ 
+ Upon initialization, the IP version is auto-detected and assigned to the 
+ object. The original IP/Netmask passed within the CIDR is stored and then 
+ used to determine the confines of the CIDR block. Various properties of the
+ CIDR block are accessible via several different methods. There are also
+ methods for modifying the CIDR or creating new derivative CIDR's.
+ 
+ An example CIDR object is as follows:
+    IPAdmin::CIDR.new('192.168.1.20/24')
+ 
+ This would create a CIDR object (192.168.1.0/24) with the following properties:
+    version = 4
+    base network = 192.168.1.0
+    ip address = 192.168.1.20
+    netmask = /24 (255.255.255.0)
+    size = 256 IP addresses
+    broadcast = 192.168.1.255
+    
+ You can see how the CIDR object is based around the entire IP space
+ defined by the provided IP/Netmask pair, and not necessarily the individual
+ IP address itself.
+
+
+
+=EUI - Extended Unique Identifier
+ 
+ A class & series of methods for creating and manipulating Extended Unique Identifier
+ (EUI) addresses. Two types of address formats are supported EUI-48 and EUI-64. The 
+ most common use for this class will be to manipulate MAC addresses (which are essentially
+ a type of EUI-48 address). 
+ 
+ EUI addresses are separated into two parts, the 
+ Organizationally Unique Identifier (OUI) and the Extended Identifier (EI). The OUI
+ is assigned by the IEEE and is used to identify a particular hardware manufacturer.
+ The EI is assigned by the hardware manufacturer as a per device unique address.
+ 
+ Probably the most useful feature of this class, and thus the reason it was created,
+ is to help automate certain address assignments within IP. For example, IPv6
+ Link Local addresses use MAC addresses for IP auto-assignment and multicast MAC addresses
+ are determined based on the multicast IP address.
+
+
+
+=Tree
+
+ A class & series of methods for creating and manipulating IP-based
+ heirarchical trees. Both IPv4 and IPv6 are supported.
+ 
+ A sample tree would look like:
+ 192.168.1.0/24
+   192.168.1.0/26
+      192.168.1.0/27
+         192.168.1.0/28
+         192.168.1.16/29
+            192.168.1.16/30
+         192.168.1.24/30
+            192.168.1.25/32
+         192.168.1.28/30
+      192.168.1.32/27
+   192.168.1.64/26
+      192.168.1.64/27
+   192.168.1.128/26
+   192.168.1.192/26
+ 
+ 
+
+=Example Script
+
+ #!/usr/bin/ruby
+
+ # A script to parse static routes from a Cisco router.
+ # Performs the following tasks:
+ #  - organizes statics by directly connected next-hop interface
+ #  - corrects recursive static routes
+ #  - reports statics with no directly connected next-hop
+ #  - reports duplicate static routes
+ #  - reports static routes that overlap directly connected interfaces
+ #
+ # Change the variable 'infile' to that of the name of the router configuration
+ # file that should be parsed.
+
+ require 'rubygems'
+ require_gem 'ipadmin'
+
+ # change this variable to that of the router config file
+ infile = 'router_config.txt'
+
+
+ ip_interface_count = 0
+ static_route_count = 0
+ connected_routes = []
+ static_routes = []
+ statics = {}
+ grouped_routes = {}
+ duplicates = []
+ recursives = []
+ corrected_statics = []
+ overlapping_statics = []
+
+
+ # sort through router config. put connected ip interfaces into 'connected_routes'
+ # and static routes into 'statics'. Set aside duplicate static routes.
+ File.open(infile, 'r') do |file|
+     while line = file.gets
+         if (line =~/^interface .+/)
+             interface = line.chomp
+         elsif (line =~ /^\s*ip address/) # connected interface
+             ip_interface_count += 1
+             addr = line.split('ip address ').join # ['x.x.x.x y.y.y.y']
+             cidr = IPAdmin::CIDR.new(:CIDR => addr, :Tag => {:interface => interface})
+             connected_routes.push(cidr)
+         elsif (line =~/^ip route/) # static route
+             static_route_count += 1
+             elements = line.split(' ') # ['ip','route','x.x.x.x','y.y.y.y','x.x.x.x',]
+                ip = elements[2]
+                netmask = elements[3]
+                nexthop = elements[4]
+
+             # keep all but loopbacks, nulls, or defaults
+             if ( (nexthop !~ /Loopback/) && (nexthop !~ /Null/) && (ip != '0.0.0.0') )
+                 nexthop_cidr = IPAdmin::CIDR.new(nexthop)
+                 cidr = IPAdmin::CIDR.new(:CIDR => "#{ip} #{netmask}",
+                                          :Tag => {:route => line, :nexthop => nexthop_cidr})
+
+                 if (!statics.has_key?(cidr.desc))
+                     statics[cidr.desc] = cidr
+                 else
+                     msg = '! overlaps with - ' + statics[cidr.desc].tag[:route] + line + "!\n"
+                     duplicates.push(msg)
+                 end
+             end
+         end
+     end
+ end
+
+
+ # look for statics that overlap with a connected interface, and
+ # group static routes with their next-hop interface.
+ statics.each_key do  |desc|
+     cidr = statics[desc]
+     nexthop = cidr.tag[:nexthop]
+     route = cidr.tag[:route]
+
+     overlaps_with = nil
+     nexthop_int = nil
+     connected_routes.each do |interface|
+         if (interface.contains?(cidr)) # overlapping static
+             overlaps_with = interface
+             break
+         elsif (interface.contains?(nexthop)) # next-hop directly connected
+             nexthop_int = interface
+             break
+         end
+     end
+
+     if (nexthop_int)
+         key = "#{nexthop_int.tag[:interface]} -> #{nexthop_int.desc}"
+         if (grouped_routes.has_key?(key))
+             grouped_routes[key].push(route)
+         else
+             grouped_routes[key] = [route]
+         end
+         static_routes.push(cidr)
+     elsif (overlaps_with)
+         overlap = "! overlaps with: #{overlaps_with.tag[:interface]} -> #{overlaps_with.desc}"
+         overlap << "\n#{route}!\n"
+         overlapping_statics.push(overlap)
+     else
+         recursives.push(cidr)
+     end
+ end
+
+
+ # process recursive routes. update next-hop so that it points
+ # to next hop of a directly connected ip. remove any that do not point to a
+ # directly connected ip. We must continually cycle through the list, as the
+ # 'static_routes' tree is constantly updated. We do this until our list of
+ # recursive static routes stops getting any shorter
+ recursives_count = 0
+ until (recursives_count == recursives.length)
+     recursives_count = recursives.length
+     recursives.each do  |cidr|
+         nexthop = cidr.tag[:nexthop]
+         route = cidr.tag[:route]
+
+         found = nil
+         static_routes.each do |static|
+             if (static.contains?(nexthop))
+                 found = static
+                 break
+             end
+         end
+
+         if (found)
+             updated = 'no ' + route
+             updated << "ip route #{cidr.network} #{cidr.netmask_ext} #{found.tag[:nexthop].ip}\n"
+             updated << "!\n"
+             corrected_statics.push(updated)
+             static_routes.push(cidr)
+             recursives.delete(cidr)
+         end
+     end
+ end
+
+
+ # print results.
+ puts "--- STATISTICS ---"
+ puts "#{ip_interface_count} Connected IP Interfaces\n#{static_route_count} IP Static Routes\n"
+
+ print "\n\n"
+
+ puts "--- OVERLAPPING STATIC ROUTES ---"
+ overlapping_statics.each do |overlap|
+     puts overlap
+ end
+
+ print "\n\n"
+
+ puts "--- DUPLICATE STATIC ROUTES ---"
+ duplicates.each do |route|
+     puts route
+ end
+
+ print "\n\n"
+
+ puts "--- STATIC ROUTES WITH UPDATED NEXT-HOP ---"
+ corrected_statics.each do |route|
+     puts route
+ end
+
+ print "\n\n"
+
+ puts "--- STATIC ROUTES WITH UNKNOWN NEXT-HOP ---"
+ recursives.each do |cidr|
+     puts cidr.tag[:route]
+ end
+
+ print "\n\n"
+
+ puts "--- STATIC ROUTES GROUPED BY NEXT-HOP INTERFACE ---"
+ grouped_routes.each_key do |interface|
+     routes = grouped_routes[interface]
+     puts interface
+     routes.each do |route|
+         puts route
+     end
+     print "\n"
+ end
+
+ __END__

@@ -1,0 +1,51 @@
+- title "Customer"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @customer.name
+      %li
+        %label Address1
+        =h @customer.address1
+      %li
+        %label Address2
+        =h @customer.address2
+      %li
+        %label City
+        =h @customer.city
+      %li
+        %label State
+        =h @customer.state
+      %li
+        %label Zip
+        =h @customer.zip
+      %li
+        %label URL
+        =link_to @customer.url if @customer.url
+      %li
+        %label Notes
+        =h @customer.notes
+
+  %fieldset#contacts
+    %legend Contacts
+    - unless @customer.contacts.empty?
+      %ul
+        - @customer.contacts.each do |contact|
+          %li= link_to contact.name, contact
+
+  %fieldset#projects
+    %legend Projects
+    - unless @customer.projects.empty?
+      %ul
+        - @customer.projects.each do |project|
+          %li= link_to project.name, project
+
+%p
+  = link_to "Edit", edit_customer_path(@customer)
+  |
+  = link_to "Destroy", @customer, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", customers_path

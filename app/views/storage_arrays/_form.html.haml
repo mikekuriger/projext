@@ -1,0 +1,44 @@
+- semantic_form_for @storage_array do |f|
+  = f.error_messages
+  - f.inputs :name => 'General Information' do
+    = f.input :name
+    = f.input :description
+    = f.input :serial
+
+    = f.input :state, :label => 'Status', :as => :select, :collection => Asset.state_machine.states.collect{|s| [s.name.to_s.humanize, s.name.to_s]}
+    = f.input :type_helper, :label => 'Type', :as => :select, :collection => Asset::TYPE_OPTIONS
+
+    = f.input :wb_asset_id, :label => 'WB Asset ID'
+
+  - f.inputs :name => 'Hardware', :id => 'hardware' do
+    = f.input :manufacturer_id, :as => :select, :collection => Manufacturer.all, :selected => (@storage_array.manufacturer.nil? ? '' : @storage_array.manufacturer.id), :include_blank => true
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'hardware_model_spinner'
+    = f.input :hardware_model, :label => 'Model', :collection => (@storage_array.manufacturer.nil?) ? [] : HardwareModel.find_all_by_manufacturer_id(@storage_array.manufacturer.id), :include_blank => true
+    :javascript
+      $(document).ready(function() {
+        $('#storage_array_manufacturer_id').change(function() {
+          $('#hardware_model_spinner').show();
+          $('#storage_array_hardware_model_id').html = "";
+          $('#storage_array_hardware_model_id').load('/hardware_models.js?manufacturer_id=' + $('#storage_array_manufacturer_id').val(), function() {
+            $('#hardware_model_spinner').hide();
+          });
+        })
+      });
+
+  - f.inputs :name => 'Classification', :id => 'classification' do
+    %li
+      = f.label :group
+      = text_field_with_auto_complete :storage_array, :group_name, { :size => 15 }, { :url => { :controller => 'groups', :action => 'autocomplete', :format => :js }, :method => :get, :param_name => 'search' }
+    = f.input :farm
+
+  - f.inputs :name => 'Storage Controllers' do
+    - f.semantic_fields_for :storage_heads do |builder|
+      = render 'storage_head_fields', :f => builder
+    = link_to_add_fields "Add Storage Controller", f, :storage_heads
+
+  - f.inputs :name => 'Storage Shelves' do
+    - f.semantic_fields_for :storage_shelves do |builder|
+      = render 'storage_shelf_fields', :f => builder
+    = link_to_add_fields "Add Storage Shelf", f, :storage_shelves
+
+  = f.buttons

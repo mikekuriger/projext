@@ -1,0 +1,29 @@
+- title "Storage Shelves"
+
+%table.list
+  %tr
+    %th Name
+    %th Hostname
+    %th Domain
+    %th Serial
+    %th Hardware model
+    %th Group
+    %th Farm
+    %th Equipment rack
+    %th actions
+  - for storage_shelf in @storage_shelves
+    %tr
+      %td= h storage_shelf.name
+      %td= h storage_shelf.hostname
+      %td= h storage_shelf.domain
+      %td= h storage_shelf.serial
+      %td= h storage_shelf.hardware_model_id
+      %td= h storage_shelf.group_id
+      %td= h storage_shelf.farm_id
+      %td= h storage_shelf.equipment_rack_id
+      %td
+        = link_to 'Show', storage_shelf
+        = link_to 'Edit', edit_storage_shelf_path(storage_shelf)
+        = link_to 'Destroy', storage_shelf, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Storage Shelf", new_storage_shelf_path

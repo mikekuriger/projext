@@ -1,0 +1,11 @@
+- title "Services"
+
+- javascript 'jquery.qtip.min'
+
+#services
+  = render 'services'
+
+= render :partial => "addservice" if can? :create, Service
+
+= render :partial => 'shared/export', :object => @services
+

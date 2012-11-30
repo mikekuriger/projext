@@ -1,0 +1,25 @@
+%tr{:id => dom_id(function, 'row'), :class => cycle("odd", "even")}
+  %td= link_to function.name, function
+  %td
+    = h function.description
+    &nbsp;
+  %td= h function.state
+  %td= h function.assets.size
+  %td.actions
+    = link_to icon('arrow_switch', 'Activate/Deactivate'), (function.active?) ? deactivate_function_path(function) : activate_function_path(function), :class => "activate" if can? :edit, function
+    = link_to icon('magnifier', 'Show'), function, :class => "view" if can? :read, function
+    = link_to icon('pencil', 'Edit'), edit_function_path(function), :class => "edit" if can? :edit, function
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => function_path(function), |
+      :confirm => "Are you sure?", |
+      :method => "delete", |
+      :loading => "$('##{dom_id(function, 'spinner')}').show();", |
+      :success => [ |
+        visual_effect(:highlight, dom_id(function, 'row')), |
+        visual_effect(:fade, dom_id(function, 'row')) |
+      ], |
+      :failure => [ |
+        "alert('Could not delete');", |
+        "$('##{dom_id(function, 'spinner')}').hide();" |
+      ] |
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(function, 'spinner')

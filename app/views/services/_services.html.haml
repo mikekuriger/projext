@@ -1,0 +1,19 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @services, :entry_name => 'service'
+  = will_paginate @services
+
+%table{:id => "servicelist", :class => "list"}
+  %tr
+    %th Cluster
+    %th Function
+    %th State
+    %th # of Assets
+    %th Actions
+  = render :partial => "service", :collection => @services
+
+.wham_pagination
+  .page_info
+    = page_entries_info @services, :entry_name => 'service'
+  = will_paginate @services
+

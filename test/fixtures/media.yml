@@ -1,0 +1,22 @@
+one:
+  name: CAT-6
+  description: MyString
+  state: MyString
+
+two:
+  name: MM fiber
+  description: MyString
+  state: MyString
+
+# == Schema Information
+#
+# Table name: media
+#
+#  id          :integer(4)      not null, primary key
+#  name        :string(255)
+#  description :string(255)
+#  state       :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

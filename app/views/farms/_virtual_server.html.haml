@@ -1,0 +1,26 @@
+%tr{:id => dom_id(virtual_server, 'row'), :class => cycle("odd", "even")}
+  %td= h virtual_server.fqdn
+  %td
+    = link_to virtual_server.operatingsystem.name, virtual_server.operatingsystem if virtual_server.operatingsystem
+    &nbsp;
+  %td
+    = link_to virtual_server.group.name, virtual_server.group if virtual_server.group
+    &nbsp;
+  %td
+    - unless virtual_server.equipment_rack.nil?
+      = link_to virtual_server.equipment_rack.room.building.name, virtual_server.equipment_rack.room.building
+      , 
+      = link_to virtual_server.equipment_rack.room.name, virtual_server.equipment_rack.room
+      %br
+      = link_to virtual_server.equipment_rack.name, virtual_server.equipment_rack
+    - if virtual_server.rack_elevation
+      = h ", Unit #{virtual_server.rack_elevation}"
+      - unless virtual_server.hardware_model.nil?
+        = (virtual_server.hardware_model.rackunits > 0) ? " - #{virtual_server.rack_elevation + virtual_server.hardware_model.rackunits}" : ""
+  %td= virtual_server.services.collect{|service| "#{link_to service.cluster.name, service.cluster if service.cluster}:#{link_to service.function.name, service.function if service.function}" if service}.join('<br>')
+  %td= h virtual_server.try(:state).try(:capitalize)
+  / %td= h virtual_server.last_seen
+  %td.action
+    = link_to icon('magnifier', 'Show'), virtual_server, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_virtual_server_path(virtual_server), :class => "edit" if can? :edit, virtual_server
+    = link_to_remote icon('delete', 'Delete'), :url => virtual_server_path(virtual_server), :confirm => "Are you sure?", :method => "delete", :complete => [ visual_effect(:highlight, dom_id(virtual_server, 'row')), visual_effect(:fade, dom_id(virtual_server, 'row'))] if can? :delete, virtual_server

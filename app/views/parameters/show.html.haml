@@ -1,0 +1,22 @@
+- title "Parameter"
+
+.itemdetail
+  %fieldset#generalinformation
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @parameter.name
+      %li
+        %label Description
+        =h @parameter.description
+      %li
+        %label State
+        =h @parameter.state
+
+%p
+  = link_to "Edit", edit_parameter_path(@parameter)
+  |
+  = link_to "Destroy", @parameter, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", parameters_path

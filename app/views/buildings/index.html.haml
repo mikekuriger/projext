@@ -1,0 +1,27 @@
+- title "Buildings"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th Address1
+    %th Address2
+    %th City
+    %th State
+    %th Zip
+    %th Country
+  - for building in @buildings
+    %tr
+      %td= h building.name
+      %td= h building.description
+      %td= h building.address1
+      %td= h building.address2
+      %td= h building.city
+      %td= h building.state
+      %td= h building.zip
+      %td= h building.country
+      %td= link_to 'Show', building
+      %td= link_to 'Edit', edit_building_path(building)
+      %td= link_to 'Destroy', building, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Building", new_building_path

@@ -1,0 +1,31 @@
+- title "Servers - Search Results for Query #{@query}"
+
+- javascript 'jquery.qtip.min'
+
+/ = (session[:show_inactive]) ? link_to("Hide Inactive", search_servers_url(:hide_inactive => 'Y', :q => @query)) : link_to("Show Inactive", search_servers_url(:show_inactive => 'Y', :q => @query))
+
+.perpage_select
+  - form_tag search_servers_url(:q => @query), :method => :get do
+    Items Per Page:
+    = servers_per_page_select @servers
+    = hidden_field_tag 'q', @query
+
+#assetsearch
+  .box
+    %ul#search
+      - form_tag search_servers_url, :method => :get do
+        %li
+          %input.search_button{ :name => 'q', :type => 'text', :size=> '20', :value => (@query || 'Search Servers'), :onclick => 'this.focus();this.select()', :onfocus => 'this.select()' }/
+        = submit_tag 'Search', :class => 'hidebutton'
+
+- @entry_name = ((session[:show_inactive]) ? '' : 'active ') + 'server search result'
+#servers
+  = render 'servers'
+
+= render :partial => "addserver", :locals => { :server => @server } if can? :create, Server
+
+= render :partial => 'search_export', :object => @servers
+
+%ul
+  %li= "#{icon('bullet_star', 'Virtual Machine')} = Virtual Server"
+  %li= "#{icon('asterisk_yellow', 'Virtual Host')} = Virtual Host"

@@ -1,0 +1,33 @@
+- title "Storage Head"
+
+%p
+  %strong Name:
+  =h @storage_head.name
+%p
+  %strong Hostname:
+  =h @storage_head.hostname
+%p
+  %strong Domain:
+  =h @storage_head.domain
+%p
+  %strong Serial:
+  =h @storage_head.serial
+%p
+  %strong Hardware Model:
+  =h @storage_head.hardware_model_id
+%p
+  %strong Group:
+  =h @storage_head.group_id
+%p
+  %strong Farm:
+  =h @storage_head.farm_id
+%p
+  %strong Equipment Rack:
+  =h @storage_head.equipment_rack_id
+
+%p
+  = link_to "Edit", edit_storage_head_path(@storage_head)
+  |
+  = link_to "Destroy", @storage_head, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", storage_heads_path

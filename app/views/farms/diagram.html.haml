@@ -1,0 +1,100 @@
+- title "Rack Elevation Diagram"
+
+- javascript 'jquery.qtip.min'
+
+- racks = @farm.equipment_racks.sort_by{|r| r.name}.uniq
+- unit_count = 42
+
+- if params[:javascript]
+  - javascript 'raphael-min'
+  
+  #raphaeltest
+    :javascript
+      // Creates canvas 320 × 200 at 10, 50
+      var paper = Raphael('raphaeltest', 875, 800);
+  
+      // Set up some variables
+      var rack_horiz_offset = 50;
+      var rack_vert_offset = 5;
+      // Rack width and height in pixels
+      var rack_width_px = 126;
+      var rack_height_px = 504;
+      // RMU height in pixels
+      var rmu_height_px = rack_height_px / #{unit_count};
+      // Server width and height in pixels
+      var server_width_px = rack_width_px - 2;
+      var server_height_px = rmu_height_px - 2;
+  
+      var racks = Array();
+      var labels = Array();
+      var servers = Array();
+      
+      var t_x;
+      var t_y;
+    
+      for (i = 0; i < #{unit_count}; i++) {
+        labels[i] = paper.text(20, rack_height_px-(rmu_height_px*i), 'Unit ' + (i+1));
+      }
+
+    - racks.each_index do |rack_index|
+      - rack = racks[rack_index]
+      :javascript
+        racks['#{rack.name}'] = Array();
+
+      - unit_count.downto(1).each do |unit|
+        - asset = rack.asset_at_unit(unit)
+        :javascript
+          racks['#{rack.name}'][#{unit}] = Array();
+          t_x = rack_horiz_offset * (#{rack_index} + 1);
+          t_y = rack_height_px - (rmu_height_px * (#{unit} - 1));
+          racks['#{rack.name}'][#{unit}]['server'] = paper.rect(t_x, t_y, rack_width_px, rmu_height_px);
+          racks['#{rack.name}'][#{unit}]['label'] = paper.text((t_x + server_width_px) / 2, t_y, '#{'Empty' || asset.name}');
+  
+- else
+  #rackdiagram  
+    %table
+      %tr
+        %th &nbsp;
+        - racks.each do |rack|
+          %th= link_to rack.name, rack
+
+      - unit_count.downto(1).each do |unit|
+        %tr
+          %td.unit= "U#{unit}"
+          - racks.each do |rack|
+            - asset = rack.asset_at_unit(unit)
+            - htmlclass = (asset.nil?) ? 'empty' : (asset.operatingsystem ? asset.operatingsystem.name : 'none')
+            
+            - if (asset && asset.is_top_unit?(unit))
+              %td{:class => htmlclass, :rowspan => (asset.hardware_model.nil?) ? 1 : asset.hardware_model.rackunits, :id => dom_id(asset, 'cell')}
+                = link_to asset.name, asset, :id => dom_id(asset, 'link')
+                :javascript
+                  $("##{dom_id(asset, 'link')}").qtip({
+                    content: {
+                      url: '#{eval("tooltip_" + asset.type.underscore + "_path(asset)")}',
+                    },
+                    show: {
+                      solo: true,
+                      effect: 'grow'
+                    },
+                    hide: {
+                      delay: 1000,
+                      fixed: true
+                    },
+                    position: {
+                      corner: {
+                        target: 'rightMiddle',
+                        tooltip: 'leftMiddle'
+                      }
+                    },
+                    style: {
+                      tip: 'leftMiddle',
+                      name: 'blue'
+                    }
+                  });
+            - elsif asset.nil?
+              %td{:class => htmlclass}
+                Empty
+              
+        
+/ = render @farm.equipment_racks.uniq

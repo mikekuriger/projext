@@ -1,0 +1,117 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html', :charset => 'utf-8'}
+    %title= ['WHAM 2.0', controller.controller_name, controller.action_name].join('::')
+
+    / CSS
+    = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'compiled/print.css', :media => 'print'
+    /[if IE]
+      = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
+    / = stylesheet_link_tag 'ui-lightness/jquery-ui-1.7.2.custom', :media => 'screen', :cache => true
+    
+    /[if IE 6]
+    /   = stylesheet_link_tag [ 'ie6', 'ie7' ], :media => 'screen', :cache => true
+    
+    / JavaScripts
+    = javascript_include_tag ['application', 'jquery-min', 'jquery-ui-min', 'jrails', 'pagination']
+    = yield(:head)
+
+  %body
+    #page
+      #header
+        #title
+          %h1= link_to "WBADS Host/Asset Management Tool (WHAM)", root_url
+        - if can? :read, Search
+          #search
+            .box
+              %ul#search
+                - form_tag({ :controller => 'searches', :action => 'index' }, :method => :get) do
+                  %li
+                    %input.search_button{ :name => 'q', :type => 'text', :size=> '20', :value => (session[:q] || 'Search'), :onclick => 'this.focus();this.select()', :onfocus => 'this.select()' }/
+                  = submit_tag 'Search', :class => 'hidebutton'
+
+      #nav
+        = semantic_menu :id => "mainNav" do |root|
+          - root.add "Home", root_path
+      
+          - if current_user
+            - root.add "Assets", assets_path do |m|
+              - m.add "All", assets_path if can? :read, Asset
+              - m.add "Servers", servers_path if can? :read, Server
+              - m.add "Switches", switches_path if can? :read, Switch
+              - m.add "Load Balancers", load_balancers_path if can? :read, LoadBalancer
+              - m.add "Firewalls", firewalls_path if can? :read, Firewall
+              - m.add "Routers", routers_path if can? :read, Router
+              - m.add "Storage", storage_path if (can? :read, StorageArray or can? :read, StorageHead or can? :read, StorageShelf)
+              - m.add "Software", software_licenses_path if can? :read, SoftwareLicense
+              - m.add "Crontabs", crontabs_path if can? :read, Crontab
+
+          - if current_user
+            - root.add "Classification", groups_path, :class => 'subNav' do |m|
+              - m.add "Groups", groups_path if can? :read, Group
+              - m.add "Farms", farms_path if can? :read, Farm
+              - m.add "Clusters", clusters_path if can? :read, Cluster
+              - m.add "Functions", functions_path if can? :read, Function
+              - m.add "Services", services_path if can? :read, Service
+              - m.add "Parameters", parameters_path if can? :read, Parameter
+      
+          - if ((can? :read, Cable) || (can? :read, Circuit) || (can? :read, Network))
+            - root.add "Networking", cables_path, :class => 'subNav' do |m|
+              - m.add "Cables", cables_path if can? :read, Cable
+              - m.add "Circuits", circuits_path if can? :read, Circuit
+              - m.add "Networks", networks_path if can? :read, Network
+
+          - if ((can? :read, Site) || (can? :read, Vip))
+            - root.add "Web", sites_path, :class => 'subNav' do |m|
+              - m.add "Sites", sites_path if can? :read, Site
+              - m.add "VIPs", vips_path if can? :read, Vip
+      
+          - if ((can? :read, Customer) || (can? :read, Contact) || (can? :read, Project) || (can? :read, App))
+            - root.add "Customer Portal", apps_path, :class => 'subNav' do |m|
+              - m.add "Customers", customers_path if can? :read, Customer
+              - m.add "Contacts", contacts_path if can? :read, Contact
+              - m.add "Projects", projects_path if can? :read, Project
+              - m.add "Applications", apps_path if can? :read, App
+        
+          - if ((can? :read, Contract) || (can? :read, Quote) || (can? :read, PurchaseOrder))
+            - root.add "Finance", contracts_path, :class => 'subNav' do |m|
+              - m.add "Contracts", contracts_path if can? :read, Contract
+              - m.add "Quotes", quotes_path if can? :read, Quote
+              - m.add "Purchase Orders", purchase_orders_path if can? :read, PurchaseOrder
+
+          - if can? :read, Building
+            - root.add "Admin", users_path, :class => 'subNav' do |m|
+              - m.add "Users", users_path if can? :read, User
+              - m.add "CPUs", cpus_path if can? :read, Cpu
+              - m.add "Buildings", buildings_path if can? :read, Building
+              - m.add "Rooms", rooms_path if can? :read, Room
+              - m.add "Racks", racks_path if can? :read, EquipmentRack
+              - m.add "Vendors", vendors_path if can? :read, Vendor
+              - m.add "Manufacturers", manufacturers_path if can? :read, Manufacturer
+              - m.add "Operating Systems", operatingsystems_path if can? :read, Operatingsystem
+              - m.add "Hardware Models", hardware_models_path if can? :read, HardwareModel
+              - m.add "Cable Media", media_path if can? :read, Medium
+    
+          - if current_user
+            -# root.add "My Account", user_path(current_user), :class => "myaccount"
+            - root.add "Sign Out", sign_out_path, :class => "signout"
+          - else
+            - root.add "Sign Up", sign_up_path, :class => "signup"
+            - root.add "Forgot Password", new_password_path, :class => "forgotpassword"
+            - root.add "Sign In", sign_in_path, :class => "signin"
+              
+      #content
+        .main
+          %h2= crumbs
+
+          = render :partial => 'shared/flashes'
+        
+          - if show_title?
+            %h3= h yield(:title)
+        
+          = yield
+      
+      #footer
+        WHAM 2.0

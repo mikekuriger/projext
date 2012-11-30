@@ -1,0 +1,12 @@
+- title "Alias"
+
+%p
+  %strong Name:
+  =h @alias.name
+
+%p
+  = link_to "Edit", edit_alias_path(@alias)
+  |
+  = link_to "Destroy", @alias, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", aliases_path

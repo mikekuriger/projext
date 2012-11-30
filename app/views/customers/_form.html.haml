@@ -1,0 +1,13 @@
+- semantic_form_for @customer do |f|
+  = f.error_messages
+  - f.inputs :name => 'General Information', :id => 'general' do
+    = f.input :name
+    = f.input :address1
+    = f.input :address2
+    = f.input :city
+    = f.input :state
+    = f.input :zip
+    = f.input :url, :label => 'URL'
+    = f.input :notes
+    = f.input :contacts, :as => :comboselect
+  = f.buttons

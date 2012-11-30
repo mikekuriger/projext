@@ -1,0 +1,21 @@
+- title "Cpus"
+
+%table.list
+  %tr
+    %th Manufacturer
+    %th Processor type
+    %th Cores
+    %th Speed
+    %th Actions
+  - for cpu in @cpus
+    %tr
+      %td= h cpu.manufacturer.name if cpu.manufacturer
+      %td= h cpu.cpu_type
+      %td= h cpu.cores
+      %td= h cpu.speed
+      %td
+        = link_to 'Show', cpu
+        = link_to 'Edit', edit_cpu_path(cpu)
+        = link_to 'Destroy', cpu, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Processor", new_cpu_path

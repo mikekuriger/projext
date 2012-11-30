@@ -1,0 +1,10 @@
+# header row
+csv << ["Cluster:", @cluster.name]
+csv << ["Status:", @cluster.state]
+csv << ["Created At:", @cluster.created_at]
+csv << ["Updated At:", @cluster.updated_at]
+csv << [] # gap between header and data for visibility
+
+csv << ["Asset List"]
+csv << []
+generate_assets_csv(@cluster.assets.uniq).each {|elem| csv << elem }

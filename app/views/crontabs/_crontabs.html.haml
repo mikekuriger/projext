@@ -1,0 +1,20 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @crontabs, :entry_name => 'crontab'
+  = will_paginate @crontabs
+
+%table{:id => "crontablist", :class => "list" }
+  %tr
+    %th Name
+    %th Description
+    %th Cluster
+    %th Command
+    %th # of Assets
+    %th Actions
+  = render :partial => "crontab", :collection => @crontabs
+
+.wham_pagination
+  .page_info
+    = page_entries_info @crontabs, :entry_name => 'crontab'
+  = will_paginate @crontabs
+

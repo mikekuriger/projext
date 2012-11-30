@@ -1,0 +1,481 @@
+/* Basic ---------------------------------------- */
+
+/*body {
+	background: url(../../images/transdmin/bg-stripe.gif) repeat;
+}
+*/
+
+.hidebutton {
+	color: #ffffff;
+	background-color: #ffffff;
+	border: none;
+	width: 1px;
+	height: 1px;
+}
+
+/* Header ---------------------------------------- */
+
+#header {
+	width: 918px;
+	position: relative;
+}
+
+#header #userid {
+	position: absolute;
+	top: 5px;
+	right: 0;
+}
+
+#header #search {
+	position: absolute;
+	top: 30px;
+	right: 0;
+}
+
+/* Logo ------------------------------------------ */
+
+#logo {
+	width: 167px;
+}
+
+#logo h1 {
+	width: 167px;
+	height: 75px;
+	background: url(../../images/transdmin/wham-logo.png) no-repeat left top;
+}
+
+#logo h1 a {
+	display: block;
+	width: 167px;
+	height: 75px;
+}
+
+#logo h1 span { display: none; }
+
+/* User ID ------------------------------------------ */
+
+#userid {
+}
+
+/* Main Navigation ---------------------------------------- */
+
+#mainNav {
+	width: 918px;
+	height: 38px;
+	padding: 6px 6px 0px 6px;
+	margin: 0 0 0 0;
+	background: url(../../images/transdmin/main-nav-bg.gif) no-repeat left top; 
+	/* We used a background image making the thick border and the thin one to keep the html structure simple */
+}
+
+#mainNav li {
+/*	border-right: none;*/
+}
+
+#mainNav li.signin,
+#mainNav li.signout,
+#mainNav li.signup,
+#mainNav li.myaccount,
+#mainNav li.forgotpassword {
+	float: right;
+	border-left: 1px solid #ddd;
+	border-right: none;
+}
+
+/* Dropdown menus */
+
+#mainNav li ul {
+	position: absolute;
+	top: 118px;
+	width: 10em;
+	left: -999em;
+	border: 1px solid #ddd;
+}
+
+#mainNav li:hover ul {
+	left: auto;
+}
+
+#mainNav li ul li,
+#mainNav li ul li a {
+	width: 10em;
+	background: none;
+	background-color: #e3e3e3;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+#mainNav li ul li a:hover {
+	background-color: #fdfcf6;
+}
+
+/* Sub Navigation ---------------------------------------- */
+
+#subNav {
+	width: 918px;
+	height: 35px;
+	padding: 0px 6px 6px 6px;
+	margin: 0 0 0 0;
+	background: url(../../images/transdmin/sub-nav-bg.gif) no-repeat left top; 
+	/* We used a background image making the thick border and the thin one to keep the html structure simple */
+}
+
+#subNav li {
+	float: left;
+	height: 35px;
+	border-right: 1px solid #ddd;
+}
+
+#subNav li a {
+	display: block;
+	float: left;
+	height: 35px;
+	font-weight: bold;
+	line-height: 35px;
+	text-decoration: none;
+	color: #646464;
+	padding: 0 20px;
+}
+
+#subNav li a:hover { background: #fdfcf6; }
+
+#subNav li.active {
+	background: #f0f0f0 url(../../images/transdmin/top-menu-item-bg.gif) repeat-x left top;	
+}
+#subNav li a.active {
+	background: #f0f0f0 url(../../images/transdmin/top-menu-item-bg.gif) repeat-x left top;
+	color: #454545;
+}
+
+/* Container ----------------------------------------- */
+
+#containerHolder {
+	background: #eee;
+	padding: 0 5px 5px;
+}
+
+/* Breadcrumb ---------------------------------------- */
+
+h2 {
+	width: 897px;
+}
+
+/* Content ---------------------------------------- */
+
+#main,
+#main table {
+	width: 879px;
+}
+
+#main table tr th {
+	background: #f6f6f6;
+	padding: 0px 10px;
+	height: 29px;
+	line-height: 29px;
+	border-bottom: 2px solid #ddd;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+#main table tr td {
+	background: #f6f6f6;
+	padding: 0px 0 0px 5px;
+	height: 29px;
+	line-height: 29px;
+	border-bottom: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+#main table#serverlist td {
+	font-size: 10px;
+}
+
+#main table#serverlist tr th {
+	height: 19px;
+	line-height: 19px;
+	padding: 0px 10px;
+}
+
+#main .itemdetail li {
+	margin-bottom: 9px;
+}
+
+#main .itemdetail li ul {
+	list-style-type: disc;
+	margin-left: 2em;
+	margin-top: 7px;
+}
+#main .itemdetail fieldset label {
+	display: inline;
+	width: 100%;
+	line-height: 12px;
+	font-weight: bold;
+	background-color: #e8e8e8;
+	padding: 2px;
+}
+
+/* Sidebar --------------------------------------------- */
+#sidebar .sideNav li { border-bottom: 1px solid #ddd; width: 179px; }
+
+#sidebar .sideNav li a {
+	display: block;
+	color: #646464;
+	background: #f6f6f6;
+	text-decoration: none;
+	height: 29px;
+	line-height: 29px;
+	padding: 0 19px;
+	width: 141px;
+}
+
+/* Tabs ---------------------------------------- */
+
+.ui-tabs .ui-tabs-hide {
+     display: none;
+}
+
+/* Flash messages ------------------------------ */
+#flash_notice {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 50%;
+	border: 5px solid;
+	margin-top: 10px;
+	padding: 20px;
+	font-weight: bold;
+	border-color: #ccc;
+	background-color: #eee;
+	font-size: medium;
+}
+
+#flash_warning {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 50%;
+	border: 5px solid #dddb31;
+	margin-top: 10px;
+	padding: 20px;
+	font-weight: bold;
+	background-color: #fafb39;
+	font-size: medium;
+}
+
+#flash_error {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 50%;
+	border: 5px solid #ba0808;
+	margin-top: 10px;
+	padding: 20px;
+	font-weight: bold;
+	background-color: #fe393c;
+	color: white;
+	font-size: medium;
+}
+
+#flash_success {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 50%;
+	border: 5px solid;
+	margin-top: 10px;
+	padding: 20px;
+	font-weight: bold;
+	border-color: #00b429;
+	background-color: #00e13e;
+	color: white;
+	font-size: medium;
+}
+
+/* Highlight search matches -------------------------- */
+.match {
+	font-weight: bold;
+	color: red;
+}
+
+/* Rack diagram styles -------------------------------- */
+/* Begin rackdiagram styles */
+#rackdiagram table,
+#rackdiagram tr,
+#rackdiagram td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	width: 400px;
+}
+
+#rackdiagram td.empty,
+#rackdiagram table tr:hover td {
+    font-weight: bold;
+    background-color:#333333;
+    color: #dddd99;
+}
+
+#rackdiagram td {
+        font-weight: bold;
+        background-color:#777777;
+        color: #dddd99;
+}
+
+#rackdiagram td.filled {
+        font-weight: bold;
+        background-color:#777777;
+        color: #dddd99;
+}
+
+#rackdiagram td.empty {
+        font-weight: bold;
+        background-color:#333333;
+        color: #dddd99;
+}
+
+#rackdiagram td.other, 
+#rackdiagram td.openbsd39, 
+#rackdiagram td.freebsd60, 
+#rackdiagram td.freebsd61, 
+#rackdiagram td.freebsd62 {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#555555;
+        color: #eeeeee;
+}
+
+#rackdiagram td.none {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:black;
+        color: #dddd00;
+}
+
+#rackdiagram td.brocade {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#444499;
+        color: #eeeeee;
+}
+
+#rackdiagram td.solaris, 
+#rackdiagram td.solaris8, 
+#rackdiagram td.solaris25, 
+#rackdiagram td.solaris26, 
+#rackdiagram td.solaris7, 
+#rackdiagram td.solaris9, 
+#rackdiagram td.solaris10 {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#660066;
+        color: #dddd00;
+
+}
+
+#rackdiagram td.windows, 
+#rackdiagram td.windows2000, 
+#rackdiagram td.windows2003_64, 
+#rackdiagram td.windowsserver2003, 
+#rackdiagram td.windowsxp {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#0000dd;
+        color: #cccccc;
+}
+
+#rackdiagram td.redhat, 
+#rackdiagram td.rhel4_64, 
+#rackdiagram td.rhel5, 
+#rackdiagram td.rhel52, 
+#rackdiagram td.rhel52_64, 
+#rackdiagram td.rhel53, 
+#rackdiagram td.rhel53_64,  
+#rackdiagram td.rhel5_64, 
+#rackdiagram td.rhelas3, 
+#rackdiagram td.rhelas4 { 
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#cc0000;
+        color: #000000;
+}
+
+#rackdiagram td.OVS,
+#rackdiagram td.OVS215 {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#990000;
+        color: #ffffff;
+}
+
+#rackdiagram td.fedora, 
+#rackdiagram td.fedora11, 
+#rackdiagram td.fedora7, 
+#rackdiagram td.fedora8, 
+#rackdiagram td.fedoracore2, 
+#rackdiagram td.fedoracore3, 
+#rackdiagram td.fedoracore4, 
+#rackdiagram td.fedoracore5, 
+#rackdiagram td.fedoracore6 { 
+	font-size: 12px;
+        font-variant: small-caps;
+        background-color:#cccc00;
+        color: #000000;
+}
+
+#rackdiagram td.centos, 
+#rackdiagram td.centos51, 
+#rackdiagram td.centos51_64, 
+#rackdiagram td.centos52, 
+#rackdiagram td.centos52_64, 
+#rackdiagram td.centos53, 
+#rackdiagram td.centos53_64 {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#00cc00;
+        color: #000000;
+}
+
+#rackdiagram td.dataontap {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#336611;
+        color: #dddd00;
+}
+
+#rackdiagram td.fastt {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#886644;
+        color: #dddd00;
+}
+
+#rackdiagram td.screenos6 {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#8800ff;
+        color: #000000;
+}
+
+#rackdiagram td.osx {
+        font-weight: bold;
+        font-variant: small-caps;
+        background-color:#FF00FF;
+        color: #000000;
+}
+/* End rackdiagram styles */
+
+/* Tooltip styles -------------------------------- */
+ul.tooltip label {
+	display: inline;
+	width: 100%;
+	line-height: 16px;
+	font-weight: bold;
+	background-color: #e8e8e8;
+	padding: 2px;
+}
+/* End tooltip styles */

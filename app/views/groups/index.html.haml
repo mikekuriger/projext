@@ -1,0 +1,8 @@
+- title "Groups"
+
+#groups
+  = render 'groups'
+
+= render :partial => "addgroup" if can? :create, Group
+
+= render :partial => 'shared/export', :object => @groups

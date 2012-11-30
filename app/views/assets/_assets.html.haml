@@ -1,0 +1,29 @@
+.perpage_select
+  = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'perpage_spinner'
+  - form_tag assets_url, :method => :get do
+    Items Per Page:
+    = assets_per_page_select @assets
+
+.wham_pagination
+  .page_info
+    = page_entries_info @assets, :entry_name => 'asset'
+  = will_paginate @assets
+  / = will_paginate @assets, :draw_if_single => true, :next_previous_links => false
+
+%table{:id => "assetlist", :class => "list"}
+  %tr
+    %th Name
+    %th Type
+    %th Description
+    %th Group
+    %th Serial
+    %th Location
+    %th Status
+    %th Actions
+  = render :partial => "assets/asset", :collection => @assets
+
+.wham_pagination
+  .page_info
+    = page_entries_info @assets, :entry_name => 'asset'
+  = will_paginate @assets
+  / = will_paginate @assets, :draw_if_single => true, :next_previous_links => false

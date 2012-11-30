@@ -1,0 +1,9 @@
+- semantic_form_for @circuit do |f|
+  = f.error_messages
+  - f.inputs do
+    = f.input :name
+    = f.input :description
+    = f.input :vendor
+    = f.input :vendor_circuit_id, :label => "Circuit ID"
+    = f.input :notes
+  = f.buttons

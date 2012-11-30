@@ -1,0 +1,13 @@
+one:
+  id: 1
+  manufacturer: Intel
+  cpu_type: Xeon
+  cores: 2
+  speed: 2.0GHz
+
+two:
+  id: 2
+  manufacturer: Intel
+  cpu_type: Xeon
+  cores: 4
+  speed: 2.0GHz

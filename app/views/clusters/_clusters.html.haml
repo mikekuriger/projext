@@ -1,0 +1,18 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @clusters, :entry_name => 'cluster'
+  = will_paginate @clusters
+
+%table{:id => "clusterlist", :class => "list"}
+  %tr
+    %th Name
+    %th Description
+    %th State
+    %th # of Assets
+    %th Actions
+  = render :partial => "cluster", :collection => @clusters
+
+.wham_pagination
+  .page_info
+    = page_entries_info @clusters, :entry_name => 'cluster'
+  = will_paginate @clusters

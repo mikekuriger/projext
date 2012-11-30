@@ -1,0 +1,76 @@
+- semantic_form_for @asset do |f|
+  = f.error_messages
+  
+  - f.inputs :name => 'General Information', :id => 'general' do
+    = f.input :name
+    = f.input :state, :label => 'Status', :as => :select, :collection => Asset.state_machine.states.collect{|s| [s.name.to_s.humanize, s.name.to_s]}
+    = f.input :type_helper, :label => 'Type', :as => :select, :collection => Asset::TYPE_OPTIONS
+    = f.input :description
+    = f.input :serial
+    = f.input :wb_asset_id, :label => 'WB Asset ID'
+    = f.input :manufacturer_id, :as => :select, :collection => Manufacturer.all, :selected => (@asset.manufacturer.nil? ? '' : @asset.manufacturer.id), :include_blank => true
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'hardware_model_spinner'
+    = f.input :hardware_model, :label => 'Model', :collection => (@asset.manufacturer.nil?) ? [] : HardwareModel.find_all_by_manufacturer_id(@asset.manufacturer.id), :include_blank => true
+    :javascript
+      $(document).ready(function() {
+        $('#asset_manufacturer_id').change(function() {
+          $('#hardware_model_spinner').show();
+          $('#asset_hardware_model_id').html = "";
+          $('#asset_hardware_model_id').load('/hardware_models.js?manufacturer_id=' + $('#asset_manufacturer_id').val(), function() {
+            $('#hardware_model_spinner').hide();
+          });
+        })
+      });
+      
+    = f.input :wb_asset_id, :label => 'WB Asset ID'
+    
+  - f.inputs :name => 'Physical Location', :id => 'location' do
+    = f.input :building_id, :collection => Building.all, :selected => (@asset.equipment_rack.nil? ? '' : @asset.equipment_rack.room.building.id), :include_blank => true
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'building_spinner'
+  
+    = f.input :room_id, :collection => (@asset.equipment_rack.nil? ? [] : @asset.equipment_rack.room.building.rooms), :selected => (@asset.equipment_rack.nil? ? '' : @asset.equipment_rack.room.id), :include_blank => true
+    :javascript
+      $(document).ready(function() {
+        $('#asset_building_id').change(function() {
+          $('#building_spinner').show();
+          $('#asset_room_id').html = "";
+          $('#asset_room_id').load('/rooms.js?building_id=' + $('#asset_building_id').val(), function() {
+            $('#building_spinner').hide();
+          });
+        })
+      });
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'room_spinner'
+    
+    = f.input :equipment_rack, :label => 'Rack', :collection => (@asset.equipment_rack.nil? ? [] : @asset.equipment_rack.room.equipment_racks)
+    :javascript
+      $(document).ready(function() {
+        $('#asset_room_id').change(function() {
+          $('#room_spinner').show();
+          $('#asset_equipment_rack_id').html = "";
+          $('#asset_equipment_rack_id').load('/racks.js?room_id=' + $('#asset_room_id').val(), function() {
+            $('#room_spinner').hide();
+          });
+        })
+      });
+  
+    = f.input :rack_elevation
+    
+  - f.inputs :name => 'Classification', :id => 'classification' do
+    = f.input :group
+    = f.input :farm, :collection => Farm.with_state(:active)
+    -# = f.input :services
+    
+  - f.inputs :name => 'Finance', :id => 'finance' do
+    = f.input :purchase_date
+    = f.input :vendor
+    = f.input :leased
+    = f.input :sap_asset_id, :label => 'SAP Asset ID'
+    = f.input :sap_wbs_element, :label => 'WBS Element'
+    
+  - f.inputs :name => 'Miscellaneous', :id => 'miscellaneous' do
+    = f.input :monitorable
+    
+  - f.inputs :name => 'Notes', :id => 'notes' do
+    = f.input :notes
+    
+  = f.buttons

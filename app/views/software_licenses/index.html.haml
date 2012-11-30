@@ -1,0 +1,17 @@
+- title "Software Licenses"
+
+%table.list
+  %tr
+    %th Name
+    %th Description
+    %th actions
+  - for software_license in @software_licenses
+    %tr
+      %td= h software_license.name
+      %td= h software_license.description
+      %td
+        = link_to 'Show', software_license
+        = link_to 'Edit', edit_software_license_path(software_license)
+        = link_to 'Destroy', software_license, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Software License", new_software_license_path

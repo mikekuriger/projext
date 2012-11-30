@@ -1,0 +1,21 @@
+#addvip
+  %h3 New Vip
+  - vip = Vip.new
+  #addvipform
+    - semantic_remote_form_for vip, |
+      :loading => "$('#add_spinner').show();", |
+      :loaded => "$('#add_spinner').hide();", |
+      :update => 'viplist', |
+      :position => 'bottom', |
+      :failure => "alert('Unable to create, status ' + request.status)", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(vip, 'row')) |
+        ] do |f| |
+      - f.inputs do
+        = f.input :name
+        = f.input :description
+        = f.input :ip, :label => 'IP'
+        = f.input :port
+        = f.input :load_balancer, :label => 'Load Balancer', :as => :select, :collection => LoadBalancer.all
+        = f.commit_button
+        = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => 'add_spinner'

@@ -1,0 +1,174 @@
+- title "Cluster"
+
+- javascript 'contentpanes'
+
+.itemdetail
+  %fieldset
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @cluster.name
+      %li
+        %label Description
+        =h @cluster.description
+      %li
+        %label Status
+        =h @cluster.state
+        
+  %fieldset
+    %legend Applications
+    %ul
+      - if @cluster.apps.empty?
+        %li None
+      - else
+        - @cluster.apps.each do |app|
+          %li= link_to app.name, app
+
+%fieldset#actions
+  %legend Actions
+  = link_to "Edit", edit_cluster_path(@cluster)
+  |
+  = link_to "Destroy", @cluster, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", clusters_path
+
+= render :partial => 'shared/show_export', :object => @cluster
+
+#assetdetail
+  %fieldset
+    %legend Assets
+
+    - @assets = @cluster.assets.find_all_by_type('Asset').uniq
+    - @servers = @cluster.assets.find_all_by_type('Server').uniq
+    - @virtual_servers = @cluster.assets.find_all_by_type('VirtualServer').uniq
+    - @routers = @cluster.assets.find_all_by_type('Router').uniq
+    - @firewalls = @cluster.assets.find_all_by_type('Firewall').uniq
+    - @load_balancers = @cluster.assets.find_all_by_type('LoadBalancer').uniq
+    - @switches = @cluster.assets.find_all_by_type('Switch').uniq
+    - @storage_arrays = @cluster.assets.find_all_by_type('StorageArray').uniq
+
+    %p= link_to "Expand All", "#", :id => 'expandallpanes'
+    
+    .panes
+      .head
+        = link_to "Assets (#{@assets.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Name
+            %th Type
+            %th Description
+            %th Group
+            %th Serial
+            %th Location
+            %th Status
+            %th Actions
+          = render :partial => "assets/asset", :collection => @assets
+
+      .head
+        = link_to "Physical Servers (#{@servers.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Hostname
+            %th Serial
+            %th Hardware
+            %th Interfaces
+            %th OS
+            %th Group
+            %th Farm
+            %th Services
+            %th State
+            %th Actions
+          = render :partial => "servers/server", :collection => @servers
+
+      .head
+        = link_to "Virtual Servers (#{@virtual_servers.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Hostname
+            %th Serial
+            %th Hardware
+            %th Interfaces
+            %th OS
+            %th Group
+            %th Farm
+            %th Services
+            %th State
+            %th Actions
+          = render :partial => "virtual_servers/virtual_server", :collection => @virtual_servers
+  
+      .head
+        = link_to "Routers (#{@routers.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Name
+            %th Hostname
+            %th Domain
+            %th Serial
+            %th Model
+            %th Group
+            %th Farm
+            %th Equipment Rack
+            %th Actions
+          = render :partial => "routers/router", :collection => @routers
+
+      .head
+        = link_to "Firewalls (#{@firewalls.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Name
+            %th Hostname
+            %th Domain
+            %th Serial
+            %th Model
+            %th Group
+            %th Farm
+            %th Rack
+            %th Actions
+          = render :partial => "firewalls/firewall", :collection => @firewalls
+
+      .head
+        = link_to "Switches (#{@switches.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Hostname
+            %th Serial
+            %th Model
+            %th Group
+            %th Farm
+            %th Rack
+            %th Actions
+          = render :partial => "switches/switch", :collection => @switches
+
+      .head
+        = link_to "Load Balancers (#{@load_balancers.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Hostname
+            %th Serial
+            %th Hardware
+            %th Group
+            %th Farm
+            %th Location
+            %th Actions
+          = render :partial => "load_balancers/load_balancer", :collection => @load_balancers
+
+      .head
+        = link_to "Storage (#{@storage_arrays.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Name
+            %th Description
+            %th # of Controllers
+            %th # of Shelves
+            %th # of Disks
+            %th Actions
+          = render :partial => "storage_arrays/storage_array", :collection => @storage_arrays

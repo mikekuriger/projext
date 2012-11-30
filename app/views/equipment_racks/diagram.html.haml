@@ -1,0 +1,20 @@
+- title "Rack Diagram"
+
+%p
+  %strong Building:
+  =h @equipment_rack.try(:room).try(:building).try(:name)
+%p
+  %strong Room:
+  =h @equipment_rack.try(:room).try(:name)
+%p
+  %strong Name:
+  =h @equipment_rack.name
+%p
+  %strong Description:
+  =h @equipment_rack.description
+%p
+  %strong State:
+  =h @equipment_rack.state
+
+#diagram
+  = render @equipment_rack

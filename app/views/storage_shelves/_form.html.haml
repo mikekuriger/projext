@@ -1,0 +1,16 @@
+- semantic_form_for @storage_shelf do |f|
+  = f.error_messages
+  - f.inputs do
+    = f.input :name
+    = f.input :hostname
+    = f.input :domain
+    = f.input :serial
+    = f.input :hardware_model
+    
+    = f.input :state, :label => 'Status', :as => :select, :collection => Asset.state_machine.states.collect{|s| [s.name.to_s.humanize, s.name.to_s]}
+    = f.input :type_helper, :label => 'Type', :as => :select, :collection => Asset::TYPE_OPTIONS
+    
+    = f.input :group
+    = f.input :farm, :collection => Farm.with_state(:active)
+    = f.input :equipment_rack
+  = f.buttons

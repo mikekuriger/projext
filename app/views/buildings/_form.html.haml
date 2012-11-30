@@ -1,0 +1,12 @@
+- semantic_form_for @building do |f|
+  = f.error_messages
+  - f.inputs do
+    = f.input :name
+    = f.input :description
+    = f.input :address1
+    = f.input :address2
+    = f.input :city
+    = f.input :state
+    = f.input :zip
+    = f.input :country
+  = f.buttons

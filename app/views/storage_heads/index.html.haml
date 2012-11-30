@@ -1,0 +1,29 @@
+- title "Storage Heads"
+
+%table.list
+  %tr
+    %th Name
+    %th Hostname
+    %th Domain
+    %th Serial
+    %th Hardware model
+    %th Group
+    %th Farm
+    %th Equipment rack
+    %th actions
+  - for storage_head in @storage_heads
+    %tr
+      %td= h storage_head.name
+      %td= h storage_head.hostname
+      %td= h storage_head.domain
+      %td= h storage_head.serial
+      %td= h storage_head.hardware_model_id
+      %td= h storage_head.group_id
+      %td= h storage_head.farm_id
+      %td= h storage_head.equipment_rack_id
+      %td
+        = link_to 'Show', storage_head
+        = link_to 'Edit', edit_storage_head_path(storage_head)
+        = link_to 'Destroy', storage_head, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Storage Controller", new_storage_head_path

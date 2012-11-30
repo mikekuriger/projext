@@ -1,0 +1,16 @@
+%h3
+  Welcome to WHAM 2.0
+
+%h3 Dashboard
+
+%fieldset
+  %legend Active Farms
+  %ul
+    - @farms.each do |farm|
+      %li
+        %label= farm.name
+        %ul
+          %li
+            = "#{farm.assets.active.count} Active Assets"
+          %li
+            = "#{farm.assets.inactive.count} Inactive Assets"

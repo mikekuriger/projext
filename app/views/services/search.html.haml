@@ -1,0 +1,25 @@
+- title "Services - Search Results for Query #{@query}"
+
+/ = (session[:show_inactive]) ? link_to("Hide Inactive", search_services_url(:hide_inactive => 'Y', :q => @query)) : link_to("Show Inactive", search_services_url(:show_inactive => 'Y', :q => @query))
+
+.perpage_select
+  - form_tag search_services_url(:q => @query), :method => :get do
+    Items Per Page:
+    = services_per_page_select @services
+    = hidden_field_tag 'q', @query
+
+#assetsearch
+  .box
+    %ul#search
+      - form_tag search_services_url, :method => :get do
+        %li
+          %input.search_button{ :name => 'q', :type => 'text', :size=> '20', :value => (@query || 'Search Services'), :onclick => 'this.focus();this.select()', :onfocus => 'this.select()' }/
+        = submit_tag 'Search', :class => 'hidebutton'
+
+- @entry_name = ((session[:show_inactive]) ? '' : 'active ') + 'service search result'
+#services
+  = render 'services'
+
+= render :partial => "addservice", :locals => { :service => @service } if can? :create, Service
+
+/ = render :partial => 'shared/export', :object => @services

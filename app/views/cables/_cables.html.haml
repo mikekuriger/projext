@@ -1,0 +1,21 @@
+.wham_pagination
+  .page_info
+    = page_entries_info @cables, :entry_name => 'cable'
+  = will_paginate @cables
+
+%table{:id => "cablelist", :class => "list"}
+  %tr
+    %th From Device
+    %th From Interface
+    %th Medium
+    %th To Interface
+    %th To Device
+    %th Notes
+    %th Actions
+  = render :partial => "cable", :collection => @cables
+
+.wham_pagination
+  .page_info
+    = page_entries_info @cables, :entry_name => 'cable'
+  = will_paginate @cables
+

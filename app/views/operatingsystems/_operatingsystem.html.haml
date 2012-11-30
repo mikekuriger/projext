@@ -1,0 +1,32 @@
+%tr{ :id => dom_id(operatingsystem, 'row'), :class => cycle("odd", "even") }
+  %td= link_to operatingsystem.name, operatingsystem
+  %td
+    = h operatingsystem.description
+    &nbsp;
+  %td
+    = link_to operatingsystem.manufacturer.name, operatingsystem.manufacturer if operatingsystem.manufacturer
+    &nbsp;
+  %td
+    = h operatingsystem.ostype
+    &nbsp;
+  %td
+    = h operatingsystem.version
+    &nbsp;
+  %td
+    = h operatingsystem.architecture
+    &nbsp;
+  %td.action
+    = link_to icon('magnifier', 'Show'), operatingsystem, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_operatingsystem_path(operatingsystem), :class => "edit"
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => operatingsystem_path(operatingsystem), |
+      :class => "delete", |
+      :confirm => 'Are you sure?', |
+      :method => :delete, |
+      :loading => "$('##{dom_id(operatingsystem, 'state_spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(operatingsystem, 'row')), |
+        visual_effect(:fade, dom_id(operatingsystem, 'row')) |
+      ] |
+      
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(operatingsystem, 'state_spinner')
