@@ -5,7 +5,7 @@ class Asset < ActiveRecord::Base
                   :sap_asset_id, :sap_wbs_element, :monitorable, :state, :room_id, :building_id,
                   :hardware_model_name, :hardware_model_id, :asset_id,
                   :cpu_count, :physical_memory, :cpu_type, :cpu_speed, :cpu_id,
-                  :manufacturer_id, :room, :service_ids, :kernel, :kernel_release, :notes,
+                  :manufacturer_id, :room, :service_ids, :kernel, :kernel_release, :notes, :backup,
                   :type_helper
   
   
@@ -357,6 +357,7 @@ end
 #  purchase_date     :date
 #  vendor_id         :integer(4)
 #  leased            :boolean(1)
+#  backup            :boolean(1)
 #  sap_asset_id      :string(255)
 #  sap_wbs_element   :string(255)
 #  monitorable       :boolean(1)

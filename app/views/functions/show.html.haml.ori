@@ -1,0 +1,152 @@
+- title "Function"
+
+- javascript "contentpanes"
+
+.itemdetail
+  %fieldset
+    %legend General Information
+    %ul
+      %li
+        %label Name
+        =h @function.name
+      %li
+        %label Description
+        =h @function.description
+      %li
+        %label Status
+        =h @function.state
+
+%p
+  = link_to "Edit", edit_function_path(@function)
+  |
+  = link_to "Destroy", @function, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", functions_path
+
+#assetdetail
+  %fieldset
+    %legend Assets
+
+    - @assets = @function.assets.find_all_by_type('Asset')
+    - @servers = @function.assets.find_all_by_type('Server')
+    - @virtual_servers = @function.assets.find_all_by_type('VirtualServer')
+    - @routers = @function.assets.find_all_by_type('Router')
+    - @firewalls = @function.assets.find_all_by_type('Firewall')
+    - @load_balancers = @function.assets.find_all_by_type('LoadBalancer')
+    - @switches = @function.assets.find_all_by_type('Switch')
+    - @storage_arrays = @function.assets.find_all_by_type('StorageArray')
+
+    %p= link_to "Expand All", "#", :id => 'expandallpanes'
+
+    .panes
+      .head
+        = link_to "Assets (#{@assets.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Name
+            %th Serial
+            %th Model
+            %th Location
+            %th State
+            %th Actions
+          = render :partial => "asset", :collection => @assets
+
+      .head
+        = link_to "Physical Servers (#{@servers.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Hostname
+            %th Serial
+            %th Model
+            %th OS
+            %th Group
+            %th Location
+            %th Services
+            %th State
+            %th Actions
+          = render :partial => "server", :collection => @servers
+
+      .head
+        = link_to "Virtual Servers (#{@virtual_servers.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Hostname
+            %th OS
+            %th Group
+            %th Parent
+            %th Services
+            %th State
+            %th Actions
+          = render :partial => "virtual_server", :collection => @virtual_servers
+
+      .head
+        = link_to "Routers (#{@routers.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Hostname
+            %th Serial
+            %th Model
+            %th Group
+            %th Location
+            %th State
+            %th Actions
+          = render :partial => "router", :collection => @routers
+
+      .head
+        = link_to "Firewalls (#{@firewalls.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Hostname
+            %th Serial
+            %th Model
+            %th Group
+            %th Location
+            %th State
+            %th Actions
+          = render :partial => "firewall", :collection => @firewalls
+
+      .head
+        = link_to "Switches (#{@switches.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Hostname
+            %th Serial
+            %th Model
+            %th Group
+            %th Location
+            %th State
+            %th Actions
+          = render :partial => "switch", :collection => @switches
+
+      .head
+        = link_to "Load Balancers (#{@load_balancers.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Hostname
+            %th Serial
+            %th Model
+            %th Group
+            %th Location
+            %th State
+            %th Actions
+          = render :partial => "load_balancer", :collection => @load_balancers
+
+      .head
+        = link_to "Storage (#{@storage_arrays.size})", "#"
+      .content
+        %table.list
+          %tr
+            %th Name
+            %th Description
+            %th # of Controllers
+            %th # of Shelves
+            %th # of Disks
+            %th Actions
+          = render :partial => "storage_array", :collection => @storage_arrays

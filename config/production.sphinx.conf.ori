@@ -1,0 +1,229 @@
+indexer
+{
+}
+
+searchd
+{
+  listen = 127.0.0.1:9312
+  log = /usr/wbol/wham/releases/20120925000000/log/searchd.log
+  query_log = /usr/wbol/wham/releases/20120925000000/log/searchd.query.log
+  pid_file = /usr/wbol/wham/releases/20120925000000/log/searchd.production.pid
+}
+
+source asset_core_0
+{
+  type = mysql
+  sql_host = wham-database
+  sql_user = wham_production
+  sql_pass = 9KwqKUfcHnIyHw
+  sql_db = wham_production
+  sql_sock = /var/lib/mysql/mysql.sock
+  sql_query_pre = UPDATE `assets` SET `delta` = 0 WHERE `delta` = 1
+  sql_query_pre = SET NAMES utf8
+  sql_query_pre = SET TIME_ZONE = '+0:00'
+  sql_query = SELECT SQL_NO_CACHE `assets`.`id` * 4 + 0 AS `id` , `assets`.`name` AS `name`, CONCAT_WS(' ', `assets`.`hostname`, `assets`.`domain`) AS `fqdn`, `assets`.`serial` AS `serial`, `groups`.`name` AS `group_name`, `farms`.`name` AS `farm_name`, GROUP_CONCAT(DISTINCT IFNULL(`interfaces`.`mac`, '0') SEPARATOR ' ') AS `mac`, `hardware_models`.`name` AS `hardware_model_name`, `operatingsystems`.`name` AS `operating_system_name`, type AS `type`, `assets`.`state` AS `state`, `assets`.`id` AS `sphinx_internal_id`, CAST(IFNULL(CRC32(NULLIF(`assets`.`type`,'')), 3278796120) AS UNSIGNED) AS `class_crc`, 0 AS `sphinx_deleted`, IFNULL(`assets`.`name`, '') AS `name_sort`, IFNULL(`groups`.`name`, '') AS `group_name_sort`, IFNULL(`farms`.`name`, '') AS `farm_name_sort`, IFNULL(`hardware_models`.`name`, '') AS `hardware_model_name_sort`, IFNULL(`operatingsystems`.`name`, '') AS `operating_system_name_sort`, `assets`.`group_id` AS `group_id`, `assets`.`farm_id` AS `farm_id`, UNIX_TIMESTAMP(`assets`.`created_at`) AS `created_at`, UNIX_TIMESTAMP(`assets`.`updated_at`) AS `updated_at` FROM `assets`    LEFT OUTER JOIN `groups` ON `groups`.id = `assets`.group_id   LEFT OUTER JOIN `farms` ON `farms`.id = `assets`.farm_id   LEFT OUTER JOIN `interfaces` ON interfaces.asset_id = assets.id   LEFT OUTER JOIN `hardware_models` ON `hardware_models`.id = `assets`.hardware_model_id   LEFT OUTER JOIN `operatingsystems` ON `operatingsystems`.id = `assets`.operatingsystem_id  WHERE `assets`.`id` >= $start AND `assets`.`id` <= $end AND `assets`.`delta` = 0 GROUP BY `assets`.`id`, `assets`.`type`  ORDER BY NULL
+  sql_query_range = SELECT IFNULL(MIN(`id`), 1), IFNULL(MAX(`id`), 1) FROM `assets` WHERE `assets`.`delta` = 0
+  sql_attr_uint = sphinx_internal_id
+  sql_attr_uint = class_crc
+  sql_attr_uint = sphinx_deleted
+  sql_attr_uint = group_id
+  sql_attr_uint = farm_id
+  sql_attr_timestamp = created_at
+  sql_attr_timestamp = updated_at
+  sql_attr_str2ordinal = name_sort
+  sql_attr_str2ordinal = group_name_sort
+  sql_attr_str2ordinal = farm_name_sort
+  sql_attr_str2ordinal = hardware_model_name_sort
+  sql_attr_str2ordinal = operating_system_name_sort
+  sql_query_info = SELECT * FROM `assets` WHERE `id` = (($id - 0) / 4)
+}
+
+index asset_core
+{
+  source = asset_core_0
+  path = /usr/wbol/wham/releases/20120925000000/db/sphinx/production/asset_core
+  morphology = stem_en
+  charset_type = utf-8
+  min_infix_len = 2
+  enable_star = 1
+}
+
+source asset_delta_0 : asset_core_0
+{
+  type = mysql
+  sql_host = wham-database
+  sql_user = wham_production
+  sql_pass = 9KwqKUfcHnIyHw
+  sql_db = wham_production
+  sql_sock = /var/lib/mysql/mysql.sock
+  sql_query_pre = 
+  sql_query_pre = SET NAMES utf8
+  sql_query_pre = SET TIME_ZONE = '+0:00'
+  sql_query = SELECT SQL_NO_CACHE `assets`.`id` * 4 + 0 AS `id` , `assets`.`name` AS `name`, CONCAT_WS(' ', `assets`.`hostname`, `assets`.`domain`) AS `fqdn`, `assets`.`serial` AS `serial`, `groups`.`name` AS `group_name`, `farms`.`name` AS `farm_name`, GROUP_CONCAT(DISTINCT IFNULL(`interfaces`.`mac`, '0') SEPARATOR ' ') AS `mac`, `hardware_models`.`name` AS `hardware_model_name`, `operatingsystems`.`name` AS `operating_system_name`, type AS `type`, `assets`.`state` AS `state`, `assets`.`id` AS `sphinx_internal_id`, CAST(IFNULL(CRC32(NULLIF(`assets`.`type`,'')), 3278796120) AS UNSIGNED) AS `class_crc`, 0 AS `sphinx_deleted`, IFNULL(`assets`.`name`, '') AS `name_sort`, IFNULL(`groups`.`name`, '') AS `group_name_sort`, IFNULL(`farms`.`name`, '') AS `farm_name_sort`, IFNULL(`hardware_models`.`name`, '') AS `hardware_model_name_sort`, IFNULL(`operatingsystems`.`name`, '') AS `operating_system_name_sort`, `assets`.`group_id` AS `group_id`, `assets`.`farm_id` AS `farm_id`, UNIX_TIMESTAMP(`assets`.`created_at`) AS `created_at`, UNIX_TIMESTAMP(`assets`.`updated_at`) AS `updated_at` FROM `assets`    LEFT OUTER JOIN `groups` ON `groups`.id = `assets`.group_id   LEFT OUTER JOIN `farms` ON `farms`.id = `assets`.farm_id   LEFT OUTER JOIN `interfaces` ON interfaces.asset_id = assets.id   LEFT OUTER JOIN `hardware_models` ON `hardware_models`.id = `assets`.hardware_model_id   LEFT OUTER JOIN `operatingsystems` ON `operatingsystems`.id = `assets`.operatingsystem_id  WHERE `assets`.`id` >= $start AND `assets`.`id` <= $end AND `assets`.`delta` = 1 GROUP BY `assets`.`id`, `assets`.`type`  ORDER BY NULL
+  sql_query_range = SELECT IFNULL(MIN(`id`), 1), IFNULL(MAX(`id`), 1) FROM `assets` WHERE `assets`.`delta` = 1
+  sql_attr_uint = sphinx_internal_id
+  sql_attr_uint = class_crc
+  sql_attr_uint = sphinx_deleted
+  sql_attr_uint = group_id
+  sql_attr_uint = farm_id
+  sql_attr_timestamp = created_at
+  sql_attr_timestamp = updated_at
+  sql_attr_str2ordinal = name_sort
+  sql_attr_str2ordinal = group_name_sort
+  sql_attr_str2ordinal = farm_name_sort
+  sql_attr_str2ordinal = hardware_model_name_sort
+  sql_attr_str2ordinal = operating_system_name_sort
+  sql_query_info = SELECT * FROM `assets` WHERE `id` = (($id - 0) / 4)
+}
+
+index asset_delta : asset_core
+{
+  source = asset_delta_0
+  path = /usr/wbol/wham/releases/20120925000000/db/sphinx/production/asset_delta
+}
+
+index asset
+{
+  type = distributed
+  local = asset_delta
+  local = asset_core
+}
+
+source service_core_0
+{
+  type = mysql
+  sql_host = wham-database
+  sql_user = wham_production
+  sql_pass = 9KwqKUfcHnIyHw
+  sql_db = wham_production
+  sql_sock = /var/lib/mysql/mysql.sock
+  sql_query_pre = SET NAMES utf8
+  sql_query_pre = SET TIME_ZONE = '+0:00'
+  sql_query = SELECT SQL_NO_CACHE `services`.`id` * 4 + 1 AS `id` , `clusters`.`name` AS `cluster`, `functions`.`name` AS `function`, `clusters`.`description` AS `description`, `functions`.`description` AS `description`, `services`.`id` AS `sphinx_internal_id`, 773890894 AS `class_crc`, 0 AS `sphinx_deleted`, IFNULL(`clusters`.`name`, '') AS `cluster_sort`, IFNULL(`functions`.`name`, '') AS `function_sort` FROM `services`    LEFT OUTER JOIN `clusters` ON `clusters`.id = `services`.cluster_id   LEFT OUTER JOIN `functions` ON `functions`.id = `services`.function_id  WHERE `services`.`id` >= $start AND `services`.`id` <= $end GROUP BY `services`.`id`  ORDER BY NULL
+  sql_query_range = SELECT IFNULL(MIN(`id`), 1), IFNULL(MAX(`id`), 1) FROM `services` 
+  sql_attr_uint = sphinx_internal_id
+  sql_attr_uint = class_crc
+  sql_attr_uint = sphinx_deleted
+  sql_attr_str2ordinal = cluster_sort
+  sql_attr_str2ordinal = function_sort
+  sql_query_info = SELECT * FROM `services` WHERE `id` = (($id - 1) / 4)
+}
+
+index service_core
+{
+  source = service_core_0
+  path = /usr/wbol/wham/releases/20120925000000/db/sphinx/production/service_core
+  morphology = stem_en
+  charset_type = utf-8
+  min_infix_len = 2
+  enable_star = 1
+}
+
+index service
+{
+  type = distributed
+  local = service_core
+}
+
+source site_core_0
+{
+  type = mysql
+  sql_host = wham-database
+  sql_user = wham_production
+  sql_pass = 9KwqKUfcHnIyHw
+  sql_db = wham_production
+  sql_sock = /var/lib/mysql/mysql.sock
+  sql_query_pre = SET NAMES utf8
+  sql_query_pre = SET TIME_ZONE = '+0:00'
+  sql_query = SELECT SQL_NO_CACHE `sites`.`id` * 4 + 2 AS `id` , `sites`.`name` AS `name`, `ips`.`ip` AS `ip`, `clusters`.`name` AS `cluster_name`, `customers`.`name` AS `customer_name`, `sites`.`id` AS `sphinx_internal_id`, 3379668698 AS `class_crc`, 0 AS `sphinx_deleted`, IFNULL(`sites`.`name`, '') AS `name_sort`, `sites`.`ip_id` AS `ip_id`, `sites`.`cluster_id` AS `cluster_id`, `sites`.`customer_id` AS `customer_id`, UNIX_TIMESTAMP(`sites`.`created_at`) AS `created_at`, UNIX_TIMESTAMP(`sites`.`updated_at`) AS `updated_at` FROM `sites`    LEFT OUTER JOIN `ips` ON `ips`.id = `sites`.ip_id   LEFT OUTER JOIN `clusters` ON `clusters`.id = `sites`.cluster_id   LEFT OUTER JOIN `customers` ON `customers`.id = `sites`.customer_id  WHERE `sites`.`id` >= $start AND `sites`.`id` <= $end GROUP BY `sites`.`id`  ORDER BY NULL
+  sql_query_range = SELECT IFNULL(MIN(`id`), 1), IFNULL(MAX(`id`), 1) FROM `sites` 
+  sql_attr_uint = sphinx_internal_id
+  sql_attr_uint = class_crc
+  sql_attr_uint = sphinx_deleted
+  sql_attr_uint = ip_id
+  sql_attr_uint = cluster_id
+  sql_attr_uint = customer_id
+  sql_attr_timestamp = created_at
+  sql_attr_timestamp = updated_at
+  sql_attr_str2ordinal = name_sort
+  sql_query_info = SELECT * FROM `sites` WHERE `id` = (($id - 2) / 4)
+}
+
+index site_core
+{
+  source = site_core_0
+  path = /usr/wbol/wham/releases/20120925000000/db/sphinx/production/site_core
+  morphology = stem_en
+  charset_type = utf-8
+  min_infix_len = 2
+  enable_star = 1
+}
+
+index site
+{
+  type = distributed
+  local = site_core
+}
+
+source vip_core_0
+{
+  type = mysql
+  sql_host = wham-database
+  sql_user = wham_production
+  sql_pass = 9KwqKUfcHnIyHw
+  sql_db = wham_production
+  sql_sock = /var/lib/mysql/mysql.sock
+  sql_query_pre = UPDATE `vips` SET `delta` = 0 WHERE `delta` = 1
+  sql_query_pre = SET NAMES utf8
+  sql_query_pre = SET TIME_ZONE = '+0:00'
+  sql_query = SELECT SQL_NO_CACHE `vips`.`id` * 4 + 3 AS `id` , `vips`.`name` AS `name`, `vips`.`description` AS `description`, `vips`.`id` AS `sphinx_internal_id`, 1934240450 AS `class_crc`, 0 AS `sphinx_deleted`, IFNULL(`vips`.`name`, '') AS `name_sort` FROM `vips`    WHERE `vips`.`id` >= $start AND `vips`.`id` <= $end AND `vips`.`delta` = 0 GROUP BY `vips`.`id`  ORDER BY NULL
+  sql_query_range = SELECT IFNULL(MIN(`id`), 1), IFNULL(MAX(`id`), 1) FROM `vips` WHERE `vips`.`delta` = 0
+  sql_attr_uint = sphinx_internal_id
+  sql_attr_uint = class_crc
+  sql_attr_uint = sphinx_deleted
+  sql_attr_str2ordinal = name_sort
+  sql_query_info = SELECT * FROM `vips` WHERE `id` = (($id - 3) / 4)
+}
+
+index vip_core
+{
+  source = vip_core_0
+  path = /usr/wbol/wham/releases/20120925000000/db/sphinx/production/vip_core
+  morphology = stem_en
+  charset_type = utf-8
+  min_infix_len = 2
+  enable_star = 1
+}
+
+source vip_delta_0 : vip_core_0
+{
+  type = mysql
+  sql_host = wham-database
+  sql_user = wham_production
+  sql_pass = 9KwqKUfcHnIyHw
+  sql_db = wham_production
+  sql_sock = /var/lib/mysql/mysql.sock
+  sql_query_pre = 
+  sql_query_pre = SET NAMES utf8
+  sql_query_pre = SET TIME_ZONE = '+0:00'
+  sql_query = SELECT SQL_NO_CACHE `vips`.`id` * 4 + 3 AS `id` , `vips`.`name` AS `name`, `vips`.`description` AS `description`, `vips`.`id` AS `sphinx_internal_id`, 1934240450 AS `class_crc`, 0 AS `sphinx_deleted`, IFNULL(`vips`.`name`, '') AS `name_sort` FROM `vips`    WHERE `vips`.`id` >= $start AND `vips`.`id` <= $end AND `vips`.`delta` = 1 GROUP BY `vips`.`id`  ORDER BY NULL
+  sql_query_range = SELECT IFNULL(MIN(`id`), 1), IFNULL(MAX(`id`), 1) FROM `vips` WHERE `vips`.`delta` = 1
+  sql_attr_uint = sphinx_internal_id
+  sql_attr_uint = class_crc
+  sql_attr_uint = sphinx_deleted
+  sql_attr_str2ordinal = name_sort
+  sql_query_info = SELECT * FROM `vips` WHERE `id` = (($id - 3) / 4)
+}
+
+index vip_delta : vip_core
+{
+  source = vip_delta_0
+  path = /usr/wbol/wham/releases/20120925000000/db/sphinx/production/vip_delta
+}
+
+index vip
+{
+  type = distributed
+  local = vip_delta
+  local = vip_core
+}

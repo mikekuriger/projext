@@ -111,9 +111,6 @@
         %label Vendor
         = link_to @server.vendor.name, @server.vendor unless @server.vendor.nil?
       %li
-        %label Leased
-        =h @server.leased
-      %li
         %label SAP - Asset ID
         =h @server.sap_asset_id
       %li
@@ -123,6 +120,9 @@
   %fieldset#miscellaneous
     %legend Miscellaneous
     %ul
+      %li
+        %label Backup
+        =h @server.backup
       %li
         %label Monitorable
         =h @server.monitorable

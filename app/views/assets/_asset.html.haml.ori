@@ -1,0 +1,22 @@
+%tr{:id => dom_id(asset, 'row'), :class => cycle("odd", "even")}
+  %td= h asset.backup
+  %td= link_to asset.name, asset
+  %td= h asset.type.humanize
+  %td
+    = h asset.description
+    &nbsp;
+  %td= link_to asset.group.name, asset.group if asset.group
+  %td
+    = h asset.serial
+    &nbsp;
+  %td
+    - unless asset.equipment_rack.nil?
+      = link_to asset.equipment_rack.room.building.name, asset.equipment_rack.room.building
+      , 
+      = link_to asset.equipment_rack.room.name, asset.equipment_rack.room
+    &nbsp;
+  %td= h asset.state.humanize if asset.state
+  %td.action
+    = link_to icon('magnifier', 'Show'), asset, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_asset_path(asset), :class => "edit" if can? :edit, asset
+    = link_to_remote icon('delete', 'Delete'), :url => asset_path(asset), :confirm => "Are you sure?", :method => "delete", :complete => [ visual_effect(:highlight, dom_id(asset, 'row')), visual_effect(:fade, dom_id(asset, 'row'))] if can? :delete, asset

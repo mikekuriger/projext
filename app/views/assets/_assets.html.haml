@@ -12,6 +12,7 @@
 
 %table{:id => "assetlist", :class => "list"}
   %tr
+    %th Backup
     %th Name
     %th Type
     %th Description
@@ -26,4 +27,4 @@
   .page_info
     = page_entries_info @assets, :entry_name => 'asset'
   = will_paginate @assets
-  / = will_paginate @assets, :draw_if_single => true, :next_previous_links => false
+  /  = will_paginate @assets, :draw_if_single => true, :next_previous_links => false

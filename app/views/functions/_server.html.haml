@@ -1,4 +1,7 @@
 %tr{:id => dom_id(server, 'row'), :class => cycle("odd", "even")}
+  %td
+    = icon('exclamation', 'No') unless server.backup
+    = icon('accept', 'Yes') if server.backup
   %td= h server.fqdn
   %td= h server.serial
   %td= h "#{server.hardware_model.manufacturer.name} #{server.hardware_model.name}" unless server.hardware_model.nil?

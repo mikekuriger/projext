@@ -97,6 +97,7 @@
 
     
   - f.inputs :name => 'Miscellaneous', :id => 'miscellaneous' do
+    = f.input :backup
     = f.input :monitorable
     = f.input :agent if can? :assign_agents, @virtual_server
     / = f.input :state

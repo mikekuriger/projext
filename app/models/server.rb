@@ -1,8 +1,8 @@
 class Server < Asset
   attr_accessible :name, :description, :serial, :hostname, :domain, :wb_asset_id, :hardware_model, :hardware_model_id,
                   :group, :group_id, :farm, :farm_id, :equipment_rack, :equipment_rack_id, :rack_elevation, :rack_units,
-                  :purchase_date, :vendor_id, :leased, :sap_asset_id, :sap_wbs_element, :monitorable, :state, :cpu_count,
-                  :agent_id, :operatingsystem_id, :virtualization_host
+                  :purchase_date, :vendor_id, :backup, :leased, :sap_asset_id, :sap_wbs_element, :monitorable, :state, :cpu_count,
+                  :agent_id, :operatingsystem_id, :virtualization_host, :backup
   attr_accessible :created_at, :vm_memory_static_min, :delta, :first_letter, :modular, :updated_at, :vm_vcpus_at_startup, :disk_size, :disk_count, :vm_memory_dynamic_max, :id, :interfaces, :last_seen, :storage_array_id, :parent_id, :cached_slug, :vm_memory_dynamic_min, :services, :disk_type, :vm_memory_static_max, :vm_memory_target, :switch_id, :vm_vcpus_max
 
   # By default, we want records ordered by name, ascending
@@ -54,6 +54,7 @@ end
 #  purchase_date     :date
 #  vendor_id         :integer(4)
 #  leased            :boolean(1)
+#  backup            :boolean(1)
 #  sap_asset_id      :string(255)
 #  sap_wbs_element   :string(255)
 #  monitorable       :boolean(1)

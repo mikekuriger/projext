@@ -1,0 +1,21 @@
+%tr{ :id => dom_id(farm, 'row'), :class => [ cycle("odd", "even"), farm.state ].join(' ') }
+  %td= link_to farm.name, farm
+  %td= h farm.description
+  %td= h farm.state
+  %td= h farm.assets.uniq.size
+  %td.action
+    = link_to icon('application_view_columns', 'Rack Diagram'), :controller => 'farms', :id => farm, :action => 'diagram'
+    = link_to icon('magnifier', 'Show'), farm, :class => "view"
+    = link_to icon('pencil', 'Edit'), edit_farm_path(farm), :class => "edit"
+    = link_to_remote icon('delete', 'Delete'), |
+      :url => farm_path(farm), |
+      :class => "delete", |
+      :confirm => 'Are you sure?', |
+      :method => :delete, |
+      :loading => "$('##{dom_id(farm, 'state_spinner')}').show();", |
+      :complete => [ |
+        visual_effect(:highlight, dom_id(farm, 'row')), |
+        visual_effect(:fade, dom_id(farm, 'row')) |
+      ] |
+      
+    = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(farm, 'state_spinner')

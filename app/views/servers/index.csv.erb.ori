@@ -1,0 +1,23 @@
+<%- headers = ["Id", "Type", "Name", "Description", "Manufacturer", "Model", "Physical Memory", "Serial", "Operating System Manufacturer", "Operating System Name", "UUID", "Location", "Status", "Current Support Contract Description", "Current Support Contract Number", "Current Support Contract Start Date", "Current Support Contract End Date"] -%>
+<!-- Agent  Cached slug Cpu count Cpu Created at  Delta Description Disk count  Disk size Disk type Domain  Equipment rack  Farm  First letter  Group Hardware model  Hostname  Id  Kernel  Kernel release  Last seen Leased  Modular Monitorable Name  Notes Oob Operatingsystem Parent  Physical memory Purchase date Rack elevation  Rack units  Sap asset Sap wbs element Serial  State Storage array Switch  Type  Updated at  Uuid  Vendor  Virtualization host Vm memory dynamic max Vm memory dynamic min Vm memory static max  Vm memory static min  Vm memory target  Vm power state  Vm vcpus at startup Vm vcpus max  Wb asset -->
+<%= CSV.generate_line headers %>
+<%- @servers.each do |server| -%>
+<%- row = [ server.id,
+            server.type,
+            server.name,
+            server.description,
+            server.manufacturer.name,
+            server.hardware_model.name,
+            server.physical_memory,
+            server.serial,
+            server.operatingsystem.manufacturer.name,
+            server.operatingsystem.name,
+            server.uuid,
+            "#{server.try(:building).try(:name)}, #{server.try(:room).try(:name)}, #{server.try(:equipment_rack).try(:name)}, Unit #{server.rack_elevation}",
+            server.state,
+            server.contracts.current.first.description if server.contracts.current,
+            server.contracts.current.first.number if server.contracts.current,
+            server.contracts.current.first.start if server.contracts.current,
+            server.contracts.current.first.end if server.contracts.current ] -%>
+<%=   CSV.generate_line row %>
+<%- end -%>

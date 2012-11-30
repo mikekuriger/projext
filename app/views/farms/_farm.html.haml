@@ -1,8 +1,7 @@
 %tr{ :id => dom_id(farm, 'row'), :class => [ cycle("odd", "even"), farm.state ].join(' ') }
-  %td= link_to farm.name, farm
-  %td
-    =h farm.description
-    &nbsp;
+  / %td= link_to farm.name, farm
+  %td= link_to farm.name, :controller => 'servers', :farm_id => farm
+  %td= h farm.description
   %td= h farm.state
   %td= h farm.assets.uniq.size
   %td.action
@@ -21,4 +20,3 @@
       ] |
       
     = image_tag 'ajax-loader.gif', :style => 'display: none;', :id => dom_id(farm, 'state_spinner')
-    

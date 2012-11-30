@@ -1,16 +1,17 @@
 %tr{:id => dom_id(server, 'row'), :class => cycle("odd", "even")}
   %td
+    = icon('accept', 'Yes') if (server.backup_tape || server.backup_db)
+    = link_to icon('wait', 'Add'), (server.type == 'VirtualServer' ? edit_virtual_server_path(server) : edit_server_path(server)), :class => "edit" if can? :edit, server if server.backup unless (server.backup_tape || server.backup_db)
+    = link_to icon('exclamation', 'No'), (server.type == 'VirtualServer' ? edit_virtual_server_path(server) : edit_server_path(server)), :class => "edit" if can? :edit, server unless (server.backup || server.backup_tape || server.backup_db)
+    = icon('tape1', 'Tape') if server.backup_tape
+    = icon('db', 'DB') if server.backup_db
+  %td
     = link_to server.fqdn, server unless server.fqdn.nil?
     = icon('bullet_star', 'Virtual Machine') if server.type == 'VirtualServer'
     = icon('asterisk_yellow', 'Virtual Host') if server.virtualization_host
   %td
-    = h server.serial
-    &nbsp;
-  %td
     = link_to server.hardware_model.name, server.hardware_model if server.hardware_model
     &nbsp;
-  %td
-    = server.interfaces.collect{|int| "#{link_to int.name, int}:#{link_to int.ip.ip, int.ip if int.ip}<br>"}
   %td
     = link_to server.operatingsystem.name, server.operatingsystem if server.operatingsystem
     &nbsp;
@@ -83,10 +84,10 @@
   /     - unless server.hardware_model.nil?
   /       = (server.hardware_model.rackunits > 0) ? " - #{server.rack_elevation + server.hardware_model.rackunits}" : ""
   %td= h server.state.humanize if server.state
-  %td= h server.last_seen
+  / %td= h server.last_seen
   / %td= h server.comments.count
   %td.action
-    = link_to icon('magnifier', 'Show'), server, :class => "view"
+    = link_to icon('eye', 'Show'), server, :class => "view"
     = link_to icon('pencil', 'Edit'), (server.type == 'VirtualServer' ? edit_virtual_server_path(server) : edit_server_path(server)), :class => "edit" if can? :edit, server
     = link_to_remote icon('delete', 'Delete'), |
       :url => (server.type == 'Server' ? server_path(server) : virtual_server_path(server)), |

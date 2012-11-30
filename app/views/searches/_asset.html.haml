@@ -6,7 +6,7 @@
   / %td= result.to_yaml
   -# %td= result.farm.name unless result.farm.nil?
   %td.actions
-    = link_to icon('magnifier', 'Show'), asset, :class => "view" if can? :read, asset
+    = link_to icon('eye', 'Show'), asset, :class => "view" if can? :read, asset
     = link_to icon('pencil', 'Edit'), edit_asset_path(asset), :class => "edit" if can? :edit, asset
     = link_to_remote icon('delete', 'Delete'), |
       :url => asset_path(asset), |

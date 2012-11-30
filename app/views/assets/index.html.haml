@@ -3,6 +3,7 @@
 #assets
   = render 'assets'
 
+
 - if can? :create, Asset
   %h3 New Asset
   - semantic_form_for Asset.new do |f|

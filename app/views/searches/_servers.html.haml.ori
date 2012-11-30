@@ -1,0 +1,20 @@
+%h3
+  = "Matched #{pluralize(@servers.total_entries + @assets_from_service_search, "Server")}, displaying #{@servers.size}"
+  - if @servers.total_entries > @servers.size
+    (
+    = link_to "Show All Results", search_servers_url(:q => @query)
+    )
+
+%table.list
+  %tr
+    %th Hostname
+    %th Serial
+    %th Hardware
+    %th Interfaces
+    %th OS
+    %th Group
+    %th Farm
+    %th Services
+    %th State
+    %th Actions
+  = render :partial => "server", :collection => @servers

@@ -94,11 +94,11 @@
   - f.inputs :name => 'Finance', :id => 'finance' do
     = f.input :purchase_date, :label => 'Purchase Date', :as => :date, :start_year => Time.now.year - 15, :end_year => Time.now.year
     = f.input :vendor, :label => 'Purchase Vendor'
-    = f.input :leased
     = f.input :sap_asset_id, :label => 'SAP Asset ID'
     = f.input :sap_wbs_element, :label => 'WBS Element'
     
   - f.inputs :name => 'Miscellaneous', :id => 'miscellaneous' do
+    = f.input :backup
     = f.input :monitorable
     = f.input :virtualization_host, :label => 'Can host VMs'
     = f.input :agent if can? :assign_agents, @server

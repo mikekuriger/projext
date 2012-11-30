@@ -5,16 +5,15 @@
   
 %table{:id => "serverlist", :class => "list", :cellspacing => 0}
   %tr
+    %th Backup
     %th Hostname
-    %th Serial
     %th Hardware
-    %th Interfaces
     %th OS
     %th Group
     %th Farm
     %th Services
     %th State
-    %th Last Seen
+    / %th Last Seen
     %th Actions
   = render :partial => "servers/server", :collection => @servers
 

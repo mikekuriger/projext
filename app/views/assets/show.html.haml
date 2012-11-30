@@ -82,14 +82,14 @@
         %label Vendor
         =h @asset.try(:vendor).try(:name)
       %li
-        %label Leased
-        =h @asset.leased
-      %li
         %label SAP Asset ID
         =h @asset.sap_asset_id
       %li
         %label WBS Element
         =h @asset.sap_wbs_element
+      %li
+        %label Tape Backup
+        =h @asset.backup
       %li
         %label Monitorable
         =h @asset.monitorable

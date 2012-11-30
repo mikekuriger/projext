@@ -1,11 +1,12 @@
 %tr{:id => dom_id(virtual_server, 'row'), :class => cycle("odd", "even")}
+  %td
+    = icon('exclamation', 'No') unless virtual_server.backup
+    = icon('accept', 'Yes') if virtual_server.backup
   %td= h virtual_server.fqdn
   %td
     = link_to virtual_server.operatingsystem.name, virtual_server.operatingsystem if virtual_server.operatingsystem
-    &nbsp;
   %td
     = link_to virtual_server.group.name, virtual_server.group if virtual_server.group
-    &nbsp;
   %td
     - unless virtual_server.equipment_rack.nil?
       = link_to virtual_server.equipment_rack.room.building.name, virtual_server.equipment_rack.room.building

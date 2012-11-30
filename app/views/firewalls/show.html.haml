@@ -94,9 +94,6 @@
         %label Vendor
         = link_to @firewall.vendor.name, @firewall.vendor unless @firewall.vendor.nil?
       %li
-        %label Leased
-        =h @firewall.leased
-      %li
         %label SAP - Asset ID
         =h @firewall.sap_asset_id
       %li
@@ -106,6 +103,9 @@
   %fieldset#miscellaneous
     %legend Miscellaneous
     %ul
+      %li
+        %label Backup
+        =h @firewall.backup
       %li
         %label Monitorable
         =h @firewall.monitorable

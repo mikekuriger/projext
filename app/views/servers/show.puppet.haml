@@ -45,6 +45,7 @@
 - output['parameters']['fqdn'] = @server.fqdn
 - output['parameters']['group'] = @server.try(:group).try(:name)
 - output['parameters']['monitorable'] = @server.monitorable
+- output['parameters']['backup'] = @server.backup
 
 -# Now eliminate duplicates
 - output['parameters']['clusters'].uniq!
