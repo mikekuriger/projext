@@ -1,9 +1,9 @@
 require 'test_helper'
 
 class VendorTest < ActiveSupport::TestCase
-  should_have_many :contracts
+  should have_many :contracts
   
-  should_validate_presence_of :name, :message => "Vendor name can't be blank"
+  should validate_presence_of :name, :message => "Vendor name can't be blank"
   
   context 'A vendor' do
     setup do

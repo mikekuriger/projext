@@ -1,31 +1,36 @@
 require 'test_helper'
 
 class AssetTest < ActiveSupport::TestCase
-  should_belong_to :group, :farm, :hardware_model, :equipment_rack, :vendor, :cpu
+  should belong_to :group
+  should belong_to :farm
+  should belong_to :hardware_model
+  should belong_to :equipment_rack
+  should belong_to :vendor
+  should belong_to :cpu
 
-  should_have_many :service_assignments
-  should_have_many :services, :through => :service_assignments
-  should_have_many :functions, :through => :services
-  should_have_many :clusters, :through => :services
-  should_have_many :sites, :through => :clusters
-  should_have_many :ips, :through => :sites
+  should have_many :service_assignments
+  should have_many :services
+  should have_many :functions
+  should have_many :clusters
+  should have_many :sites
+  should have_many :ips
   
-  should_have_many :interfaces
-  should_have_many :cables, :through => :interfaces
+  should have_many :interfaces
+  should have_many :cables
   
-  should_have_many :vips_assets
-  should_have_many :vips, :through => :vips_assets
+  should have_many :vips_assets
+  should have_many :vips
   
-  should_have_many :parameter_assignments
-  should_have_many :parameters
+  should have_many :parameter_assignments
+  should have_many :parameters
   
-  should_have_many :assets_contracts
-  should_have_many :contracts, :through => :assets_contracts
+  should have_many :assets_contracts
+  should have_many :contracts
   
-  should_validate_presence_of :name, :message => "Asset name can't be blank"
-  #should_validate_uniqueness_of :name, :message => "Asset name must be unique"
-  # should_validate_presence_of :serial, :message => "Asset serial can't be blank"
-  # should_validate_uniqueness_of :serial, :message => "Asset serial must be unique"
+  should validate_presence_of :name
+  #should validate_uniqueness_of :name, :message => "Asset name must be unique"
+  # should validate_presence_of :serial, :message => "Asset serial can't be blank"
+  # should validate_uniqueness_of :serial, :message => "Asset serial must be unique"
   
   context 'An asset' do
     setup do

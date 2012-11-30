@@ -1,9 +1,9 @@
 require 'test_helper'
 
 class VipsAssetTest < ActiveSupport::TestCase
-  should_belong_to :vip, :asset
+  should belong_to :vip, :asset
   
-  should_validate_uniqueness_of :asset_id, :scoped_to => :vip_id, :message => "That asset has already been assigned to this VIP"
+  should validate_uniqueness_of :asset_id, :scoped_to => :vip_id, :message => "That asset has already been assigned to this VIP"
 end
 
 # == Schema Information

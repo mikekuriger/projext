@@ -1,15 +1,15 @@
 require 'test_helper'
 
 class VipTest < ActiveSupport::TestCase
-  should_belong_to :load_balancer
-  should_belong_to :ip
-  should_have_many :sites
+  should belong_to :load_balancer
+  should belong_to :ip
+  should have_many :sites
   
-  should_have_many :vips_assets
-  should_have_many :assets, :through => :vips_assets
+  should have_many :vips_assets
+  should have_many :assets, :through => :vips_assets
   
-  should_validate_presence_of :name, :message => "VIP name can't be blank"
-  should_validate_presence_of :ip_id, :message => "VIP IP can't be blank"
+  should validate_presence_of :name, :message => "VIP name can't be blank"
+  should validate_presence_of :ip_id, :message => "VIP IP can't be blank"
   
   context 'A vip' do
     setup do

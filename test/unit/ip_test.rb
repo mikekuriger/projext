@@ -1,18 +1,18 @@
 require 'test_helper'
 
 class IpTest < ActiveSupport::TestCase
-  should_have_one :site, :cluster, :customer
-  should_belong_to :network
-  should_have_many :assets, :services
+  should have_one :site, :cluster, :customer
+  should belong_to :network
+  should have_many :assets, :services
 
-  should_have_one :interface
+  should have_one :interface
   
-  should_validate_presence_of :ip, :message => "IP must exist"
+  should validate_presence_of :ip, :message => "IP must exist"
   
-  should_allow_values_for :ip, "10.1.0.0", "192.168.1.0"
-  should_not_allow_values_for :ip, "blah", "256.1.1.1", "10.256.0.0", "192.168.1.256", "192.168.x.y"
+  should allow_values_for :ip, "10.1.0.0", "192.168.1.0"
+  should not_allow_values_for :ip, "blah", "256.1.1.1", "10.256.0.0", "192.168.1.256", "192.168.x.y"
   
-  should_validate_uniqueness_of :ip, :message => "IP must be unique"
+  should validate_uniqueness_of :ip, :message => "IP must be unique"
 end
 
 # == Schema Information

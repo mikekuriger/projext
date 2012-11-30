@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RoleTest < ActiveSupport::TestCase
-  should_have_many :assignments, :users
+  should have_many :assignments, :users
 end
 
 # == Schema Information

@@ -159,7 +159,8 @@ class ServersController < ApplicationController
     @server = VirtualServer.find(params[:id]) if @server.nil?
     respond_to do |format|
       format.html
-      format.xml { render :xml => @server.to_xml(:include => [ :interfaces, :services ]) }
+      # format.xml { render :xml => @server.to_xml(:include => [ :interfaces, :services ]) }
+      format.xml { render :xml => @server }
       format.puppet
     end
   end
@@ -208,6 +209,21 @@ class ServersController < ApplicationController
   
   def update
     params[:server].delete(:id)   # EJD - hack because activeresource is dumb and insists on passing ID
+    params[:server].delete(:created_at)
+    params[:server].delete(:updated_at)
+    params[:server].delete(:interfaces_attributes) if params[:server][:interfaces_attributes].nil?
+    # if params[:server].key?(:services)
+    #   params[:server][:services].map! {|s| s.delete(:id); s.delete(:created_at); s.delete(:updated_at)}
+    #   @server.services.build(params[:server][:services])
+    # # if params[:server].key? :services
+    # #   params[:server][:services].each do |service|
+    # #     service.delete(:id)
+    # #     service.delete(:created_at)
+    # #     service.delete(:updated_at)
+    # #     @server.services.build(service)
+    # #   end
+    # #   params[:server].delete(:services)
+    # end
     @server.build_agent(params[:agent]) if params[:agent]
     respond_to do |format|
       if @server.update_attributes(params[:server])

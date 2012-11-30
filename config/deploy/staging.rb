@@ -1,6 +1,8 @@
 # For migrations
 set :rails_env, 'staging'
 
+set :rvm_ruby_string, 'ree@wham-staging'        # Or whatever env you want it to run in.
+
 # Who are we?
 set :application, 'wham'
 set :repository, "git@git:#{application}.git"

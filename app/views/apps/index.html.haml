@@ -5,12 +5,16 @@
     %th Name
     %th Description
     %th Project
+    %th Contacts
     %th Actions
   - for app in @apps
     %tr
       %td= h app.name
       %td= h app.description
       %td= h app.project.name
+      %td
+        = app.contacts.each do |contact|
+          = link_to contact.name, contact if can? :read, contact
       %td.actions
         = link_to 'Show', app
         = link_to 'Edit', edit_app_path(app)

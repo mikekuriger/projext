@@ -141,7 +141,13 @@ class Asset < ActiveRecord::Base
                                 :reject_if => lambda { |a| a[:name].blank? },
                                 :allow_destroy => true
   #########
-  
+
+  # So that ActiveResource will work
+  alias interfaces_attributes interfaces
+  def to_xml(options = {})
+    super(options.merge({:methods => :interfaces_attributes}))
+  end
+    
   # Possible asset types (used in type form fields)
   # [display_name, class_name]
   TYPE_OPTIONS = [

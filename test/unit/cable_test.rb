@@ -1,11 +1,12 @@
 require 'test_helper'
 
 class CableTest < ActiveSupport::TestCase
-  should_belong_to :interface, :interface_target
-  should_belong_to :medium
+  should belong_to :interface
+  should belong_to :interface_target
+  should belong_to :medium
   
-  should_validate_presence_of :interface, :message => "Source interface must exist"
-  should_validate_presence_of :interface_target, :message => "Target interface must exist"
+  should validate_presence_of :interface
+  should validate_presence_of :interface_target
 end
 
 # == Schema Information

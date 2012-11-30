@@ -1,13 +1,13 @@
 require 'test_helper'
 
 class FunctionTest < ActiveSupport::TestCase
-  should_have_many :services
-  should_have_many :assets
-  should_have_many :parameter_assignments
-  should_have_many :parameters
+  should have_many :services
+  should have_many :assets
+  should have_many :parameter_assignments
+  should have_many :parameters
   
-  should_validate_presence_of :name, :message => "Function name can't be blank"
-  should_validate_uniqueness_of :name, :message => "Function name must be unique"
+  should validate_presence_of :name
+  should validate_uniqueness_of :name
   
   context 'A function' do
     setup do

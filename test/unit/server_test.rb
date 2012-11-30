@@ -2,13 +2,13 @@ require 'test_helper'
 
 class ServerTest < ActiveSupport::TestCase
   # Some of these tests probably aren't necessary, since they are being done at the asset level
-  should_validate_presence_of :name, :message => "Asset name can't be blank"
+  should validate_presence_of :name, :message => "Asset name can't be blank"
   
-  # should_validate_presence_of :hostname, :message => "Server hostname can't be blank"
-  # should_validate_presence_of :domain, :message => "Server domain can't be blank"
-  # should_validate_uniqueness_of :hostname, :scoped_to => :domain, :message => "Hostname must be unique"
+  # should validate_presence_of :hostname, :message => "Server hostname can't be blank"
+  # should validate_presence_of :domain, :message => "Server domain can't be blank"
+  # should validate_uniqueness_of :hostname, :scoped_to => :domain, :message => "Hostname must be unique"
   
-  should_belong_to :agent
+  should belong_to :agent
 
   context 'A server' do
     setup do

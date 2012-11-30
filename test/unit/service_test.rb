@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class ServiceTest < ActiveSupport::TestCase
-  should_belong_to :cluster, :function
-  should_have_many :service_assignments, :assets, :sites
+  should belong_to :cluster, :function
+  should have_many :service_assignments, :assets, :sites
   
-  should_validate_presence_of :cluster_id, :message => "A service must have a cluster"
-  should_validate_presence_of :function_id, :message => "A service must have a function"
-  should_validate_uniqueness_of :cluster_id, :scoped_to => :function_id, :message => "Service already exists"
+  should validate_presence_of :cluster_id, :message => "A service must have a cluster"
+  should validate_presence_of :function_id, :message => "A service must have a function"
+  should validate_uniqueness_of :cluster_id, :scoped_to => :function_id, :message => "Service already exists"
 
   context 'A service' do
     setup do

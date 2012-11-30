@@ -1,13 +1,13 @@
 require 'test_helper'
 
 class ContractTest < ActiveSupport::TestCase
-  should_belong_to :vendor
+  should belong_to :vendor
 
-  should_have_many :assets_contracts
-  should_have_many :assets, :through => :assets_contracts
+  should have_many :assets_contracts
+  should have_many :assets
 
-  should_validate_presence_of :name, :message => "Contract name can't be blank"
-  should_validate_uniqueness_of :number, :scoped_to => :vendor_id, :message => "Contract already exists"
+  should validate_presence_of :name
+  should validate_uniqueness_of :number
 end
 
 # == Schema Information

@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class RoomTest < ActiveSupport::TestCase
-  should_belong_to :building
-  should_have_many :equipment_racks
+  should belong_to :building
+  should have_many :equipment_racks
   
   context 'A room' do
     setup do

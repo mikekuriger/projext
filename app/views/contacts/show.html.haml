@@ -20,6 +20,14 @@
 %p
   %strong Notes:
   =h @contact.notes
+%p
+  %strong
+    = "Apps:"
+    %ul
+      - @contact.apps.each do |app|
+        %li
+          = link_to app.name, app if can? :read, app
+
 
 %p
   = link_to "Edit", edit_contact_path(@contact)

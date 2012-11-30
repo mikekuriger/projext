@@ -1,14 +1,14 @@
 require 'test_helper'
 
 class NetworkTest < ActiveSupport::TestCase
-  should_have_many :ips
-  should_belong_to :farm
+  should have_many :ips
+  should belong_to :farm
   
-  should_validate_presence_of :network, :message => "Network must exist"
-  should_validate_presence_of :subnetbits, :message => "Subnet bits must exist"
+  should validate_presence_of :network, :message => "Network must exist"
+  should validate_presence_of :subnetbits, :message => "Subnet bits must exist"
 
-  should_allow_values_for :network, "10.1.0.0", "192.168.1.0"
-  should_not_allow_values_for :network, "blah", "256.1.1.1", "10.256.0.0", "192.168.1.256", "192.168.x.y"
+  should allow_values_for :network, "10.1.0.0", "192.168.1.0"
+  should not_allow_values_for :network, "blah", "256.1.1.1", "10.256.0.0", "192.168.1.256", "192.168.x.y"
   
   context 'A network' do
     setup do

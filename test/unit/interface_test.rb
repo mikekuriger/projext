@@ -1,15 +1,15 @@
 require 'test_helper'
 
 class InterfaceTest < ActiveSupport::TestCase
-  should_belong_to :asset
-  should_belong_to :ip
+  should belong_to :asset
+  should belong_to :ip
 
-  should_have_one :cable
+  should have_one :cable
   
-  should_validate_presence_of :name, :message => "Interface name can't be blank"
+  should validate_presence_of :name
 
-  should_allow_values_for :mac, "00:00:00:00:00:00", "DE:AD:BE:EF:FF:FF"
-  should_not_allow_values_for :mac, "00:00", "blarg", "GG:GG:GG:GG:GG:GG"
+  should allow_values_for :mac, "00:00:00:00:00:00", "DE:AD:BE:EF:FF:FF"
+  should not_allow_values_for :mac, "00:00", "blarg", "GG:GG:GG:GG:GG:GG"
 end
 
 

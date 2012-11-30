@@ -1,16 +1,16 @@
 require 'test_helper'
 
 class ClusterTest < ActiveSupport::TestCase
-  should_have_many :sites
-  should_have_many :apps_clusters
-  should_have_many :apps
-  should_have_many :services
-  should_have_many :assets
-  should_have_many :parameters
-  should_have_many :parameter_assignments
+  should have_many :sites
+  should have_many :apps_clusters
+  should have_many :apps
+  should have_many :services
+  should have_many :assets
+  should have_many :parameters
+  should have_many :parameter_assignments
   
-  should_validate_presence_of :name, :message => "Cluster name can't be blank"
-  should_validate_uniqueness_of :name, :message => "Cluster name must be unique"
+  should validate_presence_of :name
+  should validate_uniqueness_of :name
   
   context 'A cluster' do
     setup do

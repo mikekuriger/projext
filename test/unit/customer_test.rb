@@ -1,13 +1,13 @@
 require 'test_helper'
 
 class CustomerTest < ActiveSupport::TestCase
-  should_have_many :projects
-  should_have_many :apps, :through => :projects
-  should_have_many :contacts_customers
-  should_have_many :contacts, :through => :contacts_customers
-  should_have_many :sites
+  should have_many :projects
+  should have_many :apps
+  should have_many :contacts_customers
+  should have_many :contacts
+  should have_many :sites
 
-  should_validate_presence_of :name
+  should validate_presence_of :name
 end
 
 # == Schema Information

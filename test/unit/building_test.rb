@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class BuildingTest < ActiveSupport::TestCase
-  should_have_many :rooms
+  should have_many :rooms
   
-  should_validate_presence_of :name, :message => "Building name can't be blank"
-  should_validate_uniqueness_of :name, :message => "Building name must be unique"
+  should validate_presence_of :name
+  should validate_uniqueness_of :name
   
   context 'A building' do
     setup do

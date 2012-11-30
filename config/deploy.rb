@@ -1,6 +1,5 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, 'ree@wham-staging'        # Or whatever env you want it to run in.
 
 # SSH options
 # Enable agent forwarding so we can pull code from git
@@ -72,10 +71,10 @@ after 'deploy:update_code', 'deploy:symlinks'
 
 ###
 # Thinking Sphinx deployment tasks
-after "deploy:restart", "deploy:search_stop"
-after "deploy:restart", "deploy:search_config"
-after "deploy:restart", "deploy:search_index"
-after "deploy:restart", "deploy:search_start"
+# after "deploy:restart", "deploy:search_stop"
+# after "deploy:restart", "deploy:search_config"
+# after "deploy:restart", "deploy:search_index"
+# after "deploy:restart", "deploy:search_start"
 
 namespace :deploy do
 

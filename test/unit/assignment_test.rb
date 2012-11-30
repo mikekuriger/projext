@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class AssignmentTest < ActiveSupport::TestCase
-  should_belong_to :user, :role
+  should belong_to :user
+  should belong_to :role
 end
 
 # == Schema Information

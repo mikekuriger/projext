@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class MediumTest < ActiveSupport::TestCase
-  should_have_many :cables
-  should_validate_presence_of :name, :message => "Medium name can't be blank"
+  should have_many :cables
+  should validate_presence_of :name, :message => "Medium name can't be blank"
 end
 
 # == Schema Information

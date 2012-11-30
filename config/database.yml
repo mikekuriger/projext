@@ -2,10 +2,10 @@
 
 development:
   adapter: mysql
-  database: wham_ror_development
+  database: wham_development
   username: wham
   password: 9fj388frod92d8j
-  host: localhost
+  host: wham-database
   encoding: utf8
   
 test: &TEST
@@ -13,7 +13,7 @@ test: &TEST
   database: wham_ror_test
   username: wham
   password: 9fj388frod92d8j
-  host: localhost
+  host: wham-database
   encoding: utf8
   
 staging:
@@ -22,16 +22,16 @@ staging:
   username: wham_staging
   # password: 9DlMCtsn3ZWRGA
   password: <%= File.read(PASSWORD_FILE).chomp if File.readable? PASSWORD_FILE %>
-  host: localhost
+  host: wham-database
   encoding: utf8
-  socket: /var/lib/mysql/mysql.sock
+  #socket: /var/lib/mysql/mysql.sock
   
 production:
   adapter: mysql
   database: wham_production
   username: wham_production
   password: <%= File.read(PASSWORD_FILE).chomp if File.readable? PASSWORD_FILE %>
-  host: localhost
+  host: wham-database
   encoding: utf8
   socket: /var/lib/mysql/mysql.sock
 

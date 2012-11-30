@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class AppTest < ActiveSupport::TestCase
-  should_have_many :apps_clusters
-  should_have_many :clusters
-  should_have_many :sites
+  should have_many :apps_clusters
+  should have_many :clusters
+  should have_many :sites
   
-  should_validate_presence_of :name, :message => "Name cannot be blank"
-  should_validate_presence_of :project_id, :message => "Project cannot be blank"
+  should validate_presence_of :name
+  should validate_presence_of :project_id
   
   context "A newly-created app" do
     setup do

@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class ParameterAssignmentTest < ActiveSupport::TestCase
-  should_belong_to :assignable
-  should_belong_to :parameter
+  should belong_to :assignable
+  should belong_to :parameter
   
   context 'A parameter assignment' do
     setup do

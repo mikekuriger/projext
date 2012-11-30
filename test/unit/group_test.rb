@@ -1,11 +1,19 @@
 require 'test_helper'
 
 class GroupTest < ActiveSupport::TestCase
-  should_have_many :assets, :servers, :switches, :routers, :firewalls, :load_balancers, :storage_heads, :storage_shelves, :storage_arrays
-  should_have_many :equipment_racks, :through => :assets
+  should have_many :assets
+  should have_many :servers
+  should have_many :switches
+  should have_many :routers
+  should have_many :firewalls
+  should have_many :load_balancers
+  should have_many :storage_heads
+  should have_many :storage_shelves
+  should have_many :storage_arrays
+  should have_many :equipment_racks
   
-  should_validate_presence_of :name, :message => "Group name can't be blank"
-  should_validate_uniqueness_of :name, :message => "Group name must be unique"
+  should validate_presence_of :name
+  should validate_uniqueness_of :name
   
   context 'A group' do
     setup do

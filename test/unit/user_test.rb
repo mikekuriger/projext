@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  should_have_many :assignments, :roles
+  should have_many :assignments, :roles
   
   context 'A user' do
     setup do

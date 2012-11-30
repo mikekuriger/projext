@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class PurchaseOrderTest < ActiveSupport::TestCase
-  should_belong_to :vendor
+  should belong_to :vendor
 
-  should_validate_presence_of :name, :message => "Purchase order name can't be blank"
-  should_validate_uniqueness_of :number, :scoped_to => :vendor_id, :message => "Purchase order already exists"
+  should validate_presence_of :name, :message => "Purchase order name can't be blank"
+  should validate_uniqueness_of :number, :scoped_to => :vendor_id, :message => "Purchase order already exists"
 end
 
 # == Schema Information

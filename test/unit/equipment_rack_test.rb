@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class EquipmentRackTest < ActiveSupport::TestCase
-  should_belong_to :room
-  should_have_many :assets
+  should belong_to :room
+  should have_many :assets
   
-  should_validate_presence_of :name, :message => "Rack name can't be blank"
+  should validate_presence_of :name
   
   context 'An equipment_rack' do
     setup do

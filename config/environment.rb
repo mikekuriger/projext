@@ -51,7 +51,7 @@ Rails::Initializer.run do |config|
   config.gem "acts-as-taggable-on", :source => "http://gemcutter.org"
   config.gem "thinking-sphinx",
              :lib => "thinking_sphinx",
-             :version => ">= 1.3.14"
+             :version => ">= 1.3.20"
   config.gem "acts_as_commentable",
              :version => ">= 2.0.2"
   config.gem "ipadmin",

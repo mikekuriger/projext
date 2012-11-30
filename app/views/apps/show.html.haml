@@ -22,6 +22,12 @@
               %ul
                 - cluster.sites.each do |site|
                   %li= link_to site.name, site
+      %li
+        %label Contacts
+        %ul
+          - @app.contacts.each do |contact|
+            %li
+              = link_to contact.name, contact if can? :read, contact
 
 %p
   = link_to "Edit", edit_app_path(@app)
